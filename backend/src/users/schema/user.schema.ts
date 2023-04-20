@@ -8,7 +8,14 @@ export type UserDocument = User & Document;
 
 @Schema()
 export class User {
-  @Prop({ required: true, unique: true })
+
+  _id: string
+
+  @Prop({ 
+    required: [true, ErrorMessage.REQUIRED_FIELD_EMPTY],
+    unique: [true, ErrorMessage.USERNAME_TAKEN], 
+    minlength: [5, ErrorMessage.USERNAME_MIN_LENGTH]
+  })
   username: string;
 
   @Prop({
@@ -29,7 +36,7 @@ export class User {
 
   @Prop({
     default: null,
-    validate: [validator.isURL, ErrorMessage.INVALID_URL]
+    validate: [ (value: string) => { value === null || validator.isURL(value)}, ErrorMessage.INVALID_URL],
   })
   profileImageURL: string;
 
