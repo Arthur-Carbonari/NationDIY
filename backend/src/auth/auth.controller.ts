@@ -14,11 +14,8 @@ export class AuthController {
     }
 
     @Post('signup')
-    signUp(@Body() signupDto: SignupDto): Promise<{ token: string }> | Error {
-        
-        const { email, username, password } = signupDto;
-            
-        return this.authService.signUp(email, username, password)
+    signUp(@Body() signupDto: SignupDto): Promise<{ token: string }> {            
+        return this.authService.signUp(signupDto)
     }
 
     @Post('login')

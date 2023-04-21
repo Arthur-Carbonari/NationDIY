@@ -2,6 +2,7 @@ import * as bcrypt from "bcrypt";
 import { Injectable, UnauthorizedException } from '@nestjs/common';
 import { JwtService } from '@nestjs/jwt';
 import { UsersService } from 'src/users/users.service';
+import { SignupDto } from "./dto/signup.dto";
 
 @Injectable()
 export class AuthService {
@@ -11,7 +12,9 @@ export class AuthService {
         private jwtService: JwtService
     ) { }
 
-    async signUp(email: string, username: string, password: string): Promise<{ token: string; }> {
+    async signUp(signupDto: SignupDto): Promise<{ token: string; }> {
+
+        const {email, username, password} = signupDto
 
         const hashedPassword = await bcrypt.hash(password, 10)
                         
