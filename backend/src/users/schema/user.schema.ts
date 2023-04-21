@@ -1,26 +1,25 @@
 import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
 import { Document } from 'mongoose';
 import validator from 'validator';
+import * as bcrypt from "bcrypt";
 
 import ErrorMessage from '../../common/constants/error-messages';
 
-export type UserDocument = User & Document;
+export type UserDocument = Document & User;
 
 @Schema()
 export class User {
 
-  _id: string
-
-  @Prop({ 
+  @Prop({
     required: [true, ErrorMessage.REQUIRED_FIELD_EMPTY],
-    unique: [true, ErrorMessage.USERNAME_TAKEN], 
+    unique: [true, ErrorMessage.USERNAME_TAKEN],
     minlength: [5, ErrorMessage.USERNAME_MIN_LENGTH]
   })
   username: string;
 
   @Prop({
     required: [true, ErrorMessage.REQUIRED_FIELD_EMPTY],
-    validate: [validator.isStrongPassword, ErrorMessage.WEAK_PASSWORD]
+    validate: [validator.isStrongPassword, ErrorMessage.WEAK_PASSWORD],
   })
   password: string;
 
@@ -37,7 +36,7 @@ export class User {
 
   @Prop({
     default: null,
-    validate: [ (value: string) => { value === null || validator.isURL(value)}, ErrorMessage.INVALID_URL],
+    validate: [(value: string) => { value === null || validator.isURL(value) }, ErrorMessage.INVALID_URL],
   })
   profileImageURL: string;
 
@@ -49,6 +48,29 @@ export class User {
 
   @Prop({ type: [{ type: String, ref: 'Answer' }], default: [] })
   answers: string[];
+
+  matchPassword = async function (password: string) {
+    return await bcrypt.compare(password, this.password)
+  };
+
 }
 
-export const UserSchema = SchemaFactory.createForClass(User);
+const UserSchema = SchemaFactory.createForClass(User);
+
+// always before saving the model in the db we check if it is needed to hash the passwor before saving it
+UserSchema.pre('save', async function (next) {
+
+  // Hashes the password if it has been modified (or is new)
+  if (this.isModified('password')) {
+    this.password = await bcrypt.hash(this.password, 10)
+  }
+
+  next();
+});
+
+UserSchema.methods.matchPassword = async function (password: string) {
+  return await bcrypt.compare(password, this.password)
+};
+
+
+export { UserSchema }
