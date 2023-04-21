@@ -27,7 +27,8 @@ export class User {
   @Prop({
     unique: [true, ErrorMessage.EMAIL_ALREADY_REGISTERED],
     required: [true, ErrorMessage.REQUIRED_FIELD_EMPTY],
-    validate: [validator.isEmail, ErrorMessage.INVALID_EMAIL]
+    validate: [validator.isEmail, ErrorMessage.INVALID_EMAIL],
+    lowercase: [true]
   })
   email: string;
 
