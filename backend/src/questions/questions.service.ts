@@ -14,4 +14,8 @@ export class QuestionsService {
     findAll(): Observable<Question[]> {
         return from(this.questionModel.find().exec())
     }
+    
+    findOne(questionId: string): Observable<Question | null> {
+        return from(this.questionModel.findById(questionId).exec())
+    }
 }
