@@ -10,9 +10,13 @@ export class UsersService {
     ) { }
 
     async createUser(email: string, username: string, password: string): Promise<User> {
-        const createdUser = new this.userModel({email, username, password});
-        
+        const createdUser = new this.userModel({ email, username, password });
+
         return createdUser.save();
+    }
+
+    async findByEmailOrUsername(emailOrUsername: string) {
+        return await this.userModel.findOne({ $or: [{ email: emailOrUsername }, { username: emailOrUsername }] });
     }
 
     async findByEmail(email: string): Promise<User | null> {
