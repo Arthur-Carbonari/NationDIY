@@ -8,7 +8,7 @@ import ErrorMessage from '../../common/constants/error-messages';
 export type UserDocument = Document & User;
 
 @Schema()
-export class User {
+export class User extends Document {
 
   @Prop({
     required: [true, ErrorMessage.REQUIRED_FIELD_EMPTY],
