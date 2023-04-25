@@ -1,6 +1,6 @@
 import { Body, Controller, Get, Param, Post, Req, UseGuards } from '@nestjs/common';
-import { AuthGuard } from '@nestjs/passport';
 import { from, Observable } from 'rxjs';
+import { JwtAuthGuard } from 'src/auth/guards/jwt-auth.guard';
 import { CreateQuestionDto } from './dto/createQuestionDto';
 import { QuestionsService } from './questions.service';
 import { Question } from './schema/question.schema';
@@ -21,7 +21,7 @@ export class QuestionsController {
     }
 
     @Post()
-    @UseGuards(AuthGuard())
+    @UseGuards(JwtAuthGuard)
     create(@Body() createQuestionDto: CreateQuestionDto, @Req() req: any){
         
         const userId: string = req.user._id
