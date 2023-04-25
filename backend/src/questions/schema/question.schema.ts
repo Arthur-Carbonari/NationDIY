@@ -14,7 +14,7 @@ export class Question {
     @Prop({ required: true })
     content: string;
 
-    @Prop({ type: [String], default: [] })
+    @Prop({ type: [String], default: ['misc'] })
     tags: string[];
 
     @Prop({ type: [{ vote: Number, userId: { type: MongooseSchema.Types.ObjectId, ref: 'User' } }], default: [] })
