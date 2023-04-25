@@ -1,5 +1,7 @@
-import { Controller, Get, Param } from '@nestjs/common';
-import { Observable } from 'rxjs';
+import { Body, Controller, Get, Param, Post, Req, UseGuards } from '@nestjs/common';
+import { AuthGuard } from '@nestjs/passport';
+import { from, Observable } from 'rxjs';
+import { CreateQuestionDto } from './dto/createQuestionDto';
 import { QuestionsService } from './questions.service';
 import { Question } from './schema/question.schema';
 
@@ -10,11 +12,20 @@ export class QuestionsController {
 
     @Get()
     findAll(): Observable<Question[]>{
-        return this.questionsService.findAll()
+        return from(this.questionsService.findAll())
     }
 
     @Get(":id")
     findOne(@Param('id') questionId: string): Observable<Question | null>{
-        return this.questionsService.findOne((questionId))
+        return from(this.questionsService.findOne((questionId)))
+    }
+
+    @Post()
+    @UseGuards(AuthGuard())
+    create(@Body() createQuestionDto: CreateQuestionDto, @Req() req: any){
+        
+        const userId: string = req.user._id
+                
+        return from(this.questionsService.create(createQuestionDto, userId))
     }
 }
