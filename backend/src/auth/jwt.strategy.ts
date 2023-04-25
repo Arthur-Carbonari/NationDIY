@@ -19,8 +19,6 @@ export class JwtStrategy extends PassportStrategy(Strategy){
 
         const user = await this.usersService.findById(userId)
 
-        console.log(user);
-
         if(!user){
             throw new UnauthorizedException('Login is required to access this endpoint.');
             
