@@ -1,0 +1,34 @@
+<div class="modal fade " id="loginModal" tabindex="-1" aria-labelledby="loginModal" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content br-1 p-3">
+            <div class="modal-body">
+                <div class="container">
+                    <h2 class="my-4 text-center">Sign in</h2>
+                    <form id="loginForm" [formGroup]="loginForm" (ngSubmit)="onSubmit()">
+
+                        <!-- Email or Username Field -->
+                        <mat-form-field class="form-outline mb-4 w-100">
+                            <input matInput formControlName="emailOrUsername" type="text" placeholder="Email Address/Username" class="form-control form-key" />
+                            <mat-hint *ngIf="loginForm.controls['emailOrUsername'].errors">This field is required</mat-hint>
+                        </mat-form-field>
+                        
+                        <!-- Password Field -->
+                        <mat-form-field class="form-outline mb-4 w-100">
+                            <input matInput formControlName="password" type="password" placeholder="Password" class="form-control form-key" />
+                            <mat-hint *ngIf="loginForm.controls['password'].errors">Password is required</mat-hint>
+                        </mat-form-field>
+                        
+                        <!-- Submit Button -->
+                        <button mat-flat-button color="primary" [disabled]="loginForm.invalid" type="submit" class="mb-4 w-100" >Sign in</button>
+
+                        <!-- Register Modal Link -->
+                        <div class="text-center">
+                            <p>Not a member? <a href="#!" data-bs-target="#registerModal" data-bs-toggle="modal" data-bs-dismiss="modal">Register</a></p>
+                        </div>
+
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
