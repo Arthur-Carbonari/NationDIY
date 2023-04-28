@@ -1,0 +1,60 @@
+<div class="modal fade" id="signupModal" aria-hidden="true" aria-labelledby="signupModalLabel2" tabindex="-1">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content br-1 p-3">
+            <div class="modal-body">
+                <div class="container">
+                    <h2 class="my-4 text-center">Sign up</h2>
+                    <form id="signupForm" [formGroup]="signupForm" (ngSubmit)="onSubmit()">
+                        
+                        <!-- Email input -->
+                        <mat-form-field class="form-outline mb-4 w-100">
+                            <input matInput formControlName="email" type="text" placeholder="Email Address" class="form-control form-key" />
+                            <mat-hint *ngIf="signupForm.controls['email'].errors">This field is required</mat-hint>
+                        </mat-form-field>
+
+
+                        <!-- Username input -->
+                        <mat-form-field class="form-outline mb-4 w-100">
+                            <input matInput formControlName="username" type="text" placeholder="Username" class="form-control form-key" />
+                            <mat-hint *ngIf="signupForm.controls['username'].errors">This field is required</mat-hint>
+                        </mat-form-field>
+
+                        <!-- Password input -->
+                        <mat-form-field class="form-outline mb-4 w-100">
+                            <input matInput formControlName="password" type="password" placeholder="Password" class="form-control form-key" />
+                            <mat-hint *ngIf="signupForm.controls['password'].errors">This field is required</mat-hint>
+                        </mat-form-field>
+
+                        <!-- Confirm Password input -->
+                        <mat-form-field class="form-outline mb-4 w-100">
+                            <input matInput formControlName="confirmPassword" type="password" placeholder="Confirm Password" class="form-control form-key" />
+                            <mat-hint *ngIf="signupForm.controls['confirmPassword'].errors">This field is required</mat-hint>
+                        </mat-form-field>
+
+                        <!-- 2 column grid layout for inline styling -->
+                        <div class="row mb-4">
+                            <div class="col d-flex justify-content-center">
+                                <!-- Checkbox -->
+                                <div class="form-check">
+                                    <input class="form-check-input" type="checkbox" required id="termsAndConditions" />
+                                    <label class="form-check-label" for="termsAndConditions"> I have read and agree to the terms </label>
+                                </div>
+                            </div>
+
+                        </div>
+
+                        <!-- Submit button -->
+                        <div class="container d-flex justify-content-center">
+                            <button mat-flat-button color="primary" [disabled]="signupForm.invalid" type="submit" class="mb-4 w-75" >Sign Up</button>
+                        </div>
+
+                        <!-- Register buttons -->
+                        <div class="text-center">
+                            <p>Already a member? <a href="#!" data-bs-target="#loginModal" data-bs-toggle="modal" data-bs-dismiss="modal">Login</a></p>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

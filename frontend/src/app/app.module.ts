@@ -15,6 +15,7 @@ import {MatFormFieldModule} from '@angular/material/form-field'
 import {MatInputModule} from '@angular/material/input'
 import {MatButtonModule } from '@angular/material/button';
 import { LoginModalComponent } from './login-modal/login-modal.component';
+import { SignupModalComponent } from './signup-modal/signup-modal.component';
 
 @NgModule({
   declarations: [
@@ -23,6 +24,7 @@ import { LoginModalComponent } from './login-modal/login-modal.component';
     FooterComponent,
     HomeComponent,
     LoginModalComponent,
+    SignupModalComponent,
   ],
   imports: [
     BrowserModule,
