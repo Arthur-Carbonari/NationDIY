@@ -1,14 +1,14 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http'
-import { map } from 'rxjs';
+import { map, Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthenticationService {
-  
+
   constructor(private httpClient: HttpClient) { }
-  
+
   signup(email: string, username: string, password: string) {
     return this.httpClient.post<any>('api/auth/signup', { email, username, password }).pipe(
       map((response) => {
@@ -26,5 +26,9 @@ export class AuthenticationService {
       })
     )
 
+  }
+
+  checkAvailability(emailOrUsername: string){
+    return this.httpClient.post<any>('api/auth/check-availability', { emailOrUsername })
   }
 }
