@@ -19,11 +19,13 @@
                         </mat-form-field>
                         
                         <!-- Submit Button -->
-                        <button mat-flat-button color="primary" [disabled]="loginForm.invalid" type="submit" class="mb-4 w-100" >Sign in</button>
+                        <div class="container d-flex justify-content-center">
+                            <button mat-flat-button color="primary" [disabled]="loginForm.invalid" type="submit" class="mb-4 w-75" >Sign in</button>
+                        </div>
 
                         <!-- Register Modal Link -->
                         <div class="text-center">
-                            <p>Not a member? <a href="#!" data-bs-target="#registerModal" data-bs-toggle="modal" data-bs-dismiss="modal">Register</a></p>
+                            <p>Not a member? <a href="#!" data-bs-target="#signupModal" data-bs-toggle="modal" data-bs-dismiss="modal">Register</a></p>
                         </div>
 
                     </form>

@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { AuthenticationService } from '../services/authentication.service';
 
@@ -12,21 +12,20 @@ export class LoginModalComponent {
 
   loginForm: FormGroup;
 
-  constructor(private authService: AuthenticationService, private router: Router) {
+  constructor(private formBuilder: FormBuilder, private authService: AuthenticationService, private router: Router) {
 
-    this.loginForm = new FormGroup({
+    this.loginForm = this.formBuilder.group({
 
-      // Email or Username field
-      emailOrUsername: new FormControl(null, [Validators.required]),
+      emailOrUsername: [null, [Validators.required]],
 
-      // Password field
-      password: new FormControl(null, [Validators.required])
+      password: [null, [Validators.required]],
     })
+
   }
 
   onSubmit() {
-    
-    if (this.loginForm.invalid) {return};
+
+    if (this.loginForm.invalid) { return };
 
     const { emailOrUsername, password } = this.loginForm.value;
 
