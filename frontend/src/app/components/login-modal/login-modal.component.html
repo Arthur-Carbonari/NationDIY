@@ -9,13 +9,13 @@
                         <!-- Email or Username Field -->
                         <mat-form-field class="form-outline mb-4 w-100">
                             <input matInput formControlName="emailOrUsername" type="text" placeholder="Email Address/Username" class="form-control form-key" />
-                            <mat-hint *ngIf="loginForm.controls['emailOrUsername'].errors">This field is required</mat-hint>
+                            <mat-hint class="text-danger"> {{ getErrorMessage('emailOrUsername') }} </mat-hint>
                         </mat-form-field>
                         
                         <!-- Password Field -->
                         <mat-form-field class="form-outline mb-4 w-100">
                             <input matInput formControlName="password" type="password" placeholder="Password" class="form-control form-key" />
-                            <mat-hint *ngIf="loginForm.controls['password'].errors">Password is required</mat-hint>
+                            <mat-hint class="text-danger"> {{ getErrorMessage('password') }} </mat-hint>
                         </mat-form-field>
                         
                         <!-- Submit Button -->
