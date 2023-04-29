@@ -3,44 +3,43 @@ import { AbstractControl, FormBuilder, FormControl, FormGroup, ValidationErrors,
 import { Router } from '@angular/router';
 import { AuthenticationService } from '../../services/authentication.service';
 import validator from "validator"
+import { SmartForm } from 'src/app/shared/classes/smart-form.abstract';
 
 @Component({
   selector: 'app-signup-modal',
   templateUrl: './signup-modal.component.html',
   styleUrls: ['./signup-modal.component.scss']
 })
-export class SignupModalComponent {
+export class SignupModalComponent extends SmartForm{
 
   signupForm: FormGroup
-  errorMessages: {[key: string]: { [key: string]: string }}
 
-  // Common used error messages defined here
-  static readonly required = "This field is required."
+  constructor(formBuilder: FormBuilder, private authService: AuthenticationService, private router: Router) {
 
-  constructor(private authService: AuthenticationService, private formBuilder: FormBuilder, private router: Router) {
-
-    this.signupForm = this.formBuilder.group({
+    const signupForm = formBuilder.group({
 
       email: [null, [Validators.required, Validators.email]],
 
       username: [null, [Validators.required, Validators.minLength(5)]],
 
-      password: [null, [Validators.required, this.passwordStrengthValidator]],
+      password: [null, [Validators.required, passwordStrengthValidator]],
 
-      confirmPassword: [null, [Validators.required, this.confirmPasswordValidator]],
+      confirmPassword: [null, [Validators.required, confirmPasswordValidator]],
 
       termsAndConditions: [null, [Validators.required]]
     })
 
-    const requiredMessage = "This field is required."
-
-    this.errorMessages = {
-      email: { required: requiredMessage, email: 'This is not a valid email address.' },
-      username: { required: requiredMessage, minlength: 'Username needs to be at least 5 characters long.' },
-      password: { required: requiredMessage, weakPassword: 'Password should be at least 8 characters long, including uppercase letters, numbers, special characters.' },
-      confirmPassword: { required: requiredMessage, passwordMismatch: 'Passwords do not match.' },
+    const formErrorMessages = {
+      email: { email: 'This is not a valid email address.' },
+      username: { minlength: 'Username needs to be at least 5 characters long.' },
+      password: { weakPassword: 'Password should be at least 8 characters long, including uppercase letters, numbers, special characters.' },
+      confirmPassword: { passwordMismatch: 'Passwords do not match.' },
       termsAndConditions: { required: 'You need to accept the terms and conditions to create an account.' },
     }
+
+    super(signupForm, formErrorMessages)
+
+    this.signupForm = signupForm
 
   }
 
@@ -60,37 +59,25 @@ export class SignupModalComponent {
 
   }
 
-  getErrorMessage(controlName: string) {
+}
 
-    const control = this.signupForm.controls[controlName]
+function passwordStrengthValidator(control: AbstractControl): ValidationErrors | null {
+  const password = control.value;
 
-    if (!control || !control.dirty || !control.errors) return null
-
-    return this.errorMessages[controlName][Object.keys(control.errors)[0]]
-
+  if (!password || !validator.isStrongPassword(password)) {
+    return { weakPassword: true };  
   }
 
-  private passwordStrengthValidator(control: AbstractControl): ValidationErrors | null {
-    const password = control.value;
+  return null;
+}
 
-    if (!password || !validator.isStrongPassword(password)) {
-      return { weakPassword: true };  
-    }
+function confirmPasswordValidator(control: AbstractControl): ValidationErrors | null {
+  const password = control.root.get('password');
+  const confirmPassword = control.value;
 
+  if (!password || !confirmPassword) {
     return null;
   }
 
-  private confirmPasswordValidator(control: AbstractControl): ValidationErrors | null {
-    const password = control.root.get('password');
-    const confirmPassword = control.value;
-
-    if (!password || !confirmPassword) {
-      return null;
-    }
-
-    return password.value === confirmPassword ? null : { passwordMismatch: true };
-  }
-
+  return password.value === confirmPassword ? null : { passwordMismatch: true };
 }
-
-
