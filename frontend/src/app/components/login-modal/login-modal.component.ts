@@ -1,3 +1,4 @@
+import { HttpErrorResponse } from '@angular/common/http';
 import { Component } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
@@ -12,6 +13,8 @@ import { AuthenticationService } from '../../services/authentication.service';
 export class LoginModalComponent extends SmartForm {
 
   loginForm: FormGroup;
+
+  loginError = '';
 
   constructor(formBuilder: FormBuilder, private authService: AuthenticationService, private router: Router) {
 
@@ -30,6 +33,8 @@ export class LoginModalComponent extends SmartForm {
 
   onSubmit() {
 
+    if(this.loginError) this.loginError = ''
+
     if (this.loginForm.invalid) { return };
 
     const { emailOrUsername, password } = this.loginForm.value;
@@ -37,7 +42,11 @@ export class LoginModalComponent extends SmartForm {
     this.authService.login(emailOrUsername, password)
       .subscribe({
         next: (_response) => { this.router.navigateByUrl(this.router.url); },
-        error: (error) => { console.log(error); }
+        error: (error: HttpErrorResponse) => {
+          this.loginError = error.status === 401 ? 'Invalid email or password. Please try again.' : 'Error loging in, please refresh the page and try again.'
+          this.loginForm.get('emailOrUsername')?.setErrors({ 'invalid': true });
+          this.loginForm.get('password')?.reset();
+        }
       });
 
   }

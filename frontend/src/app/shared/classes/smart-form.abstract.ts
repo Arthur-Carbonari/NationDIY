@@ -24,7 +24,7 @@ export abstract class SmartForm {
 
         const errorKey = Object.keys(control.errors)[0];
 
-        return this.formErrorMessages?.[controlName]?.[errorKey] || this.formErrorMessages?.['_default']?.[errorKey] || 'Error';
+        return this.formErrorMessages?.[controlName]?.[errorKey] || this.formErrorMessages?.['_default']?.[errorKey] || '';
     }
 
     abstract onSubmit(): void
