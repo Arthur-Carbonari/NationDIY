@@ -14,8 +14,8 @@ import { MatToolbarModule } from '@angular/material/toolbar';
 import {MatFormFieldModule} from '@angular/material/form-field'
 import {MatInputModule} from '@angular/material/input'
 import {MatButtonModule } from '@angular/material/button';
-import { LoginModalComponent } from './login-modal/login-modal.component';
-import { SignupModalComponent } from './signup-modal/signup-modal.component';
+import { LoginModalComponent } from './components/login-modal/login-modal.component';
+import { SignupModalComponent } from './components/signup-modal/signup-modal.component';
 
 @NgModule({
   declarations: [
