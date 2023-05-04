@@ -10,4 +10,8 @@ export class HeaderComponent {
 
   title: string = 'NationDIY'
   constructor(public authService: AuthenticationService) { }
+
+  logout(){
+    this.authService.logout()
+  }
 }
