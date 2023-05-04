@@ -37,4 +37,9 @@ export class AuthenticationService {
   checkAvailability(emailOrUsername: string) {
     return this.httpClient.post<any>('api/auth/check-availability', { emailOrUsername })
   }
+
+  logout(){
+    localStorage.removeItem("auth-token")
+    this._isLoggedIn$.next(false)
+  }
 }
