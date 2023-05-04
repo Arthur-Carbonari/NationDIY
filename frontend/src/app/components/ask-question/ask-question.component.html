@@ -8,20 +8,32 @@
     </div>
 
     <main id="question-form">
-        <form action="/adm/add" method="POST" class="col align-center">
+        <!-- Must add action -->
+        <form action=" MUST ADD ACTION " method="POST" class="col align-center">
             <!-- title -->
             <div class="d-flex flex-column">
                 <div class="p-2">
-                    <h4 for="title" class="s-label"> Title </h4>
+                    <h4 class="s-label"> Title </h4>
                 </div>
                 <div class="p-2">
                     <input id="title" name="title" type="text" maxlength="300"
                         placeholder="How should I assemble this table?">
                 </div>
 
+                <!-- tags -->
+
+                <div class="p-2">
+                    <h4 class="s-label"> Tag </h4>
+                </div>
+                <div class="p-2">
+                    <input id="tag" name="tag" type="text" maxlength="300"
+                        placeholder="Add upon to 3 tags">
+                </div>
+
+
                 <!-- body-content -->
                 <div class="p-2">
-                    <h4 for="body-content" class="s-label">  Detail the problems you are facing</h4>
+                    <h4  class="s-label">  Detail the problems you are facing</h4>
                 </div>
                 <div class="row">
                     <textarea id="body-content" name="body-content" cols="150" rows="10"
