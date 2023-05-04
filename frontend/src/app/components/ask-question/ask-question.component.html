@@ -1,4 +1,41 @@
 <hr>
 <hr>
 <hr>
-<p>ask-question works!</p>
+<div class="container pt-5">
+    <div class="d-flex flex--item w100 lg:mb12 lg:100 ai-center">
+
+        <h1 class="fs-headline1 fw-bold mt24"> Ask a public question</h1>
+    </div>
+
+    <main id="question-form">
+        <form action="/adm/add" method="POST" class="col align-center">
+            <!-- title -->
+            <div class="d-flex flex-column">
+                <div class="p-2">
+                    <h4 for="title" class="s-label"> Title </h4>
+                </div>
+                <div class="p-2">
+                    <input id="title" name="title" type="text" maxlength="300"
+                        placeholder="How should I assemble this table?">
+                </div>
+
+                <!-- body-content -->
+                <div class="p-2">
+                    <h4 for="body-content" class="s-label">  Detail the problems you are facing</h4>
+                </div>
+                <div class="row">
+                    <textarea id="body-content" name="body-content" cols="150" rows="10"
+                        placeholder="What is the correct assembling order"></textarea>
+                </div>
+                <br>
+                <div class="d-flex justify-content-evenly">
+
+                    <input type="submit" value="Save" class="btn btn-primary btn-block">
+                    <br>
+                    <a href="/" class="btn btn-outline-danger">Cancel</a>
+                </div>
+                <br>
+            </div>
+        </form>
+    </main>
+</div>
