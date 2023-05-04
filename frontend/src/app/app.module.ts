@@ -17,6 +17,7 @@ import {MatButtonModule } from '@angular/material/button';
 import { LoginModalComponent } from './components/login-modal/login-modal.component';
 import { SignupModalComponent } from './components/signup-modal/signup-modal.component';
 import { AskQuestionComponent } from './components/ask-question/ask-question.component';
+import { QuestionComponent } from './components/question/question.component';
 
 @NgModule({
   declarations: [
@@ -27,6 +28,7 @@ import { AskQuestionComponent } from './components/ask-question/ask-question.com
     LoginModalComponent,
     SignupModalComponent,
     AskQuestionComponent,
+    QuestionComponent,
   ],
   imports: [
     BrowserModule,
