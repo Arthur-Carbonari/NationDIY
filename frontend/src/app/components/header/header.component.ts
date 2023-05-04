@@ -6,15 +6,8 @@ import { AuthenticationService } from 'src/app/services/authentication.service';
   templateUrl: './header.component.html',
   styleUrls: ['./header.component.scss']
 })
-export class HeaderComponent implements OnInit {
+export class HeaderComponent {
 
   title: string = 'NationDIY'
-  constructor(private authService: AuthenticationService) { }
-
-  ngOnInit(): void {
-  }
-
-  login() {
-    this.authService.login('arthur@gmail.com', 'aW12@340').subscribe(res => { console.log('sucess', res); })
-  }
+  constructor(public authService: AuthenticationService) { }
 }
