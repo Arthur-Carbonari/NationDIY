@@ -18,6 +18,7 @@ import { LoginModalComponent } from './components/login-modal/login-modal.compon
 import { SignupModalComponent } from './components/signup-modal/signup-modal.component';
 import { AskQuestionComponent } from './components/ask-question/ask-question.component';
 import { QuestionComponent } from './components/question/question.component';
+import { AuthInterceptorProvider } from './interceptors/auth.interceptor';
 
 @NgModule({
   declarations: [
@@ -44,7 +45,7 @@ import { QuestionComponent } from './components/question/question.component';
     MatButtonModule,
 
   ],
-  providers: [],
+  providers: [ AuthInterceptorProvider ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

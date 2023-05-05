@@ -7,19 +7,24 @@ import { BehaviorSubject, Observable, tap } from 'rxjs';
 })
 export class AuthenticationService {
 
+  private readonly TOKEN_NAME = 'auth-token' 
+
   private _isLoggedIn$ = new BehaviorSubject<boolean>(false)
   public isLoggedIn$ = this._isLoggedIn$.asObservable()
 
   constructor(private httpClient: HttpClient) {
-    const token = localStorage.getItem("auth-token")
-    this._isLoggedIn$.next(!!token)
+    this._isLoggedIn$.next(!!this.authToken)
+  }
+
+  get authToken(){
+    return localStorage.getItem(this.TOKEN_NAME)
   }
 
   signup(email: string, username: string, password: string) {
     return this.httpClient.post<any>('api/auth/signup', { email, username, password }).pipe(
       tap((response) => {
         this._isLoggedIn$.next(true)
-        localStorage.setItem('auth-token', response.token)
+        localStorage.setItem(this.TOKEN_NAME, response.token)
       })
     )
   }
@@ -28,7 +33,7 @@ export class AuthenticationService {
     return this.httpClient.post<any>('api/auth/login', { emailOrUsername, password }).pipe(
       tap((response) => {
         this._isLoggedIn$.next(true)
-        localStorage.setItem('auth-token', response.token)
+        localStorage.setItem(this.TOKEN_NAME, response.token)
       })
     )
 
