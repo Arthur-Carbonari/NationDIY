@@ -18,7 +18,7 @@
     <hr>
 
     <!-- Question -->
-    <div id="post-cell" class="containter-fluid">
+    <div id="question" class="containter-fluid">
         <!-- vote area -->
         <div class="row">
             <div class="col-1">
@@ -47,6 +47,8 @@
 
             </div>
 
+            <!--  obs: lateral content will be moved to a diffrent container -->
+
             <div id="lateral-content" class="col bg-warning">
                 <h3> <b> Related content </b></h3>
                 <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Facilis, aperiam repellat. Non debitis,
@@ -60,7 +62,7 @@
 
         <!--question-footer -->
 
-        <div class="row">
+        <div id="question-footer" class="row">
             <!-- tags -->
             <div class="col-8">
                 <button> tag test</button>
@@ -74,13 +76,102 @@
 
         <div class="containter-fluid">
             <hr>
-                <a href="" class="btn text-muted"> add comment </a>
+            <a href="" class="btn text-muted"> add comment </a>
             <hr>
         </div>
 
     </div>
 
-    
+    <div id="answers">
+
+        <h2> 1 Answer </h2>
+
+        <!-- Answer -->
+        <div id="answer" class="containter-fluid">
+            <!-- vote area -->
+            <div class="row">
+                <div class="col-1">
+                    <div class="d-flex justify-content-center flex-column stretch gs4 fc-black-200">
+
+                        <i class="fa-solid fa-angle-up btn"></i>
+                        <h5 class="text-muted text-center"> 0 </h5>
+                        <i class="fa-solid fa-chevron-down btn"></i>
+                    </div>
+                </div>
+
+                <div class="col-8">
+
+                    <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Facilis, aperiam repellat. Non debitis,
+                        voluptatum autem, velit, eligendi vero tenetur sint at libero perferendis facere necessitatibus
+                        saepe a. Quod, non expedita!</p>
 
 
-</div>
+                    <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Facilis, aperiam repellat. Non debitis,
+                        voluptatum autem, velit, eligendi vero tenetur sint at libero perferendis facere necessitatibus
+                        saepe a. Quod, non expedita!</p>
+
+                    <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Facilis, aperiam repellat. Non debitis,
+                        voluptatum autem, velit, eligendi vero tenetur sint at libero perferendis facere necessitatibus
+                        saepe a. Quod, non expedita!</p>
+
+                </div>
+
+
+                <div id="lateral-content" class="col bg-warning">
+                    <h3> <b> Related content </b></h3>
+                    <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Facilis, aperiam repellat. Non debitis,
+                        voluptatum autem, velit, eligendi vero tenetur sint at libero perferendis facere necessitatibus
+                        saepe a. Quod, non expedita!</p>
+
+
+                </div>
+            </div>
+
+
+            <!--question-footer -->
+
+            <div id="question-footer" class="row">
+                <!-- tags -->
+                <div class="col-8">
+                    <button> tag test</button>
+                </div>
+                <!-- user profile -->
+                <div class="col-2">
+                    <!--  will be create a small card with user infs -->
+                </div>
+
+            </div>
+
+            <div class="containter-fluid">
+                <hr>
+                <a href="" class="btn text-muted"> add comment </a>
+                <hr>
+            </div>
+
+        </div>
+
+    </div>
+
+    <!--  Make an answer box -->
+    <div>
+        <div class="form-group">
+            <form action="/adm/add" method="POST" class="col align-center">
+                <div class="row">
+                    <div class="input-field ">
+                        <h2>Answer this question:</h2>
+                        <textarea id="content" name="content" cols="150" rows="10" required></textarea>
+                    </div>
+                </div>
+
+                <div class=" d-flex justify-content-center">
+                    <input type="submit" value="Answer" class="btn btn-primary btn-block m-5">
+                    <br>
+                    <a routerLink="question" class="btn btn-outline-danger m-5">Cancel</a>
+                </div>
+            </form>
+
+        </div>
+
+
+
+    </div>
