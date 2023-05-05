@@ -19,6 +19,7 @@ import { SignupModalComponent } from './components/signup-modal/signup-modal.com
 import { AskQuestionComponent } from './components/ask-question/ask-question.component';
 import { QuestionComponent } from './components/question/question.component';
 import { AuthInterceptorProvider } from './interceptors/auth.interceptor';
+import { JwtHelperService, JWT_OPTIONS } from '@auth0/angular-jwt';
 
 @NgModule({
   declarations: [
@@ -45,7 +46,11 @@ import { AuthInterceptorProvider } from './interceptors/auth.interceptor';
     MatButtonModule,
 
   ],
-  providers: [ AuthInterceptorProvider ],
+  providers: [ 
+    JwtHelperService,
+    {provide: JWT_OPTIONS, useValue: JWT_OPTIONS},
+    AuthInterceptorProvider 
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

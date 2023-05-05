@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http'
 import { BehaviorSubject, Observable, tap } from 'rxjs';
+import { JwtHelperService } from '@auth0/angular-jwt';
 
 @Injectable({
   providedIn: 'root'
@@ -12,19 +13,30 @@ export class AuthenticationService {
   private _isLoggedIn$ = new BehaviorSubject<boolean>(false)
   public isLoggedIn$ = this._isLoggedIn$.asObservable()
 
-  constructor(private httpClient: HttpClient) {
-    this._isLoggedIn$.next(!!this.authToken)
+  constructor(private httpClient: HttpClient, private jwtHelper: JwtHelperService) {
+    this.authenticateUser()
   }
 
   get authToken(){
     return localStorage.getItem(this.TOKEN_NAME)
   }
 
+  private authenticateUser(){
+    const token = this.authToken
+
+    if(!token || this.jwtHelper.isTokenExpired(token)){      
+      this.logout()
+      return 
+    }
+    
+    this._isLoggedIn$.next(true)
+  }
+
   signup(email: string, username: string, password: string) {
     return this.httpClient.post<any>('api/auth/signup', { email, username, password }).pipe(
       tap((response) => {
-        this._isLoggedIn$.next(true)
         localStorage.setItem(this.TOKEN_NAME, response.token)
+        this.authenticateUser()
       })
     )
   }
@@ -32,8 +44,8 @@ export class AuthenticationService {
   login(emailOrUsername: string, password: string) {
     return this.httpClient.post<any>('api/auth/login', { emailOrUsername, password }).pipe(
       tap((response) => {
-        this._isLoggedIn$.next(true)
         localStorage.setItem(this.TOKEN_NAME, response.token)
+        this.authenticateUser()
       })
     )
 
@@ -44,7 +56,7 @@ export class AuthenticationService {
   }
 
   logout(){
-    localStorage.removeItem("auth-token")
+    localStorage.removeItem(this.TOKEN_NAME)
     this._isLoggedIn$.next(false)
   }
 }
