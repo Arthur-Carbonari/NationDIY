@@ -44,7 +44,6 @@ export class LoginModalComponent extends SmartForm {
         next: (_response) => { this.router.navigateByUrl(this.router.url); },
         error: (error: HttpErrorResponse) => {
           this.loginError = error.status === 401 ? 'Invalid email or password. Please try again.' : 'Error loging in, please refresh the page and try again.'
-          this.loginForm.get('emailOrUsername')?.setErrors({ 'invalid': true });
           this.loginForm.get('password')?.reset();
         }
       });
