@@ -4,9 +4,10 @@ import {
   HttpHandler,
   HttpEvent,
   HttpInterceptor,
-  HTTP_INTERCEPTORS
+  HTTP_INTERCEPTORS,
+  HttpErrorResponse
 } from '@angular/common/http';
-import { Observable } from 'rxjs';
+import { catchError, Observable, throwError } from 'rxjs';
 import { AuthenticationService } from '../services/authentication.service';
 
 @Injectable()
@@ -22,7 +23,17 @@ class AuthInterceptor implements HttpInterceptor {
       request = request.clone({ headers: request.headers.set('Authorization', `Bearer ${authToken}`) })
     }
 
-    return next.handle(request);
+    return next.handle(request).pipe(
+      catchError((error: HttpErrorResponse) => {
+
+        // if user is logged in and there is an unauthorized error, log user out and redirect to login page
+        if (this.authService.isLoggedIn && (error.status === 401 || error.status === 403)) {
+          this.authService.logout();
+        }
+
+        return throwError(() => error);
+      })
+    );
   }
 }
 
