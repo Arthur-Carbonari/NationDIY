@@ -21,6 +21,10 @@ export class AuthenticationService {
     return localStorage.getItem(this.TOKEN_NAME)
   }
 
+  get isLoggedIn(){
+    return this._isLoggedIn$.value
+  }
+
   private authenticateUser(){
     const token = this.authToken
 
