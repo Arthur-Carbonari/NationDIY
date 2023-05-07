@@ -2,8 +2,8 @@ import { HttpErrorResponse } from '@angular/common/http';
 import { Component } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import { AuthenticationService } from 'src/app/core/services/authentication.service';
 import { SmartForm } from 'src/app/shared/classes/smart-form.abstract';
-import { AuthenticationService } from '../../services/authentication.service';
 
 @Component({
   selector: 'app-login-modal',

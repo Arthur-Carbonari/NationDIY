@@ -2,7 +2,6 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { HomeComponent } from './components/home/home.component';
-import { LoginModalComponent } from './components/login-modal/login-modal.component';
 import { AskQuestionComponent } from './components/ask-question/ask-question.component';
 import { QuestionComponent } from './components/question/question.component';
 

@@ -1,9 +1,9 @@
 import { Component } from '@angular/core';
 import { AbstractControl, FormBuilder, FormControl, FormGroup, ValidationErrors, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
-import { AuthenticationService } from '../../services/authentication.service';
 import validator from "validator"
 import { SmartForm } from 'src/app/shared/classes/smart-form.abstract';
+import { AuthenticationService } from 'src/app/core/services/authentication.service';
 
 @Component({
   selector: 'app-signup-modal',

@@ -4,8 +4,8 @@ import { BrowserModule } from '@angular/platform-browser';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { HeaderComponent } from './components/header/header.component';
-import { FooterComponent } from './components/footer/footer.component';
+import { HeaderComponent } from './layout/header/header.component';
+import { FooterComponent } from './layout/footer/footer.component';
 import { HomeComponent } from './components/home/home.component';
 import { HttpClientModule } from '@angular/common/http';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
@@ -14,12 +14,13 @@ import { MatToolbarModule } from '@angular/material/toolbar';
 import {MatFormFieldModule} from '@angular/material/form-field'
 import {MatInputModule} from '@angular/material/input'
 import {MatButtonModule } from '@angular/material/button';
-import { LoginModalComponent } from './components/login-modal/login-modal.component';
-import { SignupModalComponent } from './components/signup-modal/signup-modal.component';
 import { AskQuestionComponent } from './components/ask-question/ask-question.component';
 import { QuestionComponent } from './components/question/question.component';
-import { AuthInterceptorProvider } from './interceptors/auth.interceptor';
-import { JwtHelperService, JWT_OPTIONS } from '@auth0/angular-jwt';
+
+import { CoreModule } from './core/core.module';
+import { ModalFormsModule } from './modules/modal-forms/modal-forms.module';
+import { LoginModalComponent } from './modules/modal-forms/components/login-modal/login-modal.component';
+import { SignupModalComponent } from './modules/modal-forms/components/signup-modal/signup-modal.component';
 
 @NgModule({
   declarations: [
@@ -45,12 +46,13 @@ import { JwtHelperService, JWT_OPTIONS } from '@auth0/angular-jwt';
     MatInputModule,
     MatButtonModule,
 
+    // core & shared module
+    CoreModule,
+
+    ModalFormsModule
+
   ],
-  providers: [ 
-    JwtHelperService,
-    {provide: JWT_OPTIONS, useValue: JWT_OPTIONS},
-    AuthInterceptorProvider 
-  ],
+  providers: [],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
