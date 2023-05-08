@@ -4,12 +4,15 @@ import { RouterModule, Routes } from '@angular/router';
 import { HomeComponent } from './modules/home/pages/home/home.component';
 import { AskQuestionComponent } from './modules/questions/pages/ask-question/ask-question.component';
 import { QuestionComponent } from './modules/questions/pages/question/question.component';
+import { AllQuestionsComponent } from './modules/questions/pages/all-questions/all-questions.component';
+
 
 //  path is the "url", used with <a routerLink= 
 const routes: Routes = [
   {path: "", component: HomeComponent},
   {path: 'ask-question', component: AskQuestionComponent},
-  {path: 'question', component: QuestionComponent}
+  {path: 'question', component: QuestionComponent},
+  {path: 'all-questions', component: AllQuestionsComponent}
 ];
 
 @NgModule({
