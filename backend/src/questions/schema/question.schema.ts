@@ -10,12 +10,12 @@ export class Question {
 
     @Prop({ required: true })
     title: string;
-
-    @Prop({ required: true })
-    content: string;
-
+    
     @Prop({ type: [String], default: ['misc'] })
     tags: string[];
+
+    @Prop({ required: true })
+    body: string;
 
     @Prop({ type: [{ vote: Number, userId: { type: MongooseSchema.Types.ObjectId, ref: 'User' } }], default: [] })
     votes: Vote[];
@@ -29,8 +29,11 @@ export class Question {
     @Prop({ type: MongooseSchema.Types.ObjectId, ref: 'User', required: true })
     author: string;
 
-    @Prop({ type: MongooseSchema.Types.ObjectId, ref: 'Answer' })
+    @Prop({ type: MongooseSchema.Types.ObjectId, ref: 'Answer', default: null })
     acceptedAnswer: string;
+
+    @Prop({ type: Date, default: Date.now })
+    createdAt: Date;
 
 }
 
