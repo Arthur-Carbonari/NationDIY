@@ -1,20 +1,61 @@
 <br><br><br><br>
-<div class= "container mt-5 mx-auto p-3">
+<div class=" container mt-5 p-3">
+    <div class="row">
+        <div id="mainbar" class="col-10">
+            <!-- title -->
+            <div class="d-flex justify-content-around">
+                <h1 class=""><b> All Questions </b></h1>
+                <div class="mb16"></div>
+                <div class="justify-content-end ps-5 ">
+                    <a routerLink="/ask-question" class="flex-item btn btn-primary"> Ask a Question</a>
 
-    <div id="mainbar" class="">
-        <div class="d-flex">
-            <h1 class=""><b> All Questions </b></h1>
-            <div class="justify-content-end ps-5 ">
-                <a routerLink="/ask-question" class="flex-item btn btn-primary"> Ask a Question</a>
+                </div>
+
+            </div>
+            <!-- tags -->
+            <div class="d-flex justify-content-end mb-4">
+
+                <button> Tags </button>
 
             </div>
 
+            <!-- Questions -->
+
+            <div class="justify-content-start bg-info">
+
+                <!-- summary -->
+                <div class="row">
+                    <div class="d-flex align-items-center flex-column col-2 ">
+
+                        <div>
+                            <span class="text-muted"> 0 </span>
+                            <span class="text-muted"> votes </span>
+                        </div>
+                        
+                        <div>
+                            <span class="text-muted"> 0 </span>
+                            <span class="text-muted"> Answers </span>
+
+                        </div>
+
+                    </div>
+                    <!-- Question title and link -->
+                    <mat-card class="bg-info col-8 " id="card">
+                        <mat-card-title> <a routerLink="/question" class="text-decoration-none  text-dark"> Test title
+                            </a></mat-card-title>
+                    </mat-card>
+                </div>
+
+
+            </div>
+
+
         </div>
 
+        <div id="sidebar" class="col-2">
+
+            <h2 class="bg-warning"> *Sidebar component slot*</h2>
+
+        </div>
     </div>
-
-    <div id="sidebar">
-
-    </div>
-
 </div>

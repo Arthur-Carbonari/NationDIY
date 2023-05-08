@@ -13,6 +13,8 @@ import { MatInputModule } from '@angular/material/input';
 import { MatSelectModule } from '@angular/material/select';
 import { MatAutocompleteModule } from '@angular/material/autocomplete';;
 import { MatIconModule } from '@angular/material/icon';
+import {MatCardModule} from '@angular/material/card';
+
 
 import { QuestionsRoutingModule } from './questions-routing.module';
 import { QuestionComponent } from './pages/question/question.component';
@@ -44,6 +46,9 @@ import { AllQuestionsComponent } from './pages/all-questions/all-questions.compo
     MatSelectModule,
     MatAutocompleteModule,
     MatIconModule,
+
+    //Card
+    MatCardModule,
   ]
 })
 export class QuestionsModule { }
