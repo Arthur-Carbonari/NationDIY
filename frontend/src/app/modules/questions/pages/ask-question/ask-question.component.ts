@@ -40,12 +40,11 @@ export class AskQuestionComponent extends SmartForm {
     if (this.postQuestionForm.invalid) { return };
 
     const { title, tags, body } = this.postQuestionForm.value
-
-    this.httpClient.post<any>('api/questions', { title, tags, body }).subscribe({
+        
+    this.httpClient.post<any>('api/questions', { title, tags: tags ? Array.from(tags) : null, body }).subscribe({
       next: console.log,
       error: console.error
     })
-
 
   }
 
