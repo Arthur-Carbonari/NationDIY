@@ -5,8 +5,6 @@ import { JwtHelperService, JWT_OPTIONS } from '@auth0/angular-jwt';
 import { AuthInterceptorProvider } from './interceptors/auth.interceptor';
 import { AuthenticationService } from './services/authentication.service';
 
-
-
 @NgModule({
   declarations: [],
   imports: [
@@ -14,6 +12,7 @@ import { AuthenticationService } from './services/authentication.service';
     HttpClientModule,
   ],
   providers: [
+    AuthenticationService,
     JwtHelperService,
     {provide: JWT_OPTIONS, useValue: JWT_OPTIONS},
     AuthInterceptorProvider 
