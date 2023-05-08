@@ -8,45 +8,33 @@
     </div>
 
     <main id="question-form">
-        <!-- Must add action -->
-        <form action=" MUST ADD ACTION " method="POST" class="col align-center">
-            <!-- title -->
+        <form id="postQuestionForm" [formGroup]="postQuestionForm" (ngSubmit)="onSubmit()">
             <div class="d-flex flex-column">
-                <div class="p-2">
-                    <h4 class="s-label"> Title </h4>
-                </div>
-                <div class="p-2">
-                    <input id="title" name="title" type="text" maxlength="300"
-                        placeholder="How should I assemble this table?">
-                </div>
+                
+
+                <!-- Title input -->
+                <mat-form-field class="form-outline mb-4 w-100">
+                    <input matInput formControlName="title" type="text" placeholder="Question Title" class="form-control form-key" />
+                    <mat-hint class="text-danger"> {{ getErrorMessage('title') }} </mat-hint>
+                </mat-form-field>
 
                 <!-- tags -->
-
-                <div class="p-2">
-                    <h4 class="s-label"> Tag </h4>
-                </div>
-                <div class="p-2">
-                    <input id="tag" name="tag" type="text" maxlength="300"
-                        placeholder="Add upon to 3 tags">
-                </div>
+                <app-tags-input matInput formControlName="tags" class="mb-4"></app-tags-input>
 
 
-                <!-- body-content -->
-                <div class="p-2">
-                    <h4  class="s-label">  Detail the problems you are facing</h4>
-                </div>
-                <div class="row">
-                    <textarea id="body-content" name="body-content" cols="150" rows="10"
-                        placeholder="What is the correct assembling order"></textarea>
-                </div>
-                <br>
+                <!-- question body -->
+                <mat-form-field class="form-outline mb-4 w-100">
+                    <textarea matInput formControlName="body" cols="150" rows="10" placeholder="Detail the issues you're facing..."></textarea>
+                    <mat-hint class="text-danger"> {{ getErrorMessage('body') }} </mat-hint>
+                </mat-form-field>
+
                 <div class="d-flex justify-content-evenly">
 
                     <input type="submit" value="Save" class="btn btn-primary btn-block">
                     <br>
                     <a href="/" class="btn btn-outline-danger">Cancel</a>
                 </div>
-                <br>
+
             </div>
         </form>
     </main>
