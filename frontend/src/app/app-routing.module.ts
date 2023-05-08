@@ -1,9 +1,9 @@
 // import componenets to be routed 
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { HomeComponent } from './components/home/home.component';
-import { AskQuestionComponent } from './components/ask-question/ask-question.component';
-import { QuestionComponent } from './components/question/question.component';
+import { HomeComponent } from './modules/home/pages/home/home.component';
+import { AskQuestionComponent } from './modules/questions/pages/ask-question/ask-question.component';
+import { QuestionComponent } from './modules/questions/pages/question/question.component';
 
 //  path is the "url", used with <a routerLink= 
 const routes: Routes = [
