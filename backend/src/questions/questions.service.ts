@@ -20,12 +20,14 @@ export class QuestionsService {
         return this.questionModel.findById(questionId).exec()
     }
 
-    create(createQuestionDto: CreateQuestionDto, userId: string): Promise<Question>{
+    create(createQuestionDto: CreateQuestionDto, userId: string){
 
-        const {title, content, tags} = createQuestionDto
-
-        const createdQuestion = new this.questionModel({ title, content, tags, author: userId });
+        const {title, body} = createQuestionDto
         
-        return createdQuestion.save()
+        const tags = createQuestionDto.tags?.length ? createQuestionDto.tags : undefined  
+
+        const createdQuestion = new this.questionModel({ title, body, tags, author: userId });
+                
+        return from(createdQuestion.save())
     }
 }

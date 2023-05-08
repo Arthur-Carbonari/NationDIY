@@ -6,10 +6,10 @@ export class CreateQuestionDto{
     readonly title: string;
 
     @IsNotEmpty()
-    readonly content: string;
+    readonly body: string;
 
     @IsOptional()
     @IsArray()
-    readonly tags: [string];
+    readonly tags: string[]
 
 }
