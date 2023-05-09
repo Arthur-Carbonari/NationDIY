@@ -14,6 +14,7 @@ import { MatSelectModule } from '@angular/material/select';
 import { MatAutocompleteModule } from '@angular/material/autocomplete';;
 import { MatIconModule } from '@angular/material/icon';
 import {MatCardModule} from '@angular/material/card';
+import {MatPaginatorModule} from '@angular/material/paginator';
 
 
 import { QuestionsRoutingModule } from './questions-routing.module';
@@ -49,6 +50,9 @@ import { AllQuestionsComponent } from './pages/all-questions/all-questions.compo
 
     //Card
     MatCardModule,
+
+    //Paginatior 
+    MatPaginatorModule
   ]
 })
 export class QuestionsModule { }

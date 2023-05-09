@@ -21,7 +21,8 @@
 
             <!-- Questions -->
 
-            <div class="justify-content-start bg-info">
+            <div class="justify-content-start bg-light mat-elevation-z8">
+                <hr>
 
                 <!-- summary -->
                 <div class="row">
@@ -31,7 +32,7 @@
                             <span class="text-muted"> 0 </span>
                             <span class="text-muted"> votes </span>
                         </div>
-                        
+
                         <div>
                             <span class="text-muted"> 0 </span>
                             <span class="text-muted"> Answers </span>
@@ -40,14 +41,21 @@
 
                     </div>
                     <!-- Question title and link -->
-                    <mat-card class="bg-info col-8 " id="card">
-                        <mat-card-title> <a routerLink="/question" class="text-decoration-none  text-dark"> Test title
+                    <mat-card class="bg-white col-8 " id="card">
+                        <mat-card-title> <a routerLink="/question" class="text-decoration-none  text-dark"> How assemble
+                                table form ikea
                             </a></mat-card-title>
+                        <mat-card-subtitle> tag </mat-card-subtitle>
+                        <mat-card-actions align="end"> profile card </mat-card-actions>
                     </mat-card>
                 </div>
-
+                <hr>
 
             </div>
+
+            <!-- paginator -->
+            <mat-paginator class="mat-elevation-z3" [length]="3" [pageSize]="3" [pageSizeOptions]="[3, 5, 10]">
+            </mat-paginator>
 
 
         </div>
@@ -58,4 +66,5 @@
 
         </div>
     </div>
+
 </div>
