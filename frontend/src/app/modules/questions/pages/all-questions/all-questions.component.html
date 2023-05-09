@@ -53,6 +53,40 @@
 
             </div>
 
+             <!-- Questions TEST -->
+
+             <div class="justify-content-start bg-light mat-elevation-z8">
+                <hr>
+
+                <!-- summary -->
+                <div class="row">
+                    <div class="d-flex align-items-center flex-column col-2 ">
+
+                        <div>
+                            <span class="text-muted"> 0 </span>
+                            <span class="text-muted"> votes </span>
+                        </div>
+
+                        <div>
+                            <span class="text-muted"> 0 </span>
+                            <span class="text-muted"> Answers </span>
+
+                        </div>
+
+                    </div>
+                    <!-- Question title and link -->
+                    <mat-card class="bg-white col-8 " id="card">
+                        <mat-card-title> <a routerLink="/question" class="text-decoration-none  text-dark"
+                            *ngFor="let question of questions"> {{question.title}}
+                            </a></mat-card-title>
+                        <mat-card-subtitle *ngFor="let question of questions"> {{question.tags}} </mat-card-subtitle>
+                        <mat-card-actions align="end"> profile card </mat-card-actions>
+                    </mat-card>
+                </div>
+                <hr>
+
+            </div>
+
             <!-- paginator -->
             <mat-paginator class="mat-elevation-z3" [length]="3" [pageSize]="3" [pageSizeOptions]="[3, 5, 10]">
             </mat-paginator>
