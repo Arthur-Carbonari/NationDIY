@@ -1,6 +1,6 @@
 import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
 import { Document, Schema as MongooseSchema } from 'mongoose';
-import { Vote, Comment } from '../questions.interface'
+import { Comment } from '../questions.interface'
 
 export type AnswerDocument = Answer & Document;
 
@@ -12,8 +12,11 @@ export class Answer {
     @Prop({ type: [{ type: MongooseSchema.Types.ObjectId, ref: 'Comment' }], default: [] })
     comments: Comment[];
 
-    @Prop({ type: [{ vote: Number, userId: { type: MongooseSchema.Types.ObjectId, ref: 'User' } }], default: [] })
-    votes: Vote[];
+    @Prop({ type: Map, of: Boolean, default: new Map() })
+    upvotes:Map<MongooseSchema.Types.ObjectId, boolean>;
+
+    @Prop({ type: Map, of: Boolean, default: new Map() })
+    downvotes:Map<MongooseSchema.Types.ObjectId, boolean>;
 
     @Prop({ type: MongooseSchema.Types.ObjectId, ref: 'User', required: true })
     author: string;
