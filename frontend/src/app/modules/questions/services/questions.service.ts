@@ -13,4 +13,8 @@ export class QuestionsService {
   getQuestions(): Observable<Question[]>{
     return this.httpClient.get<any>('api/questions')
   }
+
+  getQuestionById(id: string): Observable<Question | null>{
+    return this.httpClient.get<any>(`api/questions/${id}`)
+  }
 }

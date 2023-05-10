@@ -1,93 +1,27 @@
 <br>
 <div class=" container mt-5 p-3">
-    <!-- title example  -->
-    <div id="question-header" class="d-flex align-items-start flex-column">
-        <div class="d-flex justify-content-between">
-            <h1 class=""> Question exemple: How assemble table form ikea </h1>
-            <div class="flex-item ps-5 "><a routerLink="/ask-question" class="flex-item btn btn-primary"> Ask a
-                    Question</a></div>
-        </div>
 
-        <div id="post-infs" class="d-flex justify-content-around    ">
-            <div class="p-2"><span class="text-muted" id="post-date"> date </span></div>
-            <div class="p-2"><span class="text-muted" id="answers"> answers </span></div>
+    <ng-container *ngIf="(question$ | async) as question; else notFound">
 
-
-        </div>
-    </div>
-    <hr>
-
-    <!-- Question -->
-    <div id="question" class="containter-fluid">
-        <!-- vote area -->
-        <div class="row">
-            <div class="col-1">
-                <div class="d-flex justify-content-center flex-column stretch gs4 fc-black-200">
-
-                    <i class="fa-solid fa-angle-up btn"></i>
-                    <h5 class="text-muted text-center"> 0 </h5>
-                    <i class="fa-solid fa-chevron-down btn"></i>
-                </div>
+        <!-- title example  -->
+        <div id="question-header" class="d-flex align-items-start flex-column">
+            <div class="d-flex justify-content-between">
+                <h1 class=""> {{question.title}}</h1>
+                <div class="flex-item ps-5 "><a routerLink="/ask-question" class="flex-item btn btn-primary"> Ask a
+                        Question</a></div>
             </div>
 
-            <div class="col-8">
-
-                <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Facilis, aperiam repellat. Non debitis,
-                    voluptatum autem, velit, eligendi vero tenetur sint at libero perferendis facere necessitatibus
-                    saepe a. Quod, non expedita!</p>
-
-
-                <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Facilis, aperiam repellat. Non debitis,
-                    voluptatum autem, velit, eligendi vero tenetur sint at libero perferendis facere necessitatibus
-                    saepe a. Quod, non expedita!</p>
-
-                <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Facilis, aperiam repellat. Non debitis,
-                    voluptatum autem, velit, eligendi vero tenetur sint at libero perferendis facere necessitatibus
-                    saepe a. Quod, non expedita!</p>
-
-            </div>
-
-            <!--  obs: lateral content will be moved to a diffrent container -->
-
-            <div id="lateral-content" class="col bg-warning">
-                <h3> <b> Related content </b></h3>
-                <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Facilis, aperiam repellat. Non debitis,
-                    voluptatum autem, velit, eligendi vero tenetur sint at libero perferendis facere necessitatibus
-                    saepe a. Quod, non expedita!</p>
+            <div id="post-infs" class="d-flex justify-content-around    ">
+                <div class="p-2"><span class="text-muted" id="post-date"> {{ dateStringToLocale(question.createdAt) }} </span></div>
+                <div class="p-2"><span class="text-muted" id="answers"> answers </span></div>
 
 
             </div>
         </div>
+        <hr>
 
-
-        <!--question-footer -->
-
-        <div id="question-footer" class="row">
-            <!-- tags -->
-            <div class="col-8">
-                <button> tag test</button>
-            </div>
-            <!-- user profile -->
-            <div class="col-2">
-                <!--  will be create a small card with user infs -->
-            </div>
-
-        </div>
-
-        <div class="containter-fluid">
-            <hr>
-            <a href="" class="btn text-muted"> add comment </a>
-            <hr>
-        </div>
-
-    </div>
-
-    <div id="answers">
-
-        <h2> 1 Answer </h2>
-
-        <!-- Answer -->
-        <div id="answer" class="containter-fluid">
+        <!-- Question -->
+        <div id="question" class="containter-fluid">
             <!-- vote area -->
             <div class="row">
                 <div class="col-1">
@@ -101,21 +35,11 @@
 
                 <div class="col-8">
 
-                    <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Facilis, aperiam repellat. Non debitis,
-                        voluptatum autem, velit, eligendi vero tenetur sint at libero perferendis facere necessitatibus
-                        saepe a. Quod, non expedita!</p>
-
-
-                    <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Facilis, aperiam repellat. Non debitis,
-                        voluptatum autem, velit, eligendi vero tenetur sint at libero perferendis facere necessitatibus
-                        saepe a. Quod, non expedita!</p>
-
-                    <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Facilis, aperiam repellat. Non debitis,
-                        voluptatum autem, velit, eligendi vero tenetur sint at libero perferendis facere necessitatibus
-                        saepe a. Quod, non expedita!</p>
+                    {{question.body}}
 
                 </div>
 
+                <!--  obs: lateral content will be moved to a diffrent container -->
 
                 <div id="lateral-content" class="col bg-warning">
                     <h3> <b> Related content </b></h3>
@@ -131,6 +55,10 @@
             <!--question-footer -->
 
             <div id="question-footer" class="row">
+                <!-- tags -->
+                <div class="col-8">
+                    <button> tag test</button>
+                </div>
                 <!-- user profile -->
                 <div class="col-2">
                     <!--  will be create a small card with user infs -->
@@ -146,28 +74,106 @@
 
         </div>
 
-    </div>
+        <div id="answers">
 
-    <!--  Make an answer box -->
-    <div>
-        <div class="form-group">
-            <form action="/adm/add" method="POST" class="col align-center">
+            <h2> 1 Answer </h2>
+
+            <!-- Answer -->
+            <div id="answer" class="containter-fluid">
+                <!-- vote area -->
                 <div class="row">
-                    <div class="input-field ">
-                        <h2>Answer this question:</h2>
-                        <textarea id="content" name="content" cols="150" rows="10" required></textarea>
+                    <div class="col-1">
+                        <div class="d-flex justify-content-center flex-column stretch gs4 fc-black-200">
+
+                            <i class="fa-solid fa-angle-up btn"></i>
+                            <h5 class="text-muted text-center"> 0 </h5>
+                            <i class="fa-solid fa-chevron-down btn"></i>
+                        </div>
+                    </div>
+
+                    <div class="col-8">
+
+                        <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Facilis, aperiam repellat. Non
+                            debitis,
+                            voluptatum autem, velit, eligendi vero tenetur sint at libero perferendis facere
+                            necessitatibus
+                            saepe a. Quod, non expedita!</p>
+
+
+                        <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Facilis, aperiam repellat. Non
+                            debitis,
+                            voluptatum autem, velit, eligendi vero tenetur sint at libero perferendis facere
+                            necessitatibus
+                            saepe a. Quod, non expedita!</p>
+
+                        <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Facilis, aperiam repellat. Non
+                            debitis,
+                            voluptatum autem, velit, eligendi vero tenetur sint at libero perferendis facere
+                            necessitatibus
+                            saepe a. Quod, non expedita!</p>
+
+                    </div>
+
+
+                    <div id="lateral-content" class="col bg-warning">
+                        <h3> <b> Related content </b></h3>
+                        <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Facilis, aperiam repellat. Non
+                            debitis,
+                            voluptatum autem, velit, eligendi vero tenetur sint at libero perferendis facere
+                            necessitatibus
+                            saepe a. Quod, non expedita!</p>
+
+
                     </div>
                 </div>
 
-                <div class=" d-flex justify-content-center">
-                    <input type="submit" value="Answer" class="btn btn-primary btn-block m-5">
-                    <br>
-                    <a routerLink="question" class="btn btn-outline-danger m-5">Cancel</a>
+
+                <!--question-footer -->
+
+                <div id="question-footer" class="row">
+                    <!-- user profile -->
+                    <div class="col-2">
+                        <!--  will be create a small card with user infs -->
+                    </div>
+
                 </div>
-            </form>
+
+                <div class="containter-fluid">
+                    <hr>
+                    <a href="" class="btn text-muted"> add comment </a>
+                    <hr>
+                </div>
+
+            </div>
 
         </div>
 
+        <!--  Make an answer box -->
+        <div>
+            <div class="form-group">
+                <form action="/adm/add" method="POST" class="col align-center">
+                    <div class="row">
+                        <div class="input-field ">
+                            <h2>Answer this question:</h2>
+                            <textarea id="content" name="content" cols="150" rows="10" required></textarea>
+                        </div>
+                    </div>
+
+                    <div class=" d-flex justify-content-center">
+                        <input type="submit" value="Answer" class="btn btn-primary btn-block m-5">
+                        <br>
+                        <a routerLink="question" class="btn btn-outline-danger m-5">Cancel</a>
+                    </div>
+                </form>
+
+            </div>
+        </div>
 
 
-    </div>
+    </ng-container>
+
+    <ng-template #notFound>
+        <h2>Question not found</h2>
+    </ng-template>
+
+</div>

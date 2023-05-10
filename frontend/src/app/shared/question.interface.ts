@@ -8,6 +8,6 @@ export interface Question {
     votes: {value: number, user: string}[];  // check if this one must be Vote [] 
     comments: Comment[];
     answers: string[];
-    createAt: Date;
+    createdAt: string;
 
 }
