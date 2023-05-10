@@ -11,8 +11,7 @@ import { AllQuestionsComponent } from './modules/questions/pages/all-questions/a
 const routes: Routes = [
   {path: "", component: HomeComponent},
   {path: 'ask-question', component: AskQuestionComponent},
-  {path: 'question', component: QuestionComponent},
-  {path: 'all-questions', component: AllQuestionsComponent}
+  {path: 'questions', loadChildren: () => import("./modules/questions/questions.module").then(m => m.QuestionsModule)}
 ];
 
 @NgModule({
