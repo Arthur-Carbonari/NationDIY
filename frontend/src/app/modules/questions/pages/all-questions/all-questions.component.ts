@@ -20,15 +20,11 @@ export class AllQuestionsComponent implements OnInit {
   // store questions in a array 
   questions: Question[] = []
 
-
-
   loading = false;
 
   // load life cycle 
   ngOnInit(): void {
-
-    this.loadQuestions();
-
+    this.loadQuestions();    
   }
 
   // @ViewChild(MatPaginator)
@@ -36,11 +32,8 @@ export class AllQuestionsComponent implements OnInit {
 
   // load all questions 
   loadQuestions(): void {
-
     this.loading = true;
-
     this.http.get<any>('api/questions').subscribe(questions => (this.questions = questions)); 
-
   }
 
 

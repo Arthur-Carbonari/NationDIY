@@ -22,6 +22,7 @@ import { QuestionComponent } from './pages/question/question.component';
 import { AskQuestionComponent } from './pages/ask-question/ask-question.component';
 import { TagsInputComponent } from './components/tags-input/tags-input.component';
 import { AllQuestionsComponent } from './pages/all-questions/all-questions.component';
+import { QuestionCardComponent } from './components/question-card/question-card.component';
 
 
 @NgModule({
@@ -29,7 +30,8 @@ import { AllQuestionsComponent } from './pages/all-questions/all-questions.compo
     QuestionComponent,
     AskQuestionComponent,
     TagsInputComponent,
-    AllQuestionsComponent
+    AllQuestionsComponent,
+    QuestionCardComponent
   ],
   imports: [
     CommonModule,
