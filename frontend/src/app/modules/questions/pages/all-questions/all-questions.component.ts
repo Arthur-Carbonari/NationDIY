@@ -1,10 +1,11 @@
 // import core angular services
 import { AfterViewInit, Component, OnInit, ViewChild } from '@angular/core';
 import { MatPaginator } from '@angular/material/paginator';
-import { HttpClient, HttpParams } from "@angular/common/http";
 
 // question interface import
 import { Question } from "../../../../shared/question.interface"
+import { QuestionsService } from '../../services/questions.service';
+import { Observable } from 'rxjs';
 
 
 @Component({
@@ -12,30 +13,18 @@ import { Question } from "../../../../shared/question.interface"
   templateUrl: './all-questions.component.html',
   styleUrls: ['./all-questions.component.scss']
 })
-
 export class AllQuestionsComponent implements OnInit {
 
-  constructor(private http: HttpClient) { }
+  questions!: Observable<Question[]>
 
-  // store questions in a array 
-  questions: Question[] = []
+  constructor(private questionsService: QuestionsService) { }
 
-  loading = false;
 
-  // load life cycle 
+  /** Runs on init of component life cycle. */ 
   ngOnInit(): void {
-    this.loadQuestions();    
+    this.questions = this.questionsService.getQuestions();
   }
 
   // @ViewChild(MatPaginator)
   // paginator: MatPaginator; 
-
-  // load all questions 
-  loadQuestions(): void {
-    this.loading = true;
-    this.http.get<any>('api/questions').subscribe(questions => (this.questions = questions)); 
-  }
-
-
-
 }

@@ -21,7 +21,7 @@
             </div>
 
             <!-- Questions -->
-            <ng-container *ngFor="let question of questions">
+            <ng-container *ngFor="let question of questions | async">
                 <app-question-card [question]="question"></app-question-card>
             </ng-container>
 
