@@ -1,8 +1,8 @@
-<app-header></app-header>
+<app-header class="mb-5"></app-header>
 
 <app-login-modal *ngIf="!(authService.isLoggedIn$ | async)"></app-login-modal>
 <app-signup-modal *ngIf="!(authService.isLoggedIn$ | async)"></app-signup-modal>
 
-<router-outlet></router-outlet>
+<router-outlet class="pt-5" ></router-outlet>
 
 <app-footer></app-footer>
