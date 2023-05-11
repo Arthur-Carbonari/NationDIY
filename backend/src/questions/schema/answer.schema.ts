@@ -2,10 +2,9 @@ import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
 import { Document, Schema as MongooseSchema } from 'mongoose';
 import { Comment } from '../questions.interface'
 
-export type AnswerDocument = Answer & Document;
 
 @Schema()
-export class Answer {
+export class Answer extends Document{
     @Prop({ required: true })
     content: string;
 

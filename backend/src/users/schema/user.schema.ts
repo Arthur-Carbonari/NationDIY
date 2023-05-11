@@ -5,8 +5,6 @@ import * as bcrypt from "bcrypt";
 
 import ErrorMessage from '../../common/constants/error-messages';
 
-export type UserDocument = Document & User;
-
 @Schema()
 export class User extends Document {
 

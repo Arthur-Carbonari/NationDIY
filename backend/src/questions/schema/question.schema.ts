@@ -3,10 +3,8 @@ import { Document, Schema as MongooseSchema } from 'mongoose';
 
 import { Comment } from '../questions.interface'
 
-export type QuestionDocument = Question & Document;
-
 @Schema()
-export class Question {
+export class Question extends Document {
 
     @Prop({ required: true })
     title: string;
