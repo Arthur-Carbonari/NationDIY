@@ -5,8 +5,6 @@ import { HomeComponent } from './modules/home/pages/home/home.component';
 import { AskQuestionComponent } from './modules/questions/pages/ask-question/ask-question.component';
 import { QuestionComponent } from './modules/questions/pages/question/question.component';
 import { AllQuestionsComponent } from './modules/questions/pages/all-questions/all-questions.component';
-
-// testing error page
 import { FoundErrorComponent } from './layout/found-error/found-error.component';
 
 
@@ -16,8 +14,8 @@ const routes: Routes = [
   {path: 'ask-question', component: AskQuestionComponent},
   {path: 'questions', loadChildren: () => import("./modules/questions/questions.module").then(m => m.QuestionsModule)},
 
-  // testing error page
-  {path: '404', component: FoundErrorComponent},
+  // Redirect all unmatched path to 404 
+  {path: '**', pathMatch: 'full', component: FoundErrorComponent},
 
   
 ];
