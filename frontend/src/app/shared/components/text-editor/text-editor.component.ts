@@ -1,6 +1,6 @@
 import { Component, forwardRef, OnDestroy, OnInit, ViewEncapsulation } from '@angular/core';
 import { FormGroup, FormControl, AbstractControl, ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
-import { Editor, Toolbar, Validators } from 'ngx-editor';
+import { Editor, toHTML, Toolbar, Validators } from 'ngx-editor';
 
 @Component({
   selector: 'app-text-editor',
@@ -16,8 +16,6 @@ import { Editor, Toolbar, Validators } from 'ngx-editor';
   ]
 })
 export class TextEditorComponent implements ControlValueAccessor, OnInit, OnDestroy {
-  editordoc = "jsonDoc";
-
   editor!: Editor;
 
   toolbar: Toolbar = [
@@ -37,8 +35,8 @@ export class TextEditorComponent implements ControlValueAccessor, OnInit, OnDest
   ngOnInit(): void {
     this.editor = new Editor();
 
-    this.editor.valueChanges.subscribe( content => {
-      this.onChange(content['html'])
+    this.editor.valueChanges.subscribe( content => {      
+      this.onChange(toHTML(content))
       this.onTouched()
     })
   }
