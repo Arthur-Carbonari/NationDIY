@@ -13,6 +13,8 @@ export class AuthenticationService {
   private _isLoggedIn$ = new BehaviorSubject<boolean>(false)
   public isLoggedIn$ = this._isLoggedIn$.asObservable()
 
+  private _userId: string = ""
+
   constructor(private httpClient: HttpClient, private jwtHelper: JwtHelperService) {
     this.authenticateUser()
   }
@@ -25,6 +27,10 @@ export class AuthenticationService {
     return this._isLoggedIn$.value
   }
 
+  get userId(){
+    return this._userId
+  }
+
   private authenticateUser(){
     const token = this.authToken
 
@@ -32,6 +38,8 @@ export class AuthenticationService {
       this.logout()
       return 
     }
+
+    this._userId = this.jwtHelper.decodeToken(token).userId
     
     this._isLoggedIn$.next(true)
   }
@@ -62,5 +70,6 @@ export class AuthenticationService {
   logout(){
     localStorage.removeItem(this.TOKEN_NAME)
     this._isLoggedIn$.next(false)
+    this._userId = ""
   }
 }
