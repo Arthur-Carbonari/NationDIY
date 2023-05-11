@@ -1,7 +1,8 @@
-import { Body, Controller, Get, Param, Post, Req, UseGuards } from '@nestjs/common';
+import { Body, Controller, Get, Param, Patch, Post, Req, UseGuards } from '@nestjs/common';
 import { catchError, from, map, Observable, of } from 'rxjs';
 import { JwtAuthGuard } from 'src/auth/guards/jwt-auth.guard';
 import { CreateQuestionDto } from './dto/createQuestionDto';
+import { VoteDto } from './dto/vote.dto';
 import { QuestionsService } from './questions.service';
 import { Question } from './schema/question.schema';
 
@@ -28,6 +29,17 @@ export class QuestionsController {
 
         return this.questionsService.create(createQuestionDto, userId).pipe(
             map(() => ({ success: true })),
+            catchError(() => of({ success: false })),
+        );
+    }
+
+    @Patch(":id/vote")
+    @UseGuards(JwtAuthGuard)
+    vote(@Body() voteDto: VoteDto, @Req() req: any, @Param('id') questionId: string): Observable<{success: boolean}>{        
+        const userId: string = req.user._id
+
+        return from(this.questionsService.vote(voteDto, questionId, userId)).pipe(
+            map((success) => ({ success })),
             catchError(() => of({ success: false })),
         );
     }

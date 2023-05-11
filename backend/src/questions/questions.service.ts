@@ -1,9 +1,12 @@
 import { Injectable } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
 import { Model } from 'mongoose';
-import { from, Observable } from 'rxjs';
+import { from, map, Observable } from 'rxjs';
 import { CreateQuestionDto } from './dto/createQuestionDto';
 import { Question } from './schema/question.schema';
+import { Schema as MongooseSchema } from 'mongoose';
+import { VoteDto } from './dto/vote.dto';
+
 
 @Injectable()
 export class QuestionsService {
@@ -29,5 +32,28 @@ export class QuestionsService {
         const createdQuestion = new this.questionModel({ title, body, tags, author: userId });
                 
         return from(createdQuestion.save())
+    }
+
+    async vote(voteDto: VoteDto, questionId: string, userId: string) {
+        
+        const {value} = voteDto
+
+        const question = await this.questionModel.findById(questionId).exec()
+
+        if(!question) return false
+
+        question.upvotes.delete(userId)
+        question.downvotes.delete(userId)
+        
+        if(value > 0){
+            question.upvotes.set(userId, true)
+        }
+        else if(value < 0){
+            question.downvotes.set(userId, true)
+        }
+
+        await question.save()
+
+        return true
     }
 }

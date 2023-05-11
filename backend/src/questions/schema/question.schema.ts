@@ -16,10 +16,10 @@ export class Question extends Document {
     body: string;
 
     @Prop({ type: Map, of: Boolean, default: new Map() })
-    upvotes:Map<MongooseSchema.Types.ObjectId, boolean>;
+    upvotes:Map<string, boolean>;
 
     @Prop({ type: Map, of: Boolean, default: new Map() })
-    downvotes:Map<MongooseSchema.Types.ObjectId, boolean>;
+    downvotes:Map<string, boolean>;
 
     @Prop({ type: [{ type: MongooseSchema.Types.ObjectId, ref: 'Answer' }], default: [] })
     answers: string[];
