@@ -20,47 +20,65 @@ export class QuestionComponent {
 
   ngOnInit(): void {
     const id = this.route.snapshot.paramMap.get('id')!;
-    
+
     this.questionsService.getQuestionById(id).subscribe(question => {
 
-      if(!question) return
-      
-      this.question = question 
+      if (!question) return
+
+      this.question = question
       this.votes = Object.keys(question.upvotes).length - Object.keys(question.downvotes).length
     })
   }
 
-  upvote(){
+  /**
+ * Allows the user to upvote or downvote a question by providing a value of either 1 or -1.
+ * 
+ * @param value The value to add to the vote count. If positive, the user is upvoting the question, if negative the user is downvoting the question.
+ */
+  vote(value: number) {
 
-    if(!this.authService.isLoggedIn) return // change this later to display login form
+    // Return early if the user is not logged in
+    if (!this.authService.isLoggedIn) return // change this later to display login form
 
-    if( !this.question || this.authService.userId in this.question.upvotes) return 
+    // Return early if there is no question to vote on
+    if (!this.question) return
 
-    if(this.authService.userId in this.question.downvotes) delete this.question.downvotes[this.authService.userId]
+    // Set the value to either 1 or -1 to represent an upvote or downvote respectively
+    value = value > 0 ? 1 : -1
 
-    this.question.upvotes[this.authService.userId] = true
+    // Store the userId in a local variable
+    const userId = this.authService.userId
 
-    this.votes++
+    // Select the appropriate vote list depending on whether the user is upvoting or downvoting
+    const voteList = value > 0 ? this.question.upvotes : this.question.downvotes
 
-    this.questionsService.upvoteQuestion(this.question._id, this.authService.userId)
+    // Select the opposite vote list to potentially remove an opposite vote if one exists
+    const oppositeVoteList = value < 0 ? this.question.upvotes : this.question.downvotes
+
+    // Check to see if user is removing their vote instead of voting, and if he is we remove their vote
+    if (userId in voteList) {
+      delete voteList[userId]
+      this.votes -= value
+      this.questionsService.voteQuestion(this.question._id, 0)
+      return
+    }
+
+    // If the user has already voted the opposite way, remove their opposite vote and add their new vote
+    if (userId in oppositeVoteList) {
+      delete oppositeVoteList[userId]
+      this.votes += value
+    }
+
+    // Add the user's vote to the appropriate vote list and update the vote count
+    voteList[userId] = true
+    this.votes += value
+
+    // Call the voteQuestion method on the question service to update the database
+    this.questionsService.voteQuestion(this.question._id, value)
   }
 
-  downvote(){
 
-    if(!this.authService.isLoggedIn) return // change this later to display login form
-
-    if( !this.question || this.authService.userId in this.question.downvotes) return 
-
-    if(this.authService.userId in this.question.upvotes) delete this.question.upvotes[this.authService.userId]
-
-    this.question.downvotes[this.authService.userId] = true
-
-    this.votes--
-
-    this.questionsService.downvoteQuestion(this.question._id, this.authService.userId)
-  }
-
-  dateStringToLocale(dateString: string){
+  dateStringToLocale(dateString: string) {
     return new Date(dateString).toLocaleString()
   }
 

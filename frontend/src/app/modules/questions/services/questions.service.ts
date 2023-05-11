@@ -14,17 +14,11 @@ export class QuestionsService {
     return this.httpClient.get<any>('api/questions')
   }
 
-  getQuestionById(id: string): Observable<Question | null>{
-    return this.httpClient.get<any>(`api/questions/${id}`)
+  getQuestionById(questionId: string): Observable<Question | null>{
+    return this.httpClient.get<any>(`api/questions/${questionId}`)
   }
 
-  upvoteQuestion(questionId: string, userId: string): void {
-    const url = `api/questions/${questionId}/upvote`;
-    this.httpClient.put<any>(url, { userId });
-  }
-
-  downvoteQuestion(questionId: string, userId: string): void {
-    const url = `api/questions/${questionId}/downvote`;
-    this.httpClient.put<any>(url, { userId });
+  voteQuestion(questionId: string, value: number): void {
+    this.httpClient.patch<any>(`api/questions/${questionId}/vote`, { value }).subscribe();
   }
 }
