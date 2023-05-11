@@ -15,12 +15,14 @@ import { CoreModule } from './core/core.module';
 import { ModalFormsModule } from './modules/modal-forms/modal-forms.module';
 import { HomeModule } from './modules/home/home.module';
 import { QuestionsModule } from './modules/questions/questions.module';
+import { FoundErrorComponent } from './layout/found-error/found-error.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     HeaderComponent,
     FooterComponent,
+    FoundErrorComponent,
   ],
   imports: [
     BrowserModule,
