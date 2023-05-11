@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, HostListener } from '@angular/core';
 import { AuthenticationService } from 'src/app/core/services/authentication.service';
 
 @Component({
@@ -6,6 +6,7 @@ import { AuthenticationService } from 'src/app/core/services/authentication.serv
   templateUrl: './header.component.html',
   styleUrls: ['./header.component.scss']
 })
+
 export class HeaderComponent {
 
   title: string = 'NationDIY'
@@ -13,5 +14,17 @@ export class HeaderComponent {
 
   logout(){
     this.authService.logout()
+  }
+  
+  // used to change the navbar class if it is scrolled 
+  isScrolled = false;
+
+  @HostListener('window:scroll', [])
+  onWindowScroll() {
+    if (window.scrollY >= 56) {
+      this.isScrolled = true;
+    } else {
+      this.isScrolled = false;
+    }
   }
 }

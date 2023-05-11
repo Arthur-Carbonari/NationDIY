@@ -1,0 +1,15 @@
+.navbar {
+    transition: all 0.5s;   
+}
+ 
+
+.navbar-scrolled {
+    color: black !important;
+    background-color: white !important;
+    box-shadow: 0 3px 10px rgba(0, 0, 0, 0.15);
+}
+
+// Used to make anchor white, must be removed when scrolled 
+// .navbar a {
+//     color: white;
+// }
