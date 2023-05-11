@@ -5,7 +5,8 @@ export interface Question {
     tags: string;
     body: string;
     author: string;
-    votes: {value: number, user: string}[]; 
+    upvotes: { [key: string]: boolean };
+    downvotes: { [key: string]: boolean };
     comments: Comment[];
     answers: string[];
     createdAt: string;

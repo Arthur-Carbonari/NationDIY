@@ -10,15 +10,11 @@ export class QuestionCardComponent implements OnInit {
   
   @Input() question!: Question;
 
-  totalVotes: number = 0
+  votes: number = 0
   totalAnswers: number = 0
   
   ngOnInit(): void {    
-
-    for (let i = 0; i < this.question.votes.length; i++) {
-      this.totalVotes += this.question.votes[i].value
-    }
+    this.votes = Object.keys(this.question.upvotes).length - Object.keys(this.question.downvotes).length
     this.totalAnswers = this.question.answers.length
-    
   }
 }
