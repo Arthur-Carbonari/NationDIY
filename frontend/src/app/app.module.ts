@@ -16,6 +16,7 @@ import { ModalFormsModule } from './modules/modal-forms/modal-forms.module';
 import { HomeModule } from './modules/home/home.module';
 import { QuestionsModule } from './modules/questions/questions.module';
 import { FoundErrorComponent } from './layout/found-error/found-error.component';
+import { ServerErrorComponent } from './layout/server-error/server-error.component';
 
 @NgModule({
   declarations: [
@@ -23,6 +24,7 @@ import { FoundErrorComponent } from './layout/found-error/found-error.component'
     HeaderComponent,
     FooterComponent,
     FoundErrorComponent,
+    ServerErrorComponent,
   ],
   imports: [
     BrowserModule,
