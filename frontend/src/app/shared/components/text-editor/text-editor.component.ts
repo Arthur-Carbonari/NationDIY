@@ -1,5 +1,5 @@
-import { Component, OnDestroy, OnInit, ViewEncapsulation } from '@angular/core';
-import { FormGroup, FormControl, AbstractControl } from '@angular/forms';
+import { Component, forwardRef, OnDestroy, OnInit, ViewEncapsulation } from '@angular/core';
+import { FormGroup, FormControl, AbstractControl, ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 import { Editor, Toolbar, Validators } from 'ngx-editor';
 
 @Component({
@@ -7,8 +7,15 @@ import { Editor, Toolbar, Validators } from 'ngx-editor';
   templateUrl: './text-editor.component.html',
   styleUrls: ['./text-editor.component.scss'],
   encapsulation: ViewEncapsulation.None,
+  providers: [
+    {
+      provide: NG_VALUE_ACCESSOR,
+      useExisting: forwardRef(() => TextEditorComponent),
+      multi: true
+    }
+  ]
 })
-export class TextEditorComponent implements OnInit, OnDestroy {
+export class TextEditorComponent implements ControlValueAccessor, OnInit, OnDestroy {
   editordoc = "jsonDoc";
 
   editor!: Editor;
@@ -24,22 +31,32 @@ export class TextEditorComponent implements OnInit, OnDestroy {
     ['align_left', 'align_center', 'align_right', 'align_justify'],
   ];
 
-  form = new FormGroup({
-    editorContent: new FormControl(
-      { value: this.editordoc, disabled: false },
-      Validators.required()
-    ),
-  });
-
-  get doc(): AbstractControl {
-    return this.form.get('editorContent')!;
-  }
+  onChange = (value: string) => {};
+  onTouched = () => {};
 
   ngOnInit(): void {
     this.editor = new Editor();
+
+    this.editor.valueChanges.subscribe( content => {
+      this.onChange(content['html'])
+      this.onTouched()
+    })
   }
 
   ngOnDestroy(): void {
     this.editor.destroy();
   }
+
+  writeValue(value: string): void {
+    this.editor.setContent(value);
+  }
+
+  registerOnChange(fn: any): void {
+    this.onChange = fn;
+  }
+
+  registerOnTouched(fn: any): void {
+    this.onTouched = fn;
+  }
+
 }
