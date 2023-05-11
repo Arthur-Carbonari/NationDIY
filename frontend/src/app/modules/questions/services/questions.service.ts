@@ -17,4 +17,14 @@ export class QuestionsService {
   getQuestionById(id: string): Observable<Question | null>{
     return this.httpClient.get<any>(`api/questions/${id}`)
   }
+
+  upvoteQuestion(questionId: string, userId: string): void {
+    const url = `api/questions/${questionId}/upvote`;
+    this.httpClient.put<any>(url, { userId });
+  }
+
+  downvoteQuestion(questionId: string, userId: string): void {
+    const url = `api/questions/${questionId}/downvote`;
+    this.httpClient.put<any>(url, { userId });
+  }
 }
