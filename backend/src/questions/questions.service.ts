@@ -6,6 +6,7 @@ import { CreateQuestionDto } from './dto/createQuestionDto';
 import { Question } from './schema/question.schema';
 import { Schema as MongooseSchema } from 'mongoose';
 import { VoteDto } from './dto/vote.dto';
+import { Answer } from './schema/answer.schema';
 
 
 @Injectable()
@@ -13,6 +14,7 @@ export class QuestionsService {
 
     constructor(
         @InjectModel(Question.name) private readonly questionModel: Model<Question>,
+        @InjectModel(Answer.name) private readonly answerModel: Model<Answer>
     ) { }
 
     findAll(): Promise<Question[]> {
@@ -55,5 +57,18 @@ export class QuestionsService {
         await question.save()
 
         return true
+    }
+
+    async postAnswer(postAnswerDto: any, questionId: string, userId: string){
+        const question = await this.questionModel.findById(questionId).exec()
+
+        if(!question) return {success: false}
+
+        const newAnswer = await this.answerModel.create({body: postAnswerDto.body, author: userId, question: questionId})
+
+        question.answers.push(newAnswer._id)
+        await question.save()
+
+        return newAnswer
     }
 }

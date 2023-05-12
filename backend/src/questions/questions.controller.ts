@@ -33,6 +33,13 @@ export class QuestionsController {
         );
     }
 
+    @Post(":id/answer")
+    @UseGuards(JwtAuthGuard)
+    postAnswer(@Body() postAnswerDto: any, @Req() req: any, @Param('id') questionId: string){
+        const userId: string = req.user._id
+        return this.questionsService.postAnswer(postAnswerDto, questionId, userId)
+    }
+
     @Patch(":id/vote")
     @UseGuards(JwtAuthGuard)
     vote(@Body() voteDto: VoteDto, @Req() req: any, @Param('id') questionId: string): Observable<{success: boolean}>{        
