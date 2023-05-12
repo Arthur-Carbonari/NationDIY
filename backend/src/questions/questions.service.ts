@@ -71,4 +71,8 @@ export class QuestionsService {
 
         return newAnswer
     }
+
+    findAnswers(answerIds: string[]) {
+        return this.answerModel.find({ _id: { $in: answerIds } }).exec();        
+    }
 }
