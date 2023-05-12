@@ -85,7 +85,7 @@ export class QuestionsService {
     async voteAnswer(voteDto: VoteDto, userId: string, answerId: string) {
         const {value} = voteDto
 
-        const answer = await this.questionModel.findById(answerId).exec()
+        const answer = await this.answerModel.findById(answerId).exec()
 
         if(!answer) return false
 
