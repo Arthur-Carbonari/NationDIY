@@ -6,6 +6,7 @@ import { MatPaginator } from '@angular/material/paginator';
 import { Question } from "../../../../shared/question.interface"
 import { QuestionsService } from '../../services/questions.service';
 import { Observable } from 'rxjs';
+import { ActivatedRoute } from '@angular/router';
 
 
 @Component({
@@ -13,18 +14,27 @@ import { Observable } from 'rxjs';
   templateUrl: './all-questions.component.html',
   styleUrls: ['./all-questions.component.scss']
 })
-export class AllQuestionsComponent implements OnInit {
+export class AllQuestionsComponent implements AfterViewInit {
 
   questions!: Observable<Question[]>
 
-  constructor(private questionsService: QuestionsService) { }
+  @ViewChild(MatPaginator)
+  paginator!: MatPaginator;
 
-
-  /** Runs on init of component life cycle. */ 
-  ngOnInit(): void {
-    this.questions = this.questionsService.getQuestions();
+  constructor(private questionsService: QuestionsService, private route: ActivatedRoute) { }
+  
+  ngAfterViewInit(): void {
+    this.changePage()
   }
 
-  // @ViewChild(MatPaginator)
-  // paginator: MatPaginator; 
+  changePage(){
+    const pageNumber = this.paginator.pageIndex
+    const pageSize = this.paginator.pageSize
+    const tag = this.route.snapshot.queryParamMap.get('tag') || "";
+    // const sort    
+    
+    this.questions = this.questionsService.queryQuestions(pageNumber, pageSize, tag)
+  }
+
+
 }
