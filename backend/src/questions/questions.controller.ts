@@ -52,9 +52,9 @@ export class QuestionsController {
 
     @Post(":id/answers")
     @UseGuards(JwtAuthGuard)
-    postAnswer(@Body() postAnswerDto: PostAnswerDto, @Req() req: any, @Param('id') questionId: string) {
+    postAnswer(@Body() postAnswerDto: PostAnswerDto, @Req() req: any, @Param('id') questionId: string) {        
         const userId: string = req.user._id
-        return this.questionsService.postAnswer(postAnswerDto, userId, questionId)
+        return this.questionsService.postAnswer(postAnswerDto, questionId, userId)
     }
 
     @Get(":id/answers")
