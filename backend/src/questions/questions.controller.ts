@@ -4,6 +4,7 @@ import { JwtAuthGuard } from 'src/auth/guards/jwt-auth.guard';
 import { CreateQuestionDto } from './dto/createQuestionDto';
 import { VoteDto } from './dto/vote.dto';
 import { QuestionsService } from './questions.service';
+import { Answer } from './schema/answer.schema';
 import { Question } from './schema/question.schema';
 
 @Controller('questions')
@@ -45,7 +46,7 @@ export class QuestionsController {
     }
 
     @Get(":id/answers")
-    getAnswers(@Param('id') questionId: string){
+    getAnswers(@Param('id') questionId: string): Promise<Answer[]>{
         return this.questionsService.findAnswers(questionId)
     }
 

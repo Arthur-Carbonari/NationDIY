@@ -72,11 +72,11 @@ export class QuestionsService {
         return newAnswer
     }
 
-    async findAnswers(questionId: string) {
+    async findAnswers(questionId: string): Promise<Answer[]> {
 
         const question = await this.questionModel.findById(questionId).exec()
 
-        if(!question) return
+        if(!question) return []
         
         return this.answerModel.find({ _id: { $in: question.answers } }).exec();        
     }
