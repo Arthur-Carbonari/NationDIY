@@ -21,6 +21,9 @@ import { AskQuestionComponent } from './pages/ask-question/ask-question.componen
 import { TagsInputComponent } from './components/tags-input/tags-input.component';
 import { AllQuestionsComponent } from './pages/all-questions/all-questions.component';
 import { QuestionCardComponent } from './components/question-card/question-card.component';
+import { NgxEditorModule } from 'ngx-editor';
+import { SharedModule } from 'src/app/shared/shared.module';
+import { PostAnswerFormComponent } from './components/post-answer-form/post-answer-form.component';
 
 
 @NgModule({
@@ -29,11 +32,13 @@ import { QuestionCardComponent } from './components/question-card/question-card.
     AskQuestionComponent,
     TagsInputComponent,
     AllQuestionsComponent,
-    QuestionCardComponent
+    QuestionCardComponent,
+    PostAnswerFormComponent
   ],
   imports: [
     CommonModule,
     QuestionsRoutingModule,
+    SharedModule,
 
     //tags input imports
     FormsModule,
@@ -45,6 +50,9 @@ import { QuestionCardComponent } from './components/question-card/question-card.
     MatSelectModule,
     MatAutocompleteModule,
     MatIconModule,
+
+    // Rich Text-Editor
+    NgxEditorModule,
 
     //Card
     MatCardModule,
