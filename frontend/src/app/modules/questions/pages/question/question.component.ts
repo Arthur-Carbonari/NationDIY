@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { map, Observable } from 'rxjs';
 import { AuthenticationService } from 'src/app/core/services/authentication.service';
+import { Answer } from 'src/app/shared/answer.interface';
 import { Question } from 'src/app/shared/question.interface';
 import { QuestionsService } from '../../services/questions.service';
 
@@ -12,8 +13,8 @@ import { QuestionsService } from '../../services/questions.service';
 })
 export class QuestionComponent {
 
-  question: Question | undefined
-  answers!: Observable<any[]>
+  question!: Question
+  answers!: Observable<Answer[]>
 
   votes: number = 0
 

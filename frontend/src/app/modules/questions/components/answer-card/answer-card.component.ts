@@ -1,4 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
+import { Answer } from 'src/app/shared/answer.interface';
 
 @Component({
   selector: 'app-answer-card',
@@ -6,7 +7,7 @@ import { Component, Input, OnInit } from '@angular/core';
   styleUrls: ['./answer-card.component.scss']
 })
 export class AnswerCardComponent implements OnInit {
-  @Input() answer!: any;
+  @Input() answer!: Answer;
 
   votes: number = 0
   ngOnInit(): void {    

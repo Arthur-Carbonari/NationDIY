@@ -1,6 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
+import { Answer } from 'src/app/shared/answer.interface';
 import { Question } from 'src/app/shared/question.interface';
 
 @Injectable({
@@ -26,7 +27,7 @@ export class QuestionsService {
     return this.httpClient.post<any>(`api/questions/${questionId}/answers`, { body: answerBody });
   }
 
-  getQuestionAnswers(questionId: string){
-    return this.httpClient.get<any[]>(`api/questions/${questionId}/answers`)
+  getQuestionAnswers(questionId: string): Observable<Answer[]>{
+    return this.httpClient.get<Answer[]>(`api/questions/${questionId}/answers`)
   }
 }
