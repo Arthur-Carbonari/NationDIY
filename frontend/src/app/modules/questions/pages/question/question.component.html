@@ -11,7 +11,8 @@
             </div>
 
             <div id="post-infs" class="d-flex justify-content-around    ">
-                <div class="p-2"><span class="text-muted" id="post-date"> {{ dateStringToLocale(question.createdAt) }} </span></div>
+                <div class="p-2"><span class="text-muted" id="post-date"> {{ dateStringToLocale(question.createdAt) }}
+                    </span></div>
                 <div class="p-2"><span class="text-muted" id="answers"> answers </span></div>
 
 
@@ -73,9 +74,9 @@
 
         </div>
 
-        <div id="answers">
+        <div>
 
-            <h2> 1 Answer </h2>
+            <h2> Answer 1</h2>
 
             <!-- Answer -->
             <div id="answer" class="containter-fluid">
@@ -147,26 +148,7 @@
 
         </div>
 
-        <!--  Make an answer box -->
-        <div>
-            <div class="form-group">
-                <form action="/adm/add" method="POST" class="col align-center">
-                    <div class="row">
-                        <div class="input-field ">
-                            <h2>Answer this question:</h2>
-                            <textarea id="content" name="content" cols="150" rows="10" required></textarea>
-                        </div>
-                    </div>
-
-                    <div class=" d-flex justify-content-center">
-                        <input type="submit" value="Answer" class="btn btn-primary btn-block m-5">
-                        <br>
-                        <a routerLink="question" class="btn btn-outline-danger m-5">Cancel</a>
-                    </div>
-                </form>
-
-            </div>
-        </div>
+        <app-post-answer-form></app-post-answer-form>        
 
 
     </ng-container>

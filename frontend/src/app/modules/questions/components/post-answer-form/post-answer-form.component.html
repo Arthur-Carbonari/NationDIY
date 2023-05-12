@@ -1,0 +1,14 @@
+<div class="card">
+    <form class="form-group card-body align-center" [formGroup]="postAnswerForm" (ngSubmit)="onSubmit()">
+
+        <h3 class="card-header">Your Answer</h3>
+
+        <app-text-editor class="card-body" formControlName="body"></app-text-editor>
+        <mat-hint class="text-danger"> {{ getErrorMessage('body') }} </mat-hint>
+
+        <div class="text-end card-footer">
+            <button type="submit" class="btn btn-primary">Post Your Answer</button>
+        </div>
+
+    </form>
+</div>
