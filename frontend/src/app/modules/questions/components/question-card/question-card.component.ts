@@ -70,5 +70,4 @@ export class QuestionCardComponent implements OnInit {
       // Call the voteQuestion method on the question service to update the database
       this.questionsService.voteQuestion(this.question._id, value).subscribe()
     }
-
 }
