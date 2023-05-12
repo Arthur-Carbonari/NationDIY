@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, EventEmitter, Output } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import { AuthenticationService } from 'src/app/core/services/authentication.service';
@@ -13,6 +13,8 @@ import { QuestionsService } from '../../services/questions.service';
 export class PostAnswerFormComponent extends SmartForm{
 
   postAnswerForm: FormGroup
+
+  @Output() answerCreated = new EventEmitter<any>();
 
   constructor(formBuilder: FormBuilder, private authService: AuthenticationService, private route: ActivatedRoute, private questionsService: QuestionsService){
 
@@ -37,7 +39,7 @@ export class PostAnswerFormComponent extends SmartForm{
 
     const questionId = this.route.snapshot.paramMap.get('id')!;
 
-    this.questionsService.answerQuestion(questionId, body).subscribe( res => console.log(res))
+    this.questionsService.answerQuestion(questionId, body).subscribe( res => this.answerCreated.emit(res))
   }
 
 }
