@@ -35,8 +35,11 @@ export class TextEditorComponent implements ControlValueAccessor, OnInit, OnDest
   ngOnInit(): void {
     this.editor = new Editor();
 
-    this.editor.valueChanges.subscribe( content => {      
-      this.onChange(toHTML(content))
+    this.editor.valueChanges.subscribe( content => {  
+      
+      const html = toHTML(content)
+      
+      this.onChange(html == "<p></p>" ? "" : html)
       this.onTouched()
     })
   }
