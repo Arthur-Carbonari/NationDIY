@@ -17,8 +17,14 @@ export class QuestionsController {
     }
 
     @Get(":id")
-    findOne(@Param('id') questionId: string): Observable<Question | null> {
-        return from(this.questionsService.findOne((questionId)))
+    async findOne(@Param('id') questionId: string) {
+        const question = await this.questionsService.findOne((questionId))
+
+        if(!question) return
+
+        const answers = question.answers.length > 0 ? await this.questionsService.findAnswers(question.answers) : []        
+
+        return {question , answers}
     }
 
     @Post()
