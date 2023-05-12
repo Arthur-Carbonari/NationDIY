@@ -1,43 +1,56 @@
 <header class="">
-    <nav class="navbar navbar-expand-lg text-light fixed-top"
-    [ngClass]="{'navbar-scrolled':isScrolled}">
+    <nav class="navbar navbar-expand-lg text-light fixed-top" [ngClass]="{'navbar-scrolled':isScrolled}">
         <div class="container ">
+            <div class="d-flex">
+                <a class="navbar navbar-brand mb-0 h1" [ngClass]="{'icon-color':!isScrolled}" routerLink="">
+                    <i class="fa-solid fa-screwdriver-wrench"></i> {{title}}
+                </a>
+                <span class="navbar m-auto"> A nation of DIY</span>
+            </div>
 
-            <a class="navbar navbar-brand mb-0 h1" [ngClass]="{'icon-color':!isScrolled}" routerLink="">
-                <i class="fa-solid fa-screwdriver-wrench"></i> {{title}}
-            </a>
-            <span class="navbar-text-dark"> A nation of DIY</span>
+            <div class="d-flex justify-content-start">
+                
 
-            <button class="navbar-toggler ms-auto bg-dark" type="button" data-bs-toggle="collapse"
-                data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
-                aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-            </button>
+                    <a routerLink="" class="nav-link font rounded"> <p class="m-3">Home</p> </a>
+                    <a routerLink="/questions" class="nav-link font rounded"> <p  class="m-3"> All Questions </p> </a>
+                    <a routerLink="/ask-question" class="nav-link font rounded"><p class="m-3"> Ask a Question </p> </a>
 
-            <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                <ul class="navbar-nav ms-auto">
+              
+
+            </div>
+
+            <div class="d-flex">
+                <button class="navbar-toggler ms-auto bg-dark" type="button" data-bs-toggle="collapse"
+                    data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
+                    aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+
+                <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                    <ul class="navbar-nav ms-auto">
+
+                        <li class="nav-item" *ngIf="!(authService.isLoggedIn$ | async)">
+                            <a class="nav-link" aria-current="page">
+                                <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#loginModal">
+                                    Login
+                                </button>
+                            </a>
+                        </li>
+                        <li class="nav-item" *ngIf="!(authService.isLoggedIn$ | async)">
+                            <a class="nav-link">
+                                <button class=" btn btn-light" data-bs-toggle="modal"
+                                    data-bs-target="#signupModal">Register</button>
+                            </a>
+                        </li>
+                        <li class="nav-item" *ngIf="authService.isLoggedIn$ | async">
+                            <a class="nav-link" aria-current="page">
+                                <button class="btn btn-primary" (click)="logout()"> Logout </button>
+                            </a>
+                        </li>
 
 
-                    <li class="nav-item" *ngIf="!(authService.isLoggedIn$ | async)">
-                        <a class="nav-link" aria-current="page">
-                            <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#loginModal"> Login
-                            </button>
-                        </a>
-                    </li>
-                    <li class="nav-item" *ngIf="!(authService.isLoggedIn$ | async)">
-                        <a class="nav-link">
-                            <button class=" btn btn-light" data-bs-toggle="modal"
-                                data-bs-target="#signupModal">Register</button>
-                        </a>
-                    </li>
-                    <li class="nav-item" *ngIf="authService.isLoggedIn$ | async">
-                        <a class="nav-link" aria-current="page">
-                            <button class="btn btn-primary" (click)="logout()"> Logout </button>
-                        </a>
-                    </li>
-
-
-                </ul>
+                    </ul>
+                </div>
             </div>
         </div>
     </nav>

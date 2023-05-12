@@ -1,5 +1,5 @@
 .navbar {
-    transition: all 0.7s;   
+    transition: all 0.5s;   
 }
  
 
@@ -11,10 +11,21 @@
 
 .icon-color{
     color: white;
+    transition: 0.7s;
 }
 
+// this is used to stly the links in the middle of the navbas
 
-// Used to make anchor white, must be removed when scrolled 
-// .navbar a {
-//     color: white;
-// }
+.font{
+    color: inherit;
+    font-family: Roboto, sans-serif;
+    font-size: 20px;
+    font-weight: 500;
+    letter-spacing: .0892857143em;
+    
+}
+
+.font:hover{
+    box-shadow: 0 3px 10px rgba(0, 0, 0, 0.15);
+    background-color: rgba(0, 0, 0, 0.5);
+}
