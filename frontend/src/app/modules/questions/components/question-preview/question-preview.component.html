@@ -1,0 +1,31 @@
+<div class="justify-content-start bg-light mat-elevation-z8">
+    <hr>
+
+    <!-- summary -->
+    <div class="row">
+        <div class="d-flex align-items-center flex-column col-2 ">
+
+            <div>
+                <span class="text-muted"> {{votes}} </span>
+                <span class="text-muted"> Votes </span>
+            </div>
+
+            <div>
+                <span class="text-muted"> {{totalAnswers}} </span>
+                <span class="text-muted"> Answers </span>
+
+            </div>
+
+        </div>
+        <!-- Question title and link -->
+        <mat-card class="bg-white col-8 " id="card">
+            <mat-card-title>
+                <a routerLink="/questions/{{question._id}}" class="text-decoration-none  text-dark"> {{question.title}} </a>
+            </mat-card-title>
+            <mat-card-subtitle> {{question.tags}} </mat-card-subtitle>
+            <mat-card-actions align="end"> profile card </mat-card-actions>
+        </mat-card>
+    </div>
+    <hr>
+
+</div>

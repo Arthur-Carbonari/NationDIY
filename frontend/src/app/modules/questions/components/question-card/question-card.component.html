@@ -1,31 +1,38 @@
-<div class="justify-content-start bg-light mat-elevation-z8">
-    <hr>
-
-    <!-- summary -->
+<div id="question" class="containter-fluid">
+    <!-- vote area -->
     <div class="row">
-        <div class="d-flex align-items-center flex-column col-2 ">
 
-            <div>
-                <span class="text-muted"> {{votes}} </span>
-                <span class="text-muted"> Votes </span>
+        <div class="col-1">
+            <div class="d-flex justify-content-center flex-column stretch gs4 fc-black-200">
+                <i class="fa-solid fa-angle-up btn" (click)="vote(1)"></i>
+                <h5 class="text-muted text-center"> {{votes}} </h5>
+                <i class="fa-solid fa-chevron-down btn" (click)="vote(-1)"></i>
             </div>
-
-            <div>
-                <span class="text-muted"> {{totalAnswers}} </span>
-                <span class="text-muted"> Answers </span>
-
-            </div>
-
         </div>
-        <!-- Question title and link -->
-        <mat-card class="bg-white col-8 " id="card">
-            <mat-card-title>
-                <a routerLink="/questions/{{question._id}}" class="text-decoration-none  text-dark"> {{question.title}} </a>
-            </mat-card-title>
-            <mat-card-subtitle> {{question.tags}} </mat-card-subtitle>
-            <mat-card-actions align="end"> profile card </mat-card-actions>
-        </mat-card>
+
+        <div class="col-8" [innerHTML]="question.body"></div>
+        
     </div>
-    <hr>
+
+
+    <!--question-footer -->
+
+    <div id="question-footer" class="row">
+        <!-- tags -->
+        <div class="col-8">
+            <button> tag test</button>
+        </div>
+        <!-- user profile -->
+        <div class="col-2">
+            <!--  will be create a small card with user infs -->
+        </div>
+
+    </div>
+
+    <div class="containter-fluid">
+        <hr>
+        <a href="" class="btn text-muted"> add comment </a>
+        <hr>
+    </div>
 
 </div>

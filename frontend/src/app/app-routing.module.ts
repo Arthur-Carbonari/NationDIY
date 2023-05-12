@@ -3,8 +3,6 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { HomeComponent } from './modules/home/pages/home/home.component';
 import { AskQuestionComponent } from './modules/questions/pages/ask-question/ask-question.component';
-import { QuestionComponent } from './modules/questions/pages/question/question.component';
-import { AllQuestionsComponent } from './modules/questions/pages/all-questions/all-questions.component';
 import { FoundErrorComponent } from './layout/found-error/found-error.component';
 import { ServerErrorComponent } from './layout/server-error/server-error.component';
 

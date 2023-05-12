@@ -16,7 +16,6 @@ import {MatPaginatorModule} from '@angular/material/paginator';
 
 
 import { QuestionsRoutingModule } from './questions-routing.module';
-import { QuestionComponent } from './pages/question/question.component';
 import { AskQuestionComponent } from './pages/ask-question/ask-question.component';
 import { TagsInputComponent } from './components/tags-input/tags-input.component';
 import { AllQuestionsComponent } from './pages/all-questions/all-questions.component';
@@ -25,17 +24,20 @@ import { NgxEditorModule } from 'ngx-editor';
 import { SharedModule } from 'src/app/shared/shared.module';
 import { PostAnswerFormComponent } from './components/post-answer-form/post-answer-form.component';
 import { AnswerCardComponent } from './components/answer-card/answer-card.component';
+import { QuestionPreviewComponent } from './components/question-preview/question-preview.component';
+import { SingleQuestionComponent } from './pages/single-question/single-question.component';
 
 
 @NgModule({
   declarations: [
-    QuestionComponent,
     AskQuestionComponent,
     TagsInputComponent,
     AllQuestionsComponent,
     QuestionCardComponent,
     PostAnswerFormComponent,
-    AnswerCardComponent
+    AnswerCardComponent,
+    QuestionPreviewComponent,
+    SingleQuestionComponent
   ],
   imports: [
     CommonModule,

@@ -21,7 +21,7 @@
 
             <!-- Questions -->
             <ng-container *ngFor="let question of questions | async">
-                <app-question-card [question]="question"></app-question-card>
+                <app-question-preview [question]="question"></app-question-preview>
             </ng-container>
 
             <!-- paginator -->

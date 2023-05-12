@@ -1,0 +1,51 @@
+<div class=" container pt-5 p-3">
+
+    <ng-container *ngIf="(question); else notFound">
+
+        <!-- title example  -->
+        <div id="question-header" class="d-flex align-items-start flex-column">
+
+            <div class="d-flex justify-content-between">
+                <h1 class=""> {{question.title}}</h1>
+                <div class="flex-item ps-5 ">
+                    <a routerLink="/ask-question" class="flex-item btn btn-primary"> Ask a Question</a>
+                </div>
+            </div>
+
+            <div id="post-infs" class="d-flex justify-content-around    ">
+                <div class="p-2">
+                    <span class="text-muted" id="post-date"> {{ dateStringToLocale(question.createdAt) }}</span>
+                </div>
+                <div class="p-2">
+                    <span class="text-muted" id="answers"> answers </span>
+                </div>
+            </div>
+
+        </div>
+
+        <hr>
+
+        <!-- Question -->
+        <app-question-card [question]="question" ></app-question-card>
+
+        <div>
+
+            <h2>{{question.answers.length}} Answer</h2>
+
+            <!-- Answer -->
+            <ng-container *ngFor="let answer of answers | async">
+                <app-answer-card [answer]="answer"></app-answer-card>
+            </ng-container>
+
+        </div>
+
+        <app-post-answer-form></app-post-answer-form>        
+
+
+    </ng-container>
+
+    <ng-template #notFound>
+        <h2>Question not found</h2>
+    </ng-template>
+
+</div>
