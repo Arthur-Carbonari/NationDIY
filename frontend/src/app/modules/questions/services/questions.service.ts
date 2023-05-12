@@ -31,7 +31,7 @@ export class QuestionsService {
     return this.httpClient.get<Answer[]>(`api/questions/${questionId}/answers`)
   }
 
-  voteAnswer(_id: string, questionId: string, value: number) {
-    return this.httpClient.patch<any>(`api/questions/${questionId}/answers/:id/vote`, { value })
+  voteAnswer(answerId: string, questionId: string, value: number) {
+    return this.httpClient.patch<any>(`api/questions/${questionId}/answers/${answerId}/vote`, { value })
   }
 }

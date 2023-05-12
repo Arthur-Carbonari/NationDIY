@@ -62,7 +62,7 @@ export class QuestionsController {
         return this.questionsService.findAnswers(questionId)
     }
 
-    @Patch(":id/vote/answers/:answerId")
+    @Patch(":id/answers/:answerId/vote")
     @UseGuards(JwtAuthGuard)
     voteAnswer(@Body() voteDto: VoteDto, @Req() req: any, @Param("answerId") answerId: string): Observable<{ success: boolean }> {
         const userId: string = req.user._id
