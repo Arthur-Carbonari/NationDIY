@@ -4,14 +4,16 @@
 
         <div class="col-1">
             <div class="d-flex justify-content-center flex-column stretch gs4 fc-black-200">
-                <i class="fa-solid fa-angle-up btn" (click)="vote(1)"></i>
-                <h5 class="text-muted text-center"> {{votes}} </h5>
-                <i class="fa-solid fa-chevron-down btn" (click)="vote(-1)"></i>
+                <i class="fa-solid fa-chevron-up btn up-vote" (click)="vote(1)"></i>
+
+                <h5 class="text-muted text-center m-0"> {{votes}} </h5>
+
+                <i class="fa-solid fa-chevron-down btn down-vote " (click)="vote(-1)"></i>
             </div>
         </div>
 
         <div class="col-8" [innerHTML]="question.body"></div>
-        
+
     </div>
 
 
@@ -21,7 +23,8 @@
         <!-- tags -->
         <div class="text-end">
             <ng-container *ngFor="let tag of question.tags">
-                <a class="badge card-header-pills bg-primary text-decoration-none link-light text-capitalize mx-1 p-2" routerLink="/questions/notimplementedyet{{tag}}">{{tag}}</a>
+                <a class="badge card-header-pills bg-primary text-decoration-none link-light text-capitalize mx-1 p-2"
+                    routerLink="/questions/notimplementedyet{{tag}}">{{tag}}</a>
             </ng-container>
         </div>
 
