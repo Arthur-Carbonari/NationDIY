@@ -24,7 +24,7 @@ export class AskQuestionComponent extends SmartForm {
     const formErrorMessages = {
 
       title: { minlength: 'Question title needs to be at least 8 characters long.' },
-      body: { minlength: 'Your question needs to be at least 200 characters long.' }
+      body: { minlength: 'Please add more details to your question.' }
 
     }
 
