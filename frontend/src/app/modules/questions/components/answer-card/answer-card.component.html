@@ -4,9 +4,9 @@
         <div class="col-1">
             <div class="d-flex justify-content-center flex-column stretch gs4 fc-black-200">
 
-                <i class="fa-solid fa-angle-up btn"></i>
+                <i class="fa-solid fa-angle-up btn" (click)="vote(1)"></i>
                 <h5 class="text-muted text-center"> {{votes}} </h5>
-                <i class="fa-solid fa-chevron-down btn"></i>
+                <i class="fa-solid fa-chevron-down btn" (click)="vote(-1)"></i>
             </div>
         </div>
 

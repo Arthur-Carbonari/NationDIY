@@ -4,20 +4,25 @@
 
         <!-- title example  -->
         <div id="question-header" class="d-flex align-items-start flex-column">
+
             <div class="d-flex justify-content-between">
                 <h1 class=""> {{question.title}}</h1>
-                <div class="flex-item ps-5 "><a routerLink="/ask-question" class="flex-item btn btn-primary"> Ask a
-                        Question</a></div>
+                <div class="flex-item ps-5 ">
+                    <a routerLink="/ask-question" class="flex-item btn btn-primary"> Ask a Question</a>
+                </div>
             </div>
 
             <div id="post-infs" class="d-flex justify-content-around    ">
-                <div class="p-2"><span class="text-muted" id="post-date"> {{ dateStringToLocale(question.createdAt) }}
-                    </span></div>
-                <div class="p-2"><span class="text-muted" id="answers"> answers </span></div>
-
-
+                <div class="p-2">
+                    <span class="text-muted" id="post-date"> {{ dateStringToLocale(question.createdAt) }}</span>
+                </div>
+                <div class="p-2">
+                    <span class="text-muted" id="answers"> answers </span>
+                </div>
             </div>
+
         </div>
+
         <hr>
 
         <!-- Question -->
