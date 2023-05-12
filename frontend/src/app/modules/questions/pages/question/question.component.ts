@@ -13,6 +13,7 @@ import { QuestionsService } from '../../services/questions.service';
 export class QuestionComponent {
 
   question: Question | undefined
+  answers!: Observable<any[]>
 
   votes: number = 0
 
@@ -27,6 +28,8 @@ export class QuestionComponent {
 
       this.question = question
       this.votes = Object.keys(question.upvotes).length - Object.keys(question.downvotes).length
+
+      this.answers = this.questionsService.getQuestionAnswers(id)
     })
   }
 

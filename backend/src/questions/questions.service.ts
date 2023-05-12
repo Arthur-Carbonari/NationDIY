@@ -72,7 +72,12 @@ export class QuestionsService {
         return newAnswer
     }
 
-    findAnswers(answerIds: string[]) {
-        return this.answerModel.find({ _id: { $in: answerIds } }).exec();        
+    async findAnswers(questionId: string) {
+
+        const question = await this.questionModel.findById(questionId).exec()
+
+        if(!question) return
+        
+        return this.answerModel.find({ _id: { $in: question.answers } }).exec();        
     }
 }

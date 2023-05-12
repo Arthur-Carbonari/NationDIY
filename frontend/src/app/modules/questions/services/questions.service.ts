@@ -14,7 +14,7 @@ export class QuestionsService {
     return this.httpClient.get<any>('api/questions')
   }
 
-  getQuestionById(questionId: string): Observable<Question | null>{
+  getQuestionById(questionId: string): Observable<Question| null>{
     return this.httpClient.get<any>(`api/questions/${questionId}`)
   }
 
@@ -23,6 +23,10 @@ export class QuestionsService {
   }
 
   answerQuestion(questionId: string, answerBody: string){
-    return this.httpClient.post<any>(`api/questions/${questionId}/answer`, { body: answerBody });
+    return this.httpClient.post<any>(`api/questions/${questionId}/answers`, { body: answerBody });
+  }
+
+  getQuestionAnswers(questionId: string){
+    return this.httpClient.get<any[]>(`api/questions/${questionId}/answers`)
   }
 }

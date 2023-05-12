@@ -22,9 +22,7 @@ export class QuestionsController {
 
         if(!question) return
 
-        const answers = question.answers.length > 0 ? await this.questionsService.findAnswers(question.answers) : []        
-
-        return {question , answers}
+        return question
     }
 
     @Post()
@@ -39,11 +37,16 @@ export class QuestionsController {
         );
     }
 
-    @Post(":id/answer")
+    @Post(":id/answers")
     @UseGuards(JwtAuthGuard)
     postAnswer(@Body() postAnswerDto: any, @Req() req: any, @Param('id') questionId: string){
         const userId: string = req.user._id
         return this.questionsService.postAnswer(postAnswerDto, questionId, userId)
+    }
+
+    @Get(":id/answers")
+    getAnswers(@Param('id') questionId: string){
+        return this.questionsService.findAnswers(questionId)
     }
 
     @Patch(":id/vote")

@@ -76,75 +76,12 @@
 
         <div>
 
-            <h2> Answer 1</h2>
+            <h2>{{question.answers.length}} Answer</h2>
 
             <!-- Answer -->
-            <div id="answer" class="containter-fluid">
-                <!-- vote area -->
-                <div class="row">
-                    <div class="col-1">
-                        <div class="d-flex justify-content-center flex-column stretch gs4 fc-black-200">
-
-                            <i class="fa-solid fa-angle-up btn"></i>
-                            <h5 class="text-muted text-center"> 0 </h5>
-                            <i class="fa-solid fa-chevron-down btn"></i>
-                        </div>
-                    </div>
-
-                    <div class="col-8">
-
-                        <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Facilis, aperiam repellat. Non
-                            debitis,
-                            voluptatum autem, velit, eligendi vero tenetur sint at libero perferendis facere
-                            necessitatibus
-                            saepe a. Quod, non expedita!</p>
-
-
-                        <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Facilis, aperiam repellat. Non
-                            debitis,
-                            voluptatum autem, velit, eligendi vero tenetur sint at libero perferendis facere
-                            necessitatibus
-                            saepe a. Quod, non expedita!</p>
-
-                        <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Facilis, aperiam repellat. Non
-                            debitis,
-                            voluptatum autem, velit, eligendi vero tenetur sint at libero perferendis facere
-                            necessitatibus
-                            saepe a. Quod, non expedita!</p>
-
-                    </div>
-
-
-                    <div id="lateral-content" class="col bg-warning">
-                        <h3> <b> Related content </b></h3>
-                        <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Facilis, aperiam repellat. Non
-                            debitis,
-                            voluptatum autem, velit, eligendi vero tenetur sint at libero perferendis facere
-                            necessitatibus
-                            saepe a. Quod, non expedita!</p>
-
-
-                    </div>
-                </div>
-
-
-                <!--question-footer -->
-
-                <div id="question-footer" class="row">
-                    <!-- user profile -->
-                    <div class="col-2">
-                        <!--  will be create a small card with user infs -->
-                    </div>
-
-                </div>
-
-                <div class="containter-fluid">
-                    <hr>
-                    <a href="" class="btn text-muted"> add comment </a>
-                    <hr>
-                </div>
-
-            </div>
+            <ng-container *ngFor="let answer of answers | async">
+                <app-answer-card [answer]="answer"></app-answer-card>
+            </ng-container>
 
         </div>
 
