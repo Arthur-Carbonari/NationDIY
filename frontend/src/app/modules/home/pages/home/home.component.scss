@@ -1,20 +1,21 @@
 // set hero banner based on the screen size
 .hero-banner{
-    background-image: url('https://images.pexels.com/photos/301703/pexels-photo-301703.jpeg');
+    background-image: url('https://media.gettyimages.com/id/519518387/photo/people-painting-house.jpg?s=2048x2048&w=gi&k=20&c=25FY_BMBLs7kiFS7ck2KzF4ZHs7PJ9YVGhmQKp4U-q0=');
     background-repeat: no-repeat;
-    background-color: rgba(0,0,0,.9);
     min-height: 25vh;
     max-height: 30vh;
     position: relative;
     background-position: center center;
     background-size: cover;
+    opacity: 0.5;
+ 
 }
 
 .hero-banner::before{
     position: absolute;
-    content: '';
-    //background-color: rgba(0, 0, 0, 0.7);
+    background-color: rgba(0, 0, 0, 0.1);
     top: 0;
     bottom: 0;
     z-index: 1;
+    
 }
