@@ -24,7 +24,7 @@ export class QuestionsController {
 
         const userId: string = req.user._id
 
-        return this.questionsService.create(createQuestionDto, userId).pipe(
+        return from(this.questionsService.create(createQuestionDto, userId)).pipe(
             map(() => ({ success: true })),
             catchError(() => of({ success: false })),
         );

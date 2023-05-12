@@ -1,13 +1,12 @@
 import { Injectable } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
 import { Model } from 'mongoose';
-import { from, map, Observable } from 'rxjs';
 import { CreateQuestionDto } from './dto/createQuestionDto';
 import { Question } from './schema/question.schema';
-import { Schema as MongooseSchema } from 'mongoose';
 import { VoteDto } from './dto/vote.dto';
 import { Answer } from './schema/answer.schema';
 import { PostAnswerDto } from 'src/auth/dto/post-answer.dto';
+import { Tag } from './schema/tag.schema';
 
 
 @Injectable()
@@ -15,7 +14,8 @@ export class QuestionsService {
 
     constructor(
         @InjectModel(Question.name) private readonly questionModel: Model<Question>,
-        @InjectModel(Answer.name) private readonly answerModel: Model<Answer>
+        @InjectModel(Answer.name) private readonly answerModel: Model<Answer>,
+        @InjectModel(Tag.name) private readonly tagModel: Model<Tag>,
     ) { }
 
     findAll(): Promise<Question[]> {
@@ -26,15 +26,29 @@ export class QuestionsService {
         return this.questionModel.findById(questionId).exec()
     }
 
-    create(createQuestionDto: CreateQuestionDto, userId: string){
+    async create(createQuestionDto: CreateQuestionDto, userId: string){
 
         const {title, body} = createQuestionDto
         
         const tags = createQuestionDto.tags?.length ? createQuestionDto.tags : undefined  
 
-        const createdQuestion = new this.questionModel({ title, body, tags, author: userId });
-                
-        return from(createdQuestion.save())
+        const createdQuestion = await this.questionModel.create({ title, body, tags, author: userId });
+        
+        await this.addQuestionToTags(createdQuestion._id, createdQuestion.tags)
+
+        return createdQuestion
+    }
+
+    async addQuestionToTags(questionId: string, tags: string[]) {        
+        tags.forEach(async (tagName) => {
+            let tag = await this.tagModel.findById(tagName.toLowerCase()).exec()
+
+            if(!tag) tag = await this.tagModel.create({_id: tagName})
+
+            tag.questionIds.set(questionId, true)
+
+            await tag.save()
+        })
     }
 
     async vote(voteDto: VoteDto, userId: string, questionId: string) {
