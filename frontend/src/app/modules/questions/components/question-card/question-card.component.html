@@ -12,8 +12,8 @@
             </div>
         </div>
 
-        <div class="col-8" [innerHTML]="question.body"></div>
-
+        <div class="col-8 text-break" [innerHTML]="question.body"></div>
+        
     </div>
 
 
@@ -23,7 +23,7 @@
         <!-- tags -->
         <div class="text-end">
             <ng-container *ngFor="let tag of question.tags">
-                <a class="badge bg-dark-subtle text-decoration-none link-light text-capitalize text-black-50 fs-7" routerLink="/questions/notimplementedyet{{tag}}">{{tag}}</a>
+                <a class="badge bg-dark-subtle text-decoration-none link-light text-capitalize text-black-50 fs-7" [routerLink]="['/questions']" [queryParams]="{ tag: tag }">{{tag}}</a>
             </ng-container>
         </div>
 

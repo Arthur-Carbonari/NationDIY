@@ -25,6 +25,10 @@ export class AllQuestionsComponent implements AfterViewInit {
   
   ngAfterViewInit(): void {
     this.changePage()
+
+    this.route.queryParams.subscribe(() => {
+      this.changePage();
+    });
   }
 
   changePage(){
