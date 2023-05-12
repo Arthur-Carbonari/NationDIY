@@ -21,4 +21,8 @@ export class QuestionsService {
   voteQuestion(questionId: string, value: number): void {
     this.httpClient.patch<any>(`api/questions/${questionId}/vote`, { value }).subscribe();
   }
+
+  answerQuestion(questionId: string, answerBody: string){
+    return this.httpClient.post<any>(`api/questions/${questionId}/answer`, { body: answerBody });
+  }
 }
