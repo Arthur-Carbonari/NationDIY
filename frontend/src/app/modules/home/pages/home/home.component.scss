@@ -1,0 +1,20 @@
+// set hero banner based on the screen size
+.hero-banner{
+    background-image: url('https://images.pexels.com/photos/301703/pexels-photo-301703.jpeg');
+    background-repeat: no-repeat;
+    background-color: rgba(0,0,0,.9);
+    min-height: 25vh;
+    max-height: 30vh;
+    position: relative;
+    background-position: center center;
+    background-size: cover;
+}
+
+.hero-banner::before{
+    position: absolute;
+    content: '';
+    //background-color: rgba(0, 0, 0, 0.7);
+    top: 0;
+    bottom: 0;
+    z-index: 1;
+}

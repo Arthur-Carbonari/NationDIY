@@ -3,7 +3,7 @@
     [ngClass]="{'navbar-scrolled':isScrolled}">
         <div class="container ">
 
-            <a class="navbar-brand mb-0 h1" routerLink="">
+            <a class="navbar-brand mb-0 h1" [ngClass]="{'icon-color':!isScrolled}" routerLink="">
                 <i class="fa-solid fa-screwdriver-wrench"></i> {{title}}
             </a>
             <span class="navbar-text-dark"> A nation of DIY</span>
