@@ -24,6 +24,7 @@ import { QuestionCardComponent } from './components/question-card/question-card.
 import { NgxEditorModule } from 'ngx-editor';
 import { SharedModule } from 'src/app/shared/shared.module';
 import { PostAnswerFormComponent } from './components/post-answer-form/post-answer-form.component';
+import { AnswerCardComponent } from './components/answer-card/answer-card.component';
 
 
 @NgModule({
@@ -33,7 +34,8 @@ import { PostAnswerFormComponent } from './components/post-answer-form/post-answ
     TagsInputComponent,
     AllQuestionsComponent,
     QuestionCardComponent,
-    PostAnswerFormComponent
+    PostAnswerFormComponent,
+    AnswerCardComponent
   ],
   imports: [
     CommonModule,
