@@ -1,4 +1,4 @@
-import { Body, Controller, Get, Param, Patch, Post, Req, UseGuards } from '@nestjs/common';
+import { Body, Controller, Get, Param, Patch, Post, Query, Req, UseGuards } from '@nestjs/common';
 import { catchError, from, map, Observable, of } from 'rxjs';
 import { PostAnswerDto } from 'src/auth/dto/post-answer.dto';
 import { JwtAuthGuard } from 'src/auth/guards/jwt-auth.guard';
@@ -14,8 +14,8 @@ export class QuestionsController {
     constructor(private questionsService: QuestionsService) { }
 
     @Get()
-    findAll(): Observable<Question[]> {
-        return from(this.questionsService.findAll())
+    getQuestions(@Query('pageNumber') pageNumber=0, @Query('pageSize') pageSize=50, @Query('tag') tag="",){
+        return from(this.questionsService.getQuestions(pageNumber, pageSize, tag))
     }
 
     @Post()
