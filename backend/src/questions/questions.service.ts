@@ -37,7 +37,7 @@ export class QuestionsService {
         return from(createdQuestion.save())
     }
 
-    async vote(voteDto: VoteDto, questionId: string, userId: string) {
+    async vote(voteDto: VoteDto, userId: string, questionId: string) {
         
         const {value} = voteDto
 
@@ -80,5 +80,27 @@ export class QuestionsService {
         if(!question) return []
         
         return this.answerModel.find({ _id: { $in: question.answers } }).exec();        
+    }
+
+    async voteAnswer(voteDto: VoteDto, userId: string, answerId: string) {
+        const {value} = voteDto
+
+        const answer = await this.questionModel.findById(answerId).exec()
+
+        if(!answer) return false
+
+        answer.upvotes.delete(userId)
+        answer.downvotes.delete(userId)
+        
+        if(value > 0){
+            answer.upvotes.set(userId, true)
+        }
+        else if(value < 0){
+            answer.downvotes.set(userId, true)
+        }
+
+        await answer.save()
+
+        return true
     }
 }

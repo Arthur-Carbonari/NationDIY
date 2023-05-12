@@ -18,18 +18,9 @@ export class QuestionsController {
         return from(this.questionsService.findAll())
     }
 
-    @Get(":id")
-    async findOne(@Param('id') questionId: string) {
-        const question = await this.questionsService.findOne((questionId))
-
-        if(!question) return
-
-        return question
-    }
-
     @Post()
     @UseGuards(JwtAuthGuard)
-    create(@Body() createQuestionDto: CreateQuestionDto, @Req() req: any): Observable<{success: boolean}> {
+    create(@Body() createQuestionDto: CreateQuestionDto, @Req() req: any): Observable<{ success: boolean }> {
 
         const userId: string = req.user._id
 
@@ -39,21 +30,18 @@ export class QuestionsController {
         );
     }
 
-    @Post(":id/answers")
-    @UseGuards(JwtAuthGuard)
-    postAnswer(@Body() postAnswerDto: PostAnswerDto, @Req() req: any, @Param('id') questionId: string){
-        const userId: string = req.user._id
-        return this.questionsService.postAnswer(postAnswerDto, questionId, userId)
-    }
+    @Get(":id")
+    async findOne(@Param('id') questionId: string) {
+        const question = await this.questionsService.findOne((questionId))
 
-    @Get(":id/answers")
-    getAnswers(@Param('id') questionId: string): Promise<Answer[]>{
-        return this.questionsService.findAnswers(questionId)
+        if (!question) return
+
+        return question
     }
 
     @Patch(":id/vote")
     @UseGuards(JwtAuthGuard)
-    vote(@Body() voteDto: VoteDto, @Req() req: any, @Param('id') questionId: string): Observable<{success: boolean}>{        
+    vote(@Body() voteDto: VoteDto, @Req() req: any, @Param('id') questionId: string): Observable<{ success: boolean }> {
         const userId: string = req.user._id
 
         return from(this.questionsService.vote(voteDto, questionId, userId)).pipe(
@@ -61,4 +49,28 @@ export class QuestionsController {
             catchError(() => of({ success: false })),
         );
     }
+
+    @Post(":id/answers")
+    @UseGuards(JwtAuthGuard)
+    postAnswer(@Body() postAnswerDto: PostAnswerDto, @Req() req: any, @Param('id') questionId: string) {
+        const userId: string = req.user._id
+        return this.questionsService.postAnswer(postAnswerDto, userId, questionId)
+    }
+
+    @Get(":id/answers")
+    getAnswers(@Param('id') questionId: string): Promise<Answer[]> {
+        return this.questionsService.findAnswers(questionId)
+    }
+
+    @Patch(":id/vote/answers/:answerId")
+    @UseGuards(JwtAuthGuard)
+    voteAnswer(@Body() voteDto: VoteDto, @Req() req: any, @Param("answerId") answerId: string): Observable<{ success: boolean }> {
+        const userId: string = req.user._id
+
+        return from(this.questionsService.voteAnswer(voteDto, userId, answerId)).pipe(
+            map((success) => ({ success })),
+            catchError(() => of({ success: false })),
+        );
+    }
+
 }
