@@ -19,6 +19,9 @@ export class QuestionCardComponent implements OnInit {
 
   ngOnInit(): void {
     this.votes = Object.keys(this.question.upvotes).length - Object.keys(this.question.downvotes).length
+
+    console.log(this.question.tags);
+    
   }
 
     /**

@@ -2,7 +2,7 @@
 export interface Question {
     _id: string;
     title: string;
-    tags: string;
+    tags: string[];
     body: string;
     author: string;
     upvotes: { [key: string]: boolean };
