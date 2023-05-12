@@ -7,6 +7,7 @@ import { Question } from './schema/question.schema';
 import { Schema as MongooseSchema } from 'mongoose';
 import { VoteDto } from './dto/vote.dto';
 import { Answer } from './schema/answer.schema';
+import { PostAnswerDto } from 'src/auth/dto/post-answer.dto';
 
 
 @Injectable()
@@ -59,7 +60,7 @@ export class QuestionsService {
         return true
     }
 
-    async postAnswer(postAnswerDto: any, questionId: string, userId: string){
+    async postAnswer(postAnswerDto: PostAnswerDto, questionId: string, userId: string){
         const question = await this.questionModel.findById(questionId).exec()
 
         if(!question) return {success: false}

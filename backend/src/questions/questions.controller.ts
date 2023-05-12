@@ -1,5 +1,6 @@
 import { Body, Controller, Get, Param, Patch, Post, Req, UseGuards } from '@nestjs/common';
 import { catchError, from, map, Observable, of } from 'rxjs';
+import { PostAnswerDto } from 'src/auth/dto/post-answer.dto';
 import { JwtAuthGuard } from 'src/auth/guards/jwt-auth.guard';
 import { CreateQuestionDto } from './dto/createQuestionDto';
 import { VoteDto } from './dto/vote.dto';
@@ -40,7 +41,7 @@ export class QuestionsController {
 
     @Post(":id/answers")
     @UseGuards(JwtAuthGuard)
-    postAnswer(@Body() postAnswerDto: any, @Req() req: any, @Param('id') questionId: string){
+    postAnswer(@Body() postAnswerDto: PostAnswerDto, @Req() req: any, @Param('id') questionId: string){
         const userId: string = req.user._id
         return this.questionsService.postAnswer(postAnswerDto, questionId, userId)
     }
