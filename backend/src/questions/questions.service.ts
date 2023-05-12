@@ -1,6 +1,6 @@
 import { Injectable } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
-import { Model } from 'mongoose';
+import { Model, Query } from 'mongoose';
 import { CreateQuestionDto } from './dto/createQuestionDto';
 import { Question } from './schema/question.schema';
 import { VoteDto } from './dto/vote.dto';
@@ -18,8 +18,28 @@ export class QuestionsService {
         @InjectModel(Tag.name) private readonly tagModel: Model<Tag>,
     ) { }
 
-    findAll(): Promise<Question[]> {
-        return this.questionModel.find().exec()
+    async getQuestions(pageNumber: number, pageSize: number, tag: string) {     
+        
+        let query = this.questionModel.find()
+
+        if(tag) return this.getQuestionsByTag(pageNumber, pageSize, tag)
+        
+        const skip = pageNumber * pageSize;
+        
+        return query.skip(skip).limit(pageSize).exec();   
+    }
+
+    async getQuestionsByTag(pageNumber: number, pageSize: number, tag: string){
+        const tagDocument = (await this.tagModel.findById(tag))
+
+        if(!tagDocument) return null
+
+        const questionIds = Array.from(tagDocument.questionIds.keys())
+
+        const query = this.questionModel.find({ _id: { $in: questionIds } });
+
+        const skip = pageNumber * pageSize;
+        return query.skip(skip).limit(pageSize).exec();   
     }
     
     findOne(questionId: string): Promise<Question | null> {
@@ -117,4 +137,6 @@ export class QuestionsService {
 
         return true
     }
+
+
 }

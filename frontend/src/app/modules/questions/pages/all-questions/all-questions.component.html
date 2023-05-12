@@ -25,7 +25,8 @@
             </ng-container>
 
             <!-- paginator -->
-            <mat-paginator class="mat-elevation-z3" [length]="3" [pageSize]="3" [pageSizeOptions]="[3, 5, 10]"></mat-paginator>
+            <mat-paginator class="mat-elevation-z3" [length]="5" [pageSize]="3" [pageSizeOptions]="[3, 5, 10]" showFirstLastButtons (page)="changePage()">
+            </mat-paginator>
 
         </div>
 
