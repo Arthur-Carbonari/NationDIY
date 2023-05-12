@@ -44,7 +44,7 @@ export class QuestionsController {
     vote(@Body() voteDto: VoteDto, @Req() req: any, @Param('id') questionId: string): Observable<{ success: boolean }> {
         const userId: string = req.user._id
 
-        return from(this.questionsService.vote(voteDto, questionId, userId)).pipe(
+        return from(this.questionsService.vote(voteDto, userId, questionId)).pipe(
             map((success) => ({ success })),
             catchError(() => of({ success: false })),
         );

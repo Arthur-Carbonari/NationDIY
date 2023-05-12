@@ -44,7 +44,7 @@ export class AnswerCardComponent implements OnInit {
     if (userId in voteList) {
       delete voteList[userId]
       this.votes -= value
-      this.questionsService.voteQuestion(this.answer._id, 0)
+      this.questionsService.voteAnswer(this.answer._id, this.answer.question, 0).subscribe()
       return
     }
 

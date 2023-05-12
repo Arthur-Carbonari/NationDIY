@@ -19,8 +19,8 @@ export class QuestionsService {
     return this.httpClient.get<any>(`api/questions/${questionId}`)
   }
 
-  voteQuestion(questionId: string, value: number): void {
-    this.httpClient.patch<any>(`api/questions/${questionId}/vote`, { value }).subscribe();
+  voteQuestion(questionId: string, value: number) {    
+    return this.httpClient.patch<any>(`api/questions/${questionId}/vote`, { value });
   }
 
   answerQuestion(questionId: string, answerBody: string){

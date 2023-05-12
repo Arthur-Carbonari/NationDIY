@@ -63,7 +63,7 @@ export class QuestionComponent {
     if (userId in voteList) {
       delete voteList[userId]
       this.votes -= value
-      this.questionsService.voteQuestion(this.question._id, 0)
+      this.questionsService.voteQuestion(this.question._id, 0).subscribe()
       return
     }
 
@@ -78,7 +78,7 @@ export class QuestionComponent {
     this.votes += value
 
     // Call the voteQuestion method on the question service to update the database
-    this.questionsService.voteQuestion(this.question._id, value)
+    this.questionsService.voteQuestion(this.question._id, value).subscribe()
   }
 
 
