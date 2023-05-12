@@ -18,10 +18,10 @@ export class Answer extends Document{
     comments: Comment[];
 
     @Prop({ type: Map, of: Boolean, default: new Map() })
-    upvotes:Map<MongooseSchema.Types.ObjectId, boolean>;
+    upvotes:Map<string, boolean>;
 
     @Prop({ type: Map, of: Boolean, default: new Map() })
-    downvotes:Map<MongooseSchema.Types.ObjectId, boolean>;
+    downvotes:Map<string, boolean>;
 
     @Prop({ type: Date, default: Date.now })
     createdAt: Date;
