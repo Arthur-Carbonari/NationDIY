@@ -17,6 +17,7 @@ import { HomeModule } from './modules/home/home.module';
 import { QuestionsModule } from './modules/questions/questions.module';
 import { FoundErrorComponent } from './layout/found-error/found-error.component';
 import { ServerErrorComponent } from './layout/server-error/server-error.component';
+import { ProfileComponent } from './modules/profile/profile.component';
 
 @NgModule({
   declarations: [
@@ -25,6 +26,7 @@ import { ServerErrorComponent } from './layout/server-error/server-error.compone
     FooterComponent,
     FoundErrorComponent,
     ServerErrorComponent,
+    ProfileComponent,
   ],
   imports: [
     BrowserModule,
