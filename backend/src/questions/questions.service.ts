@@ -36,7 +36,7 @@ export class QuestionsService {
         const skip = pageNumber * pageSize;
 
         const totalMatches = await query.clone().countDocuments()
-        const questions = await query.skip(skip).limit(pageSize).exec();
+        const questions = await query.sort({createAt: -1}).skip(skip).limit(pageSize).exec();
 
         return {questions, totalMatches}
     }
