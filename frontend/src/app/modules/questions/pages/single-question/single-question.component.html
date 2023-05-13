@@ -33,13 +33,13 @@
             <h2>{{question.answers.length}} Answer</h2>
 
             <!-- Answer -->
-            <ng-container *ngFor="let answer of answers | async">
+            <ng-container *ngFor="let answer of answers">
                 <app-answer-card [answer]="answer"></app-answer-card>
             </ng-container>
 
         </div>
 
-        <app-post-answer-form></app-post-answer-form>        
+        <app-post-answer-form (answerCreated)="addAnswer($event)"></app-post-answer-form>        
 
 
     </ng-container>

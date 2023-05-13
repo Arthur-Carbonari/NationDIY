@@ -16,10 +16,12 @@ export class PostAnswerFormComponent extends SmartForm{
 
   @Output() answerCreated = new EventEmitter<any>();
 
+  postError = ""
+
   constructor(formBuilder: FormBuilder, private authService: AuthenticationService, private route: ActivatedRoute, private questionsService: QuestionsService){
 
     const postAnswerForm = formBuilder.group({
-      body: [null, [Validators.required, Validators.minLength(50)]]
+      body: ["", [Validators.required, Validators.minLength(50)]]
     })
 
     const formErrorMessages = {
@@ -35,11 +37,24 @@ export class PostAnswerFormComponent extends SmartForm{
     this.postAnswerForm.markAllAsTouched()
     if (this.postAnswerForm.invalid) { return };
 
+    if(this.postError) this.postError = ""
+
     const {body} = this.postAnswerForm.value
 
     const questionId = this.route.snapshot.paramMap.get('id')!;
 
-    this.questionsService.answerQuestion(questionId, body).subscribe( res => this.answerCreated.emit(res))
+    this.questionsService.answerQuestion(questionId, body).subscribe( res => {
+
+      if(res.success === false){
+        this.postError = "There was an error posting your answer, please try again."
+        return
+      }
+
+      this.postAnswerForm.controls['body'].setValue("")
+      this.postAnswerForm.controls['body'].markAsUntouched()
+
+      this.answerCreated.emit(res)
+    })
   }
 
 }

@@ -15,7 +15,7 @@ export class SingleQuestionComponent {
 
 
   question!: Question
-  answers!: Observable<Answer[]>
+  answers: Answer[] = []
 
   constructor(private route: ActivatedRoute, private questionsService: QuestionsService, private authService: AuthenticationService) { }
 
@@ -28,12 +28,16 @@ export class SingleQuestionComponent {
 
       this.question = question
 
-      this.answers = this.questionsService.getQuestionAnswers(id)
+      this.questionsService.getQuestionAnswers(id).subscribe( answers => this.answers = answers)
     })
   }
 
   dateStringToLocale(dateString: string) {
     return new Date(dateString).toLocaleString()
+  }
+
+  addAnswer(answer: Answer){
+    this.answers.push(answer)
   }
 
 
