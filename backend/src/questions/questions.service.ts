@@ -7,6 +7,7 @@ import { VoteDto } from './dto/vote.dto';
 import { Answer } from './schema/answer.schema';
 import { PostAnswerDto } from 'src/auth/dto/post-answer.dto';
 import { Tag } from './schema/tag.schema';
+import { from } from 'rxjs';
 
 
 @Injectable()
@@ -20,26 +21,24 @@ export class QuestionsService {
 
     async getQuestions(pageNumber: number, pageSize: number, tag: string) {     
         
-        let query = this.questionModel.find()
+        const query = this.questionModel.find()
 
-        if(tag) return this.getQuestionsByTag(pageNumber, pageSize, tag)
-        
+        if(tag) {
+            const tagDocument = (await this.tagModel.findById(tag))
+
+            if(!tagDocument) return {questions: [], totalMatches: 0}
+    
+            const questionIds = Array.from(tagDocument.questionIds.keys())
+
+            query.find({ _id: { $in: questionIds } });
+        }
+                
         const skip = pageNumber * pageSize;
-        
-        return query.skip(skip).limit(pageSize).exec();   
-    }
 
-    async getQuestionsByTag(pageNumber: number, pageSize: number, tag: string){
-        const tagDocument = (await this.tagModel.findById(tag))
+        const totalMatches = await query.clone().countDocuments()
+        const questions = await query.skip(skip).limit(pageSize).exec();
 
-        if(!tagDocument) return null
-
-        const questionIds = Array.from(tagDocument.questionIds.keys())
-
-        const query = this.questionModel.find({ _id: { $in: questionIds } });
-
-        const skip = pageNumber * pageSize;
-        return query.skip(skip).limit(pageSize).exec();   
+        return {questions, totalMatches}
     }
     
     findOne(questionId: string): Promise<Question | null> {

@@ -21,12 +21,12 @@
             </div>
 
             <!-- Questions -->
-            <ng-container *ngFor="let question of questions | async">
+            <ng-container *ngFor="let question of (dataSource | async)?.questions">
                 <app-question-preview [question]="question"></app-question-preview>
             </ng-container>
 
             <!-- paginator -->
-            <mat-paginator class="mat-elevation-z3" [length]="5" [pageSize]="3" [pageSizeOptions]="[3, 5, 10]" showFirstLastButtons (page)="changePage()">
+            <mat-paginator class="mat-elevation-z3" [length]="10" [pageSize]="5" [pageSizeOptions]="[3, 5, 10]" showFirstLastButtons (page)="changePage()">
             </mat-paginator>
 
         </div>

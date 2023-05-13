@@ -16,7 +16,7 @@ import { ActivatedRoute } from '@angular/router';
 })
 export class AllQuestionsComponent implements AfterViewInit {
 
-  questions!: Observable<Question[]>
+  dataSource!: Observable<{questions: Question[], totalMatches: number}>
 
   @ViewChild(MatPaginator)
   paginator!: MatPaginator;
@@ -37,7 +37,9 @@ export class AllQuestionsComponent implements AfterViewInit {
     const tag = this.route.snapshot.queryParamMap.get('tag') || "";
     // const sort    
     
-    this.questions = this.questionsService.queryQuestions(pageNumber, pageSize, tag)
+    this.dataSource = this.questionsService.queryQuestions(pageNumber, pageSize, tag)
+
+    this.dataSource.subscribe(res => this.paginator.length = res.totalMatches)
   }
 
 

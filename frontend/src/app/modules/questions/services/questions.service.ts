@@ -21,7 +21,7 @@ export class QuestionsService {
       .set('pageSize', pageSize)
       .set('tag', tag)
 
-    return this.httpClient.get<Question[]>("api/questions", { params })
+    return this.httpClient.get<any>("api/questions", { params })
   }
 
   getQuestionById(questionId: string): Observable<Question | null> {
