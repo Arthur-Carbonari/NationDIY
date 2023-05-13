@@ -1,0 +1,41 @@
+<div class="container-fluid p-3">
+    <h2 mat-dialog-title class="text-center">Signup</h2>
+
+    <mat-dialog-content>
+        <form id="loginForm" [formGroup]="loginForm" (ngSubmit)="onSubmit()">
+
+            <!-- Email or Username Field -->
+            <mat-form-field class="form-outline mb-3 w-100">
+                <input matInput formControlName="emailOrUsername" type="text" placeholder="Email Address/Username" class="form-control" />
+                <mat-hint class="text-danger"> {{ getErrorMessage('emailOrUsername') }} </mat-hint>
+            </mat-form-field>
+            
+            <!-- Password Field -->
+            <mat-form-field class="form-outline mb-3 w-100">
+                <input matInput formControlName="password" type="password" placeholder="Password" class="form-control" />
+                <mat-hint class="text-danger"> {{ getErrorMessage('password') }} </mat-hint>
+            </mat-form-field>
+            
+            <div class="text-danger text-center mb-3"> {{loginError}} </div>
+        
+            <!-- Submit Button -->
+            <div class="container d-flex justify-content-center">
+                <button mat-flat-button color="primary" [disabled]="loginForm.invalid" type="submit" class="mb-3 w-75" >Sign in</button>
+            </div>
+        
+        
+            <!-- Register Modal Link -->
+            <div class="text-center">
+                <p>Not a member? <a href="#!" data-bs-target="#signupModal" data-bs-toggle="modal" data-bs-dismiss="modal">Register</a></p>
+            </div>
+        
+        </form>
+    </mat-dialog-content>
+    
+    <!-- <mat-dialog-actions align="end">
+      <button mat-button mat-dialog-close>Cancel</button>
+      <button mat-button [mat-dialog-close]="true" cdkFocusInitial>Install</button>
+      <button mat-button mat-dialog-close>Close</button>
+    </mat-dialog-actions> -->
+    
+</div>
