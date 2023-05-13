@@ -4,6 +4,7 @@ import { MatDialogRef } from '@angular/material/dialog';
 import { AuthenticationService } from 'src/app/core/services/authentication.service';
 import validator from "validator"
 import { SmartForm } from '../../classes/smart-form.abstract';
+import { DialogService } from '../../services/dialog.service';
 
 @Component({
   selector: 'app-signup-dialog',
@@ -14,7 +15,7 @@ export class SignupDialogComponent extends SmartForm {
 
   signupForm: FormGroup
 
-  constructor(formBuilder: FormBuilder, private authService: AuthenticationService, public dialogRef: MatDialogRef<SignupDialogComponent>) {
+  constructor(formBuilder: FormBuilder, private authService: AuthenticationService, private dialogRef: MatDialogRef<SignupDialogComponent>, public dialogService: DialogService) {
 
     const signupForm = formBuilder.group({
 

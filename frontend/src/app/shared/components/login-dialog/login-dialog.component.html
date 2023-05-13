@@ -1,5 +1,5 @@
 <div class="container-fluid p-3">
-    <h2 mat-dialog-title class="text-center">Signup</h2>
+    <h2 mat-dialog-title class="text-center">Login</h2>
 
     <mat-dialog-content>
         <form id="loginForm" [formGroup]="loginForm" (ngSubmit)="onSubmit()">
@@ -26,7 +26,7 @@
         
             <!-- Register Modal Link -->
             <div class="text-center">
-                <p>Not a member? <a href="#!" data-bs-target="#signupModal" data-bs-toggle="modal" data-bs-dismiss="modal">Register</a></p>
+                <p>Not a member? <a href="javascript:void(0)" (click)="dialogService.openSignupDialog()">Register</a></p>
             </div>
         
         </form>

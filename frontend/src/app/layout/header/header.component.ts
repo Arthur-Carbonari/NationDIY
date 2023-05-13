@@ -3,6 +3,7 @@ import { Component, OnInit, HostListener } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { AuthenticationService } from 'src/app/core/services/authentication.service';
 import { SignupDialogComponent } from 'src/app/shared/components/signup-dialog/signup-dialog.component';
+import { DialogService } from 'src/app/shared/services/dialog.service';
 
 @Component({
   selector: 'app-header',
@@ -13,11 +14,7 @@ import { SignupDialogComponent } from 'src/app/shared/components/signup-dialog/s
 export class HeaderComponent {
 
   title: string = 'NationDIY'
-  constructor(public authService: AuthenticationService, public dialog: MatDialog) { }
-
-  openSignupDialog() {
-    const dialogRef = this.dialog.open(SignupDialogComponent, {autoFocus: true});
-  }
+  constructor(public authService: AuthenticationService, public dialogService: DialogService) { }
 
   logout(){
     this.authService.logout()

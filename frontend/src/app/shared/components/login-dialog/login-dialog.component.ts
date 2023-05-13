@@ -5,6 +5,7 @@ import { MatDialogRef } from '@angular/material/dialog';
 import { Router } from '@angular/router';
 import { AuthenticationService } from 'src/app/core/services/authentication.service';
 import { SmartForm } from '../../classes/smart-form.abstract';
+import { DialogService } from '../../services/dialog.service';
 
 @Component({
   selector: 'app-login-dialog',
@@ -17,7 +18,7 @@ export class LoginDialogComponent extends SmartForm {
 
   loginError = '';
 
-  constructor(formBuilder: FormBuilder, private authService: AuthenticationService, public dialogRef: MatDialogRef<LoginDialogComponent>) {
+  constructor(formBuilder: FormBuilder, private authService: AuthenticationService, private dialogRef: MatDialogRef<LoginDialogComponent>, public dialogService: DialogService ) {
 
     const loginForm = formBuilder.group({
 
