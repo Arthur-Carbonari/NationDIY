@@ -1,5 +1,6 @@
 import { Component, ViewChild } from '@angular/core';
 import { MatPaginator } from '@angular/material/paginator';
+import { MatSnackBar } from '@angular/material/snack-bar';
 import { ActivatedRoute } from '@angular/router';
 import { Observable } from 'rxjs';
 import { AuthenticationService } from 'src/app/core/services/authentication.service';
@@ -21,7 +22,7 @@ export class SingleQuestionComponent {
   paginator!: MatPaginator;
   pageAnswers: Answer[] = []
 
-  constructor(private route: ActivatedRoute, private questionsService: QuestionsService, private authService: AuthenticationService) { }
+  constructor(private route: ActivatedRoute, private questionsService: QuestionsService, private authService: AuthenticationService, private snackBar: MatSnackBar) { }
 
   ngOnInit(): void {
     const id = this.route.snapshot.paramMap.get('id')!;
@@ -49,6 +50,7 @@ export class SingleQuestionComponent {
     this.allAnswers.push(answer)
     this.paginator.length = this.paginator.length + 1
     this.updatePaging()
+    this.snackBar.open("Answer Posted Sucessfully", "Dismiss")
   }
 
   updatePaging(){
