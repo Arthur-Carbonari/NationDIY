@@ -27,6 +27,7 @@ import { AnswerCardComponent } from './components/answer-card/answer-card.compon
 import { QuestionPreviewComponent } from './components/question-preview/question-preview.component';
 import { SingleQuestionComponent } from './pages/single-question/single-question.component';
 import { VoteboxComponent } from './components/votebox/votebox.component';
+import { UserCardComponent } from './components/user-card/user-card.component';
 
 
 @NgModule({
@@ -39,7 +40,8 @@ import { VoteboxComponent } from './components/votebox/votebox.component';
     AnswerCardComponent,
     QuestionPreviewComponent,
     SingleQuestionComponent,
-    VoteboxComponent
+    VoteboxComponent,
+    UserCardComponent
   ],
   imports: [
     CommonModule,
