@@ -12,12 +12,14 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { LoginDialogComponent } from './components/login-dialog/login-dialog.component';
+import { PostQuestionDialogComponent } from './components/post-question-dialog/post-question-dialog.component';
 
 @NgModule({
   declarations: [
     TextEditorComponent,
     SignupDialogComponent,
-    LoginDialogComponent
+    LoginDialogComponent,
+    PostQuestionDialogComponent
   ],
   imports: [
     CommonModule,
