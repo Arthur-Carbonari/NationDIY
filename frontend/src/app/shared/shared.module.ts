@@ -12,17 +12,29 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { LoginDialogComponent } from './components/login-dialog/login-dialog.component';
+import { PostQuestionDialogComponent } from './components/post-question-dialog/post-question-dialog.component';
+import { TagsInputComponent } from './components/tags-input/tags-input.component';
+import { HttpClientModule } from '@angular/common/http';
+import { MatAutocompleteModule } from '@angular/material/autocomplete';
+import { MatChipsModule } from '@angular/material/chips';
+import { MatNativeDateModule } from '@angular/material/core';
+import { MatIconModule } from '@angular/material/icon';
+import { MatSelectModule } from '@angular/material/select';
+import { CoreModule } from '../core/core.module';
 
 @NgModule({
   declarations: [
     TextEditorComponent,
     SignupDialogComponent,
-    LoginDialogComponent
+    LoginDialogComponent,
+    PostQuestionDialogComponent,
+    TagsInputComponent
   ],
   imports: [
     CommonModule,
     FormsModule,
     ReactiveFormsModule,
+    CoreModule,
 
     // Angular material imports
     MatSnackBarModule,
@@ -30,6 +42,16 @@ import { LoginDialogComponent } from './components/login-dialog/login-dialog.com
     MatFormFieldModule,
     MatInputModule,
     MatButtonModule,
+
+    FormsModule,
+    HttpClientModule,
+    MatNativeDateModule,
+    ReactiveFormsModule,
+    MatChipsModule,
+    MatInputModule,
+    MatSelectModule,
+    MatAutocompleteModule,
+    MatIconModule,
     
     // Rich Text-Editor
     NgxEditorModule,
