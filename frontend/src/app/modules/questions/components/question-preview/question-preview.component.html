@@ -32,8 +32,9 @@
                         [routerLink]="['/questions']" [queryParams]="{ tag: tag }">{{tag}}</a>
                 </ng-container>
             </mat-card-actions>
-            <mat-card-actions align="end"> 
-            <app-user-card></app-user-card>
+            <!-- user card component -->
+            <mat-card-actions align="end">
+                <app-user-card></app-user-card>
             </mat-card-actions>
         </mat-card>
     </div>
