@@ -20,15 +20,20 @@
         <!-- Question title and link -->
         <mat-card class="bg-white col-8 " id="card">
             <mat-card-title>
-                <a routerLink="/questions/{{question._id}}" class="text-decoration-none  text-dark"> {{question.title}} </a>
+                <a routerLink="/questions/{{question._id}}" class="text-decoration-none  text-dark"> {{question.title}}
+                </a>
             </mat-card-title>
             <mat-card-subtitle>
                 subtitle
             </mat-card-subtitle>
-            <mat-card-actions align="end"> 
+            <mat-card-actions align="end">
                 <ng-container *ngFor="let tag of question.tags">
-                    <a class="badge bg-dark-subtle text-decoration-none link-light text-capitalize text-black-50 fs-7 mx-1" [routerLink]="['/questions']" [queryParams]="{ tag: tag }">{{tag}}</a>
+                    <a class="badge bg-dark-subtle text-decoration-none link-light text-capitalize text-black-50 fs-7 mx-1"
+                        [routerLink]="['/questions']" [queryParams]="{ tag: tag }">{{tag}}</a>
                 </ng-container>
+            </mat-card-actions>
+            <mat-card-actions align="end"> 
+            <app-user-card></app-user-card>
             </mat-card-actions>
         </mat-card>
     </div>
