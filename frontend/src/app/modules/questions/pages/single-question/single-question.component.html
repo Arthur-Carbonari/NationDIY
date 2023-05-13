@@ -28,14 +28,17 @@
         <!-- Question -->
         <app-question-card [question]="question" ></app-question-card>
 
-        <div>
+        <div class="container-fluid mb-5">
 
             <h2>{{question.answers.length}} Answer</h2>
 
             <!-- Answer -->
-            <ng-container *ngFor="let answer of answers">
+            <ng-container *ngFor="let answer of pageAnswers">
                 <app-answer-card [answer]="answer"></app-answer-card>
             </ng-container>
+
+            <mat-paginator class="mat-elevation-z3" [length]="0" [pageSize]="5" [pageSizeOptions]="[3, 5, 10]" showFirstLastButtons (page)="updatePaging()">
+            </mat-paginator>
 
         </div>
 

@@ -1,4 +1,4 @@
-<div id="question" class="containter-fluid">
+<mat-card class="containter-fluid p-2 my-5 mat-elevation-z3">
     <!-- vote area -->
     <div class="row">
 
@@ -26,8 +26,6 @@
                 <a class="badge bg-dark-subtle text-decoration-none link-light text-capitalize text-black-50 fs-7" [routerLink]="['/questions']" [queryParams]="{ tag: tag }">{{tag}}</a>
             </ng-container>
         </div>
-
-
     </div>
 
     <div class="containter-fluid">
@@ -36,4 +34,4 @@
         <hr>
     </div>
 
-</div>
+</mat-card>

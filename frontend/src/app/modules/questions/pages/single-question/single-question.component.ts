@@ -1,4 +1,5 @@
-import { Component } from '@angular/core';
+import { Component, ViewChild } from '@angular/core';
+import { MatPaginator } from '@angular/material/paginator';
 import { ActivatedRoute } from '@angular/router';
 import { Observable } from 'rxjs';
 import { AuthenticationService } from 'src/app/core/services/authentication.service';
@@ -13,9 +14,12 @@ import { QuestionsService } from '../../services/questions.service';
 })
 export class SingleQuestionComponent {
 
-
   question!: Question
-  answers: Answer[] = []
+  allAnswers: Answer[] = []
+
+  @ViewChild(MatPaginator)
+  paginator!: MatPaginator;
+  pageAnswers: Answer[] = []
 
   constructor(private route: ActivatedRoute, private questionsService: QuestionsService, private authService: AuthenticationService) { }
 
@@ -28,7 +32,12 @@ export class SingleQuestionComponent {
 
       this.question = question
 
-      this.questionsService.getQuestionAnswers(id).subscribe( answers => this.answers = answers)
+      this.questionsService.getQuestionAnswers(id).subscribe( answers => {
+        this.allAnswers = answers
+
+        this.paginator.length = answers.length
+        this.updatePaging()
+      })
     })
   }
 
@@ -37,9 +46,18 @@ export class SingleQuestionComponent {
   }
 
   addAnswer(answer: Answer){
-    this.answers.push(answer)
+    this.allAnswers.push(answer)
+    this.paginator.length = this.paginator.length + 1
+    this.updatePaging()
   }
 
+  updatePaging(){
+    const pageNumber = this.paginator.pageIndex
+    const pageSize = this.paginator.pageSize
 
+    const skip = pageNumber * pageSize
+
+    this.pageAnswers = this.allAnswers.slice(skip, skip + pageSize)
+  }
 
 }
