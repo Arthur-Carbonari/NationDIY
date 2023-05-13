@@ -26,6 +26,7 @@ import { PostAnswerFormComponent } from './components/post-answer-form/post-answ
 import { AnswerCardComponent } from './components/answer-card/answer-card.component';
 import { QuestionPreviewComponent } from './components/question-preview/question-preview.component';
 import { SingleQuestionComponent } from './pages/single-question/single-question.component';
+import { VoteboxComponent } from './components/votebox/votebox.component';
 
 
 @NgModule({
@@ -37,7 +38,8 @@ import { SingleQuestionComponent } from './pages/single-question/single-question
     PostAnswerFormComponent,
     AnswerCardComponent,
     QuestionPreviewComponent,
-    SingleQuestionComponent
+    SingleQuestionComponent,
+    VoteboxComponent
   ],
   imports: [
     CommonModule,

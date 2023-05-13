@@ -1,0 +1,28 @@
+// change button color when clicked 
+
+.up-vote{
+    border-width: 0px !important;
+    border-color: transparent !important;
+}
+
+.up-vote:hover {
+    color: rgb(23, 230, 23);    
+    transition: 0.7s;
+}
+.up-vote-active {
+    color: rgb(23, 230, 23);    
+}
+
+
+.down-vote{
+    border-width: 0px !important;
+    border-color: transparent !important;
+}
+
+.down-vote:hover {
+    color: red;
+    transition: 0.7s;
+}
+.down-vote-active {
+    color: red;    
+}
