@@ -1,5 +1,8 @@
+import { DialogConfig } from '@angular/cdk/dialog';
 import { Component, OnInit, HostListener } from '@angular/core';
+import { MatDialog } from '@angular/material/dialog';
 import { AuthenticationService } from 'src/app/core/services/authentication.service';
+import { SignupDialogComponent } from 'src/app/shared/components/signup-dialog/signup-dialog.component';
 
 @Component({
   selector: 'app-header',
@@ -10,7 +13,11 @@ import { AuthenticationService } from 'src/app/core/services/authentication.serv
 export class HeaderComponent {
 
   title: string = 'NationDIY'
-  constructor(public authService: AuthenticationService) { }
+  constructor(public authService: AuthenticationService, public dialog: MatDialog) { }
+
+  openSignupDialog() {
+    const dialogRef = this.dialog.open(SignupDialogComponent, {autoFocus: true});
+  }
 
   logout(){
     this.authService.logout()

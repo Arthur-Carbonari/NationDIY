@@ -4,11 +4,18 @@ import { TextEditorComponent } from './components/text-editor/text-editor.compon
 import { NgxEditorModule } from 'ngx-editor';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
-import {MatSnackBarModule, MAT_SNACK_BAR_DEFAULT_OPTIONS} from '@angular/material/snack-bar'
+import {MatSnackBarModule, MAT_SNACK_BAR_DEFAULT_OPTIONS} from '@angular/material/snack-bar';
+import {MatDialogModule} from '@angular/material/dialog';
+
+import { SignupDialogComponent } from './components/signup-dialog/signup-dialog.component'
+import { MatButtonModule } from '@angular/material/button';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatInputModule } from '@angular/material/input';
 
 @NgModule({
   declarations: [
-    TextEditorComponent
+    TextEditorComponent,
+    SignupDialogComponent
   ],
   imports: [
     CommonModule,
@@ -17,8 +24,11 @@ import {MatSnackBarModule, MAT_SNACK_BAR_DEFAULT_OPTIONS} from '@angular/materia
 
     // Angular material imports
     MatSnackBarModule,
-
-
+    MatDialogModule,
+    MatFormFieldModule,
+    MatInputModule,
+    MatButtonModule,
+    
     // Rich Text-Editor
     NgxEditorModule,
   ],
