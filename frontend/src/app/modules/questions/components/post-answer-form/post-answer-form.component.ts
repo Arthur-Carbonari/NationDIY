@@ -2,6 +2,7 @@ import { Component, EventEmitter, Output } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import { AuthenticationService } from 'src/app/core/services/authentication.service';
+import { Answer } from 'src/app/shared/answer.interface';
 import { SmartForm } from 'src/app/shared/classes/smart-form.abstract';
 import { QuestionsService } from '../../services/questions.service';
 
@@ -14,7 +15,7 @@ export class PostAnswerFormComponent extends SmartForm{
 
   postAnswerForm: FormGroup
 
-  @Output() answerCreated = new EventEmitter<any>();
+  @Output() answerCreated = new EventEmitter<Answer>();
 
   postError = ""
 
