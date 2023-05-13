@@ -11,7 +11,6 @@ import {MatPaginatorModule} from '@angular/material/paginator';
 
 
 import { QuestionsRoutingModule } from './questions-routing.module';
-import { AskQuestionComponent } from './pages/ask-question/ask-question.component';
 import { AllQuestionsComponent } from './pages/all-questions/all-questions.component';
 import { QuestionCardComponent } from './components/question-card/question-card.component';
 import { NgxEditorModule } from 'ngx-editor';
@@ -26,7 +25,6 @@ import { UserCardComponent } from './components/user-card/user-card.component';
 
 @NgModule({
   declarations: [
-    AskQuestionComponent,
     AllQuestionsComponent,
     QuestionCardComponent,
     PostAnswerFormComponent,

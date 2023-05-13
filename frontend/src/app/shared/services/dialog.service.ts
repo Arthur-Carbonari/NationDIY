@@ -1,6 +1,7 @@
 import { ComponentType } from '@angular/cdk/portal';
 import { Injectable } from '@angular/core';
 import { MatDialog, MatDialogConfig, MatDialogRef } from '@angular/material/dialog';
+import { AuthenticationService } from 'src/app/core/services/authentication.service';
 import { LoginDialogComponent } from '../components/login-dialog/login-dialog.component';
 import { PostQuestionDialogComponent } from '../components/post-question-dialog/post-question-dialog.component';
 import { SignupDialogComponent } from '../components/signup-dialog/signup-dialog.component';
@@ -11,7 +12,7 @@ import { SignupDialogComponent } from '../components/signup-dialog/signup-dialog
 export class DialogService {
   private dialogRef: MatDialogRef<any> | null = null
 
-  constructor(private dialog: MatDialog) { }
+  constructor(private dialog: MatDialog, private authService: AuthenticationService) { }
 
   public openDialog(component: ComponentType<unknown>, config: MatDialogConfig<any> = {}) {
     if (this.dialogRef) {
@@ -41,6 +42,12 @@ export class DialogService {
   }
 
   public openPostQuestionDialog() {
+
+    if(!this.authService.isLoggedIn){
+      this.openLoginDialog()
+      return
+    }
+
     return this.openDialog(PostQuestionDialogComponent, {width: "60%", height: "70%"})
   }
 }

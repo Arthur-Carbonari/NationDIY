@@ -20,6 +20,7 @@ import { MatChipsModule } from '@angular/material/chips';
 import { MatNativeDateModule } from '@angular/material/core';
 import { MatIconModule } from '@angular/material/icon';
 import { MatSelectModule } from '@angular/material/select';
+import { CoreModule } from '../core/core.module';
 
 @NgModule({
   declarations: [
@@ -33,6 +34,7 @@ import { MatSelectModule } from '@angular/material/select';
     CommonModule,
     FormsModule,
     ReactiveFormsModule,
+    CoreModule,
 
     // Angular material imports
     MatSnackBarModule,
