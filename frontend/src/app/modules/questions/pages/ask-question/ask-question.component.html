@@ -11,8 +11,8 @@
                 
 
                 <!-- Title input -->
-                <mat-form-field class="form-outline mb-4 w-100">
-                    <input matInput formControlName="title" type="text" placeholder="Question Title" class="form-control form-key" />
+                <mat-form-field class="form-outline mb-4 w-100" appearance="fill">
+                    <input #matInput formControlName="title" type="text" placeholder="Question Title" class="form-control form-key" />
                     <mat-hint class="text-danger"> {{ getErrorMessage('title') }} </mat-hint>
                 </mat-form-field>
 
