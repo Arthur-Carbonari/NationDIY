@@ -28,6 +28,10 @@ export class QuestionsService {
     return this.httpClient.get<any>(`api/questions/${questionId}`)
   }
 
+  deleteQuestion(questionId: string){
+    return this.httpClient.delete<{sucess: boolean}>(`api/questions/${questionId}`)
+  }
+
   voteQuestion(questionId: string, value: number) {
     return this.httpClient.patch<any>(`api/questions/${questionId}/vote`, { value });
   }
@@ -42,5 +46,9 @@ export class QuestionsService {
 
   voteAnswer(answerId: string, questionId: string, value: number) {
     return this.httpClient.patch<any>(`api/questions/${questionId}/answers/${answerId}/vote`, { value })
+  }
+
+  deleteAnswer(answerId: string, questionId: string){
+    return this.httpClient.delete<{sucess: boolean}>(`api/questions/${questionId}/answers/${answerId}`)
   }
 }

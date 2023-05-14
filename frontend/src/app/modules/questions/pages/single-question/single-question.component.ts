@@ -63,4 +63,9 @@ export class SingleQuestionComponent {
     this.pageAnswers = this.allAnswers.slice(skip, skip + pageSize)
   }
 
+  removeAnswer(answerId: string){
+    this.allAnswers = this.allAnswers.filter(answer => answer._id !== answerId)
+    this.updatePaging()
+  }
+
 }

@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { AuthenticationService } from 'src/app/core/services/authentication.service';
 import { Answer } from 'src/app/shared/answer.interface';
 import { QuestionsService } from '../../services/questions.service';
@@ -10,6 +10,8 @@ import { QuestionsService } from '../../services/questions.service';
 })
 export class AnswerCardComponent implements OnInit {
   @Input() answer!: Answer;
+  @Output() deleted = new EventEmitter<string>();
+
   votes: number = 0
   currentVote: number = 0
 
@@ -41,5 +43,11 @@ export class AnswerCardComponent implements OnInit {
 
     // Call the voteQuestion method on the answer service to update the database
     this.questionsService.voteAnswer(this.answer._id, this.answer.question, value).subscribe()
+  }
+
+  delete(){
+    this.questionsService.deleteAnswer(this.answer._id, this.answer.question).subscribe( res => {
+      if(res.sucess) this.deleted.emit(this.answer._id)
+    })
   }
 }

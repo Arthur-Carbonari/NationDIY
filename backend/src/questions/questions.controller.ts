@@ -72,6 +72,16 @@ export class QuestionsController {
         return this.questionsService.findAnswers(questionId)
     }
 
+    @Delete(":questionId/answers/:answerId")
+    @UseGuards(JwtAuthGuard)
+    async deleteAnswer(@Param('answerId') answerId: string, @Req() req: any) {
+        const userId: string = req.user._id
+
+        const sucess = await this.questionsService.deleteAnswerIfOwner(answerId, userId)
+
+        return {sucess}
+    }
+
     @Patch(":id/answers/:answerId/vote")
     @UseGuards(JwtAuthGuard)
     voteAnswer(@Body() voteDto: VoteDto, @Req() req: any, @Param("answerId") answerId: string): Observable<{ success: boolean }> {

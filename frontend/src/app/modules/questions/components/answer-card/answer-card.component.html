@@ -1,4 +1,20 @@
 <mat-card class="containter-fluid p-2 my-5 mat-elevation-z3">
+
+
+    <mat-card-header class="justify-content-end">
+
+        <div *appIsOwner="answer.author._id">
+            <button mat-icon-button [matMenuTriggerFor]="menu">
+                <mat-icon>more_vert</mat-icon>
+            </button>
+            
+            <mat-menu #menu="matMenu">
+                <button mat-menu-item (click)="delete()" >Delete</button>
+            </mat-menu>
+        </div>
+
+    </mat-card-header>
+
     <!-- vote area -->
     <div class="row">
         <div class="col-1">

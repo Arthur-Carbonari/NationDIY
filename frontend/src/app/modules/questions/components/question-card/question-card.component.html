@@ -1,4 +1,19 @@
 <mat-card class="containter-fluid p-2 my-5 mat-elevation-z3">
+
+    <mat-card-header class="justify-content-end">
+
+        <div *appIsOwner="question.author._id">
+            <button mat-icon-button [matMenuTriggerFor]="menu">
+                <mat-icon>more_vert</mat-icon>
+            </button>
+            
+            <mat-menu #menu="matMenu">
+                <button mat-menu-item (click)="deleteQuestion()">Delete</button>
+            </mat-menu>
+        </div>
+
+    </mat-card-header>
+
     <!-- vote area -->
     <div class="row">
 
@@ -19,7 +34,7 @@
         <mat-card-actions align="end">
             <app-user-card [user]="question.author" [date]="question.createdAt"></app-user-card>
         </mat-card-actions>
-        
+
         <div class="text-end">
             <ng-container *ngFor="let tag of question.tags">
                 <a class="badge bg-dark-subtle text-decoration-none link-light text-capitalize text-black-50 fs-7 mx-1" [routerLink]="['/questions']" [queryParams]="{ tag: tag }">{{tag}}</a>

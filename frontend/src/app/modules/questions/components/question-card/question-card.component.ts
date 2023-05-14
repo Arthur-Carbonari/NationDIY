@@ -1,5 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { AuthenticationService } from 'src/app/core/services/authentication.service';
 import { Question } from 'src/app/shared/question.interface';
 import { QuestionsService } from '../../services/questions.service';
@@ -16,7 +16,7 @@ export class QuestionCardComponent implements OnInit {
   votes: number = 0
   currentVote: number = 0
 
-  constructor(private route: ActivatedRoute, private questionsService: QuestionsService, private authService: AuthenticationService) { }
+  constructor(private route: ActivatedRoute, private questionsService: QuestionsService, private authService: AuthenticationService, private router: Router) { }
 
   ngOnInit(): void {
     this.votes = Object.keys(this.question.upvotes).length - Object.keys(this.question.downvotes).length
@@ -43,5 +43,18 @@ export class QuestionCardComponent implements OnInit {
     // Call the voteQuestion method on the question service to update the database
     this.currentVote = value
     this.questionsService.voteQuestion(this.question._id, value).subscribe()
+  }
+
+  deleteQuestion(){
+    this.questionsService.deleteQuestion(this.question._id).subscribe( res => {
+      console.log(res);
+      
+      if(res.sucess){
+        console.log("question deleted");
+        // delete question ui
+
+        this.router.navigateByUrl("/questions")
+      }
+    })
   }
 }
