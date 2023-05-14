@@ -22,6 +22,7 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatSelectModule } from '@angular/material/select';
 import { CoreModule } from '../core/core.module';
 import { ToDatePipe } from './pipes/to-date.pipe';
+import { IsOwnerPipe } from './pipes/is-owner.pipe';
 
 @NgModule({
   declarations: [
@@ -30,7 +31,8 @@ import { ToDatePipe } from './pipes/to-date.pipe';
     LoginDialogComponent,
     PostQuestionDialogComponent,
     TagsInputComponent,
-    ToDatePipe
+    ToDatePipe,
+    IsOwnerPipe
   ],
   imports: [
     CommonModule,
@@ -60,7 +62,8 @@ import { ToDatePipe } from './pipes/to-date.pipe';
   ],
   exports: [
     TextEditorComponent,
-    ToDatePipe
+    ToDatePipe,
+    IsOwnerPipe,
   ],
   providers: [
     {provide: MAT_SNACK_BAR_DEFAULT_OPTIONS, useValue: {duration: 2500}}
