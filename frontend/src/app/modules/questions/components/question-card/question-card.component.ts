@@ -1,6 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { AuthenticationService } from 'src/app/core/services/authentication.service';
+import { Comment } from 'src/app/shared/comment.interface';
 import { Question } from 'src/app/shared/question.interface';
 import { QuestionsService } from '../../services/questions.service';
 
@@ -20,7 +21,8 @@ export class QuestionCardComponent implements OnInit {
 
   ngOnInit(): void {
     this.votes = Object.keys(this.question.upvotes).length - Object.keys(this.question.downvotes).length
-
+    console.log(this.question);
+    
     this.currentVote = this.question.upvotes[this.authService.userId] ? 1 : (this.question.downvotes[this.authService.userId] ? -1 : 0)
   }
 
@@ -56,5 +58,9 @@ export class QuestionCardComponent implements OnInit {
         this.router.navigateByUrl("/questions")
       }
     })
+  }
+
+  addComment(comment: Comment){
+    this.question.comments.push(comment)
   }
 }

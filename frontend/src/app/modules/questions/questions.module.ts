@@ -24,6 +24,8 @@ import { UserCardComponent } from './components/user-card/user-card.component';
 import { CoreModule } from 'src/app/core/core.module';
 import { MatIconModule } from '@angular/material/icon';
 import {MatMenuModule} from '@angular/material/menu';
+import {MatExpansionModule} from '@angular/material/expansion';
+import { PostCommentExpansionComponent } from './components/post-comment-expansion/post-comment-expansion.component';
 
 
 @NgModule({
@@ -35,7 +37,8 @@ import {MatMenuModule} from '@angular/material/menu';
     QuestionPreviewComponent,
     SingleQuestionComponent,
     VoteboxComponent,
-    UserCardComponent
+    UserCardComponent,
+    PostCommentExpansionComponent
   ],
   imports: [
     CommonModule,
@@ -50,6 +53,7 @@ import {MatMenuModule} from '@angular/material/menu';
     MatInputModule,
     MatIconModule,
     MatMenuModule,
+    MatExpansionModule,
 
     // Rich Text-Editor
     NgxEditorModule,

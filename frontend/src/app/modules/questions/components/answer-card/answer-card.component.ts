@@ -1,6 +1,7 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { AuthenticationService } from 'src/app/core/services/authentication.service';
 import { Answer } from 'src/app/shared/answer.interface';
+import { Comment } from 'src/app/shared/comment.interface';
 import { QuestionsService } from '../../services/questions.service';
 
 @Component({
@@ -55,5 +56,10 @@ export class AnswerCardComponent implements OnInit {
 
   delete(){
     this.deleted.emit(this.answer._id)
+  }
+
+
+  addComment(comment: Comment){
+    this.answer.comments.push(comment)
   }
 }

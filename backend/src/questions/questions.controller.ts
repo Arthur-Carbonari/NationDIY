@@ -1,9 +1,10 @@
 import { Body, Controller, Delete, Get, Param, Patch, Post, Query, Req, UseGuards } from '@nestjs/common';
 import { catchError, from, map, Observable, of } from 'rxjs';
-import { AcceptAnswerDto } from 'src/auth/dto/accept-answer-dto';
-import { PostAnswerDto } from 'src/auth/dto/post-answer.dto';
 import { JwtAuthGuard } from 'src/auth/guards/jwt-auth.guard';
+import { AcceptAnswerDto } from './dto/accept-answer-dto';
 import { CreateQuestionDto } from './dto/createQuestionDto';
+import { PostAnswerDto } from './dto/post-answer.dto';
+import { PostCommentDto } from './dto/post-comment-dto';
 import { VoteDto } from './dto/vote.dto';
 import { QuestionsService } from './questions.service';
 import { Answer } from './schema/answer.schema';
@@ -80,7 +81,7 @@ export class QuestionsController {
     @Post(":id/answers")
     @UseGuards(JwtAuthGuard)
     postAnswer(@Body() postAnswerDto: PostAnswerDto, @Req() req: any, @Param('id') questionId: string) {        
-        const userId: string = req.user._id
+        const userId = req.user._id
         return this.questionsService.postAnswer(postAnswerDto, questionId, userId)
     }
 
@@ -89,9 +90,9 @@ export class QuestionsController {
         return this.questionsService.findAnswers(questionId)
     }
 
-    @Delete(":questionId/answers/:answerId")
+    @Delete(":id/answers/:answerId")
     @UseGuards(JwtAuthGuard)
-    async deleteAnswer(@Param('answerId') answerId: string, @Req() req: any) {
+    async deleteAnswer(@Param('id') answerId: string, @Req() req: any) {
         const userId = req.user._id
 
         const sucess = await this.questionsService.deleteAnswerIfOwner(answerId, userId)
@@ -108,6 +109,20 @@ export class QuestionsController {
             map((success) => ({ success })),
             catchError(() => of({ success: false })),
         );
+    }
+
+    @Post(":id/comments")
+    @UseGuards(JwtAuthGuard)
+    postComment(@Body() postCommentDto: PostCommentDto, @Req() req: any, @Param('id') questionId: string) {        
+        const {_id , username} = req.user
+        return this.questionsService.postComment(postCommentDto, questionId, _id, username)
+    }
+
+    @Post(":id/answers/:answerId/comments")
+    @UseGuards(JwtAuthGuard)
+    postAnswerComment(@Body() postCommentDto: PostCommentDto, @Req() req: any, @Param('answerId') answerId: string) {        
+        const {_id , username} = req.user
+        return this.questionsService.postAnswerComment(postCommentDto, answerId, _id, username)
     }
 
 }

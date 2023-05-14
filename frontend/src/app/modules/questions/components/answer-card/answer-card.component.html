@@ -1,47 +1,74 @@
-<mat-card class="containter-fluid p-2 my-5 mat-elevation-z3">
+<div class="my-5">
+    <mat-card class="containter-fluid p-2 mb-1 mat-elevation-z3">
 
 
-    <mat-card-header class="justify-content-end">
-
-        <div>
-            <button mat-icon-button [matMenuTriggerFor]="menu">
-                <mat-icon>more_vert</mat-icon>
-            </button>
-
-            <mat-menu #menu="matMenu">
-                <button mat-menu-item (click)="acceptAsAnswer()" *appIsOwner="questionAuthor">Accept as Answer</button>
-                <button mat-menu-item (click)="delete()" *appIsOwner="answer.author._id">Delete</button>
-                <button mat-menu-item >Report</button>
-            </mat-menu>
-        </div>
-
-    </mat-card-header>
-
-    <!-- vote area -->
-    <div class="row">
-        <div class="col-1">
-            <div *ngIf="isAcceptedAnswer" class="d-flex justify-content-center">
-                <mat-icon class="text-success fs-3">check</mat-icon>
+        <mat-card-header class="justify-content-end">
+    
+            <div>
+                <button mat-icon-button [matMenuTriggerFor]="menu">
+                    <mat-icon>more_vert</mat-icon>
+                </button>
+    
+                <mat-menu #menu="matMenu">
+                    <button mat-menu-item (click)="acceptAsAnswer()" *appIsOwner="questionAuthor">Accept as Answer</button>
+                    <button mat-menu-item (click)="delete()" *appIsOwner="answer.author._id">Delete</button>
+                    <button mat-menu-item >Report</button>
+                </mat-menu>
             </div>
-            <app-votebox [currentValue]="votes" [currentVote]="currentVote" (voted)="vote($event)"></app-votebox>
+    
+        </mat-card-header>
+    
+        <!-- vote area -->
+        <div class="row">
+            <div class="col-1">
+                <div *ngIf="isAcceptedAnswer" class="d-flex justify-content-center">
+                    <mat-icon class="text-success fs-3">check</mat-icon>
+                </div>
+                <app-votebox [currentValue]="votes" [currentVote]="currentVote" (voted)="vote($event)"></app-votebox>
+            </div>
+    
+            <div class="col-8 text-break" [innerHTML]="answer.body"></div>
         </div>
-
-        <div class="col-8 text-break" [innerHTML]="answer.body"></div>
-    </div>
-
-
-    <!--question-footer -->
-
-    <div id="question-footer" class="d-flex justify-content-end">
-        <!-- user profile -->
-        <app-user-card [user]="answer.author" [date]="answer.createdAt"></app-user-card>
-
-    </div>
-
-    <div class="containter-fluid">
-        <hr>
-        <a href="" class="btn text-muted"> add comment </a>
-        <hr>
-    </div>
-
-</mat-card>
+    
+    
+        <!--question-footer -->
+    
+        <div class="d-flex">
+    
+            <div class="flex-grow-1 mx-2 d-flex flex-column justify-content-end">
+                <div class="overflow-auto" style="max-height: 150px;">
+                    <ng-container *ngFor="let comment of answer.comments">
+    
+                        <div class="card mb-2 p-2 d-flex flex-row justify-content-between">
+                            <div>
+                              <small class="card-text text-break w-75">{{comment.body}}</small>
+                            </div>
+                            <div class="text-end w-25">
+                                <small>{{comment.author.username}} -- {{comment.createdAt | toDate}}</small>
+                            </div>
+                        </div>
+    
+                    </ng-container>
+                    
+                  </div>    
+            </div>
+        
+            <div class="">
+    
+    
+                <!-- user card component -->
+                <mat-card-actions align="end" class="m-0">
+                    <app-user-card [user]="answer.author" [date]="answer.createdAt"></app-user-card>
+                </mat-card-actions>
+        
+                
+            </div>
+        </div>
+    
+    </mat-card>
+    
+    <app-post-comment-expansion [answerId]="answer._id" (commentPosted)="addComment($event)"></app-post-comment-expansion>
+    
+    
+    
+</div>

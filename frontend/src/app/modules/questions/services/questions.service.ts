@@ -59,4 +59,12 @@ export class QuestionsService {
   getTags(){
     return this.httpClient.get<any>(`api/questions/tags`) 
   }
+
+  postComment(questionId: string, commentBody: string){
+    return this.httpClient.post<any>(`api/questions/${questionId}/comments`, { body: commentBody });
+  }
+
+  postAnswerComment(answerId: string, questionId: string, commentBody: string){
+    return this.httpClient.post<any>(`api/questions/${questionId}/answers/${answerId}/comments`, { body: commentBody });
+  }
 }

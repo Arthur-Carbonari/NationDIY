@@ -1,8 +1,9 @@
 import { IsNotEmpty, IsString } from "class-validator";
 
-export class CheckAvailabilityDto {
-
+export class PostCommentDto {
+    
     @IsNotEmpty()
     @IsString()
-    readonly emailOrUsername: string;
+    readonly body: string;
+
 }

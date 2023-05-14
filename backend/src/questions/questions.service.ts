@@ -5,10 +5,11 @@ import { CreateQuestionDto } from './dto/createQuestionDto';
 import { Question } from './schema/question.schema';
 import { VoteDto } from './dto/vote.dto';
 import { Answer } from './schema/answer.schema';
-import { PostAnswerDto } from 'src/auth/dto/post-answer.dto';
 import { Tag } from './schema/tag.schema';
 import { from } from 'rxjs';
-import { AcceptAnswerDto } from 'src/auth/dto/accept-answer-dto';
+import { AcceptAnswerDto } from './dto/accept-answer-dto';
+import { PostAnswerDto } from './dto/post-answer.dto';
+import { PostCommentDto } from './dto/post-comment-dto';
 
 
 @Injectable()
@@ -195,9 +196,46 @@ export class QuestionsService {
 
     async getTags() {
         return (await this.tagModel.find().select('_id').exec()).map(tag => {
-            console.log('here');
             return tag._id
         });
+    }
+
+    async postComment(postCommentDto: PostCommentDto, questionId: string, userId: ObjectId, username: string){
+        const question = await this.questionModel.findById(questionId).exec()
+
+        if(!question) return {success: false}
+
+        const newComment = {
+            body: postCommentDto.body,
+            author: {_id: userId, username},
+            createdAt: new Date(),
+        }
+        
+        question.comments.push(newComment)
+
+        await question.save()        
+
+        return {success: true, newComment}
+    }
+
+    async postAnswerComment(postCommentDto: PostCommentDto, answerId: string, userId: any, username: any) {
+
+        const answer = await this.answerModel.findById(answerId).exec()
+
+        if(!answer) return {success: false}
+
+        const newComment = {
+            body: postCommentDto.body,
+            author: {_id: userId, username},
+            createdAt: new Date(),
+        }
+        
+        answer.comments.push(newComment)
+
+        await answer.save()        
+
+        return {success: true, newComment}
+
     }
 
 }

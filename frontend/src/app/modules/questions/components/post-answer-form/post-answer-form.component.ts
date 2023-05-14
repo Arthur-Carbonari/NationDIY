@@ -29,7 +29,7 @@ export class PostAnswerFormComponent extends SmartForm{
     ){
 
     const postAnswerForm = formBuilder.group({
-      body: ["", [Validators.required, Validators.minLength(50)]]
+      body: ["", [Validators.required, Validators.minLength(20)]]
     })
 
     const formErrorMessages = {

@@ -1,3 +1,5 @@
+import { Comment } from "./comment.interface";
+
 export interface Answer {
     _id: string;
 

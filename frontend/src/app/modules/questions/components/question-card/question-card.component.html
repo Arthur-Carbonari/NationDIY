@@ -1,53 +1,73 @@
-<mat-card class="containter-fluid p-2 my-5 mat-elevation-z3">
+<div class="my-5">
+    <mat-card class="containter-fluid p-2 mb-1 mat-elevation-z3">
 
-    <mat-card-header class="justify-content-end">
-
-        <div>
-            <button mat-icon-button [matMenuTriggerFor]="menu">
-                <mat-icon>more_vert</mat-icon>
-            </button>
+        <mat-card-header class="justify-content-end">
+    
+            <div>
+                <button mat-icon-button [matMenuTriggerFor]="menu">
+                    <mat-icon>more_vert</mat-icon>
+                </button>
+                
+                <mat-menu #menu="matMenu">
+                    <button mat-menu-item *appIsOwner="question.author._id" (click)="deleteQuestion()">Delete</button>
+                    <button mat-menu-item >Report</button>
+                </mat-menu>
+            </div>
+    
+        </mat-card-header>
+    
+        <div class="row">
             
-            <mat-menu #menu="matMenu">
-                <button mat-menu-item *appIsOwner="question.author._id" (click)="deleteQuestion()">Delete</button>
-                <button mat-menu-item >Report</button>
-            </mat-menu>
-        </div>
-
-    </mat-card-header>
-
-    <!-- vote area -->
-    <div class="row">
-
-        <div class="col-1">
-            <app-votebox [currentValue]="votes" [currentVote]="currentVote" (voted)="vote($event)"></app-votebox>
-        </div>
-
-        <div class="col-8 text-break" [innerHTML]="question.body"></div>
-        
-    </div>
-
-
-    <!--question-footer -->
-
-    <div id="question-footer">
-        <!-- tags -->
-        <!-- user card component -->
-        <mat-card-actions align="end">
-            <app-user-card [user]="question.author" [date]="question.createdAt"></app-user-card>
-        </mat-card-actions>
-
-        <div class="text-end">
-            <ng-container *ngFor="let tag of question.tags">
-                <a class="badge bg-dark-subtle text-decoration-none link-light text-capitalize text-black-50 fs-7 mx-1" [routerLink]="['/questions']" [queryParams]="{ tag: tag }">{{tag}}</a>
-            </ng-container>
+            <!-- vote area -->
+            <div class="col-1">
+                <app-votebox [currentValue]="votes" [currentVote]="currentVote" (voted)="vote($event)"></app-votebox>
+            </div>
+    
+            <div class="col-8 text-break" [innerHTML]="question.body"></div>
+            
         </div>
         
-    </div>
+    
+        <!--question-footer -->
+        
+        <div class="d-flex">
 
-    <div class="containter-fluid">
-        <hr>
-        <a href="" class="btn text-muted"> add comment </a>
-        <hr>
-    </div>
+            <div class="flex-grow-1 mx-2 d-flex flex-column justify-content-end">
+                <div class="overflow-auto " style="max-height: 150px;">
+                    <ng-container *ngFor="let comment of question.comments">
 
-</mat-card>
+                        <div class="card mb-2 p-2 d-flex flex-row justify-content-between">
+                            <div>
+                              <small class="card-text text-break w-75">{{comment.body}}</small>
+                            </div>
+                            <div class="text-end w-25">
+                                <small>{{comment.author.username}} -- {{comment.createdAt | toDate}}</small>
+                            </div>
+                        </div>
+
+                    </ng-container>
+                    
+                  </div>    
+            </div>
+        
+            <div id="question-footer" class="d-flex flex-column justify-content-end">
+    
+    
+                <!-- user card component -->
+                <mat-card-actions align="end">
+                    <app-user-card [user]="question.author" [date]="question.createdAt"></app-user-card>
+                </mat-card-actions>
+        
+                <div class="text-end">
+                    <ng-container *ngFor="let tag of question.tags">
+                        <a class="badge bg-dark-subtle text-decoration-none link-light text-capitalize text-black-50 fs-7 mx-1" [routerLink]="['/questions']" [queryParams]="{ tag: tag }">{{tag}}</a>
+                    </ng-container>
+                </div>
+                
+            </div>
+        </div>
+    
+    </mat-card>
+    
+    <app-post-comment-expansion (commentPosted)="addComment($event)"></app-post-comment-expansion>
+</div>

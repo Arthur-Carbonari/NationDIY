@@ -1,7 +1,7 @@
 import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
 import { Document, Schema as MongooseSchema } from 'mongoose';
+import { Comment as Comment_ } from '../comment.interface';
 
-import { Comment } from '../questions.interface'
 
 @Schema()
 export class Question extends Document {
@@ -24,8 +24,8 @@ export class Question extends Document {
     @Prop({ type: [{ type: MongooseSchema.Types.ObjectId, ref: 'Answer' }], default: [] })
     answers: string[];
 
-    @Prop({ type: [{ content: String, author: { type: MongooseSchema.Types.ObjectId, ref: 'User' } }], default: [] })
-    comments: Comment[];
+    @Prop({ default: [] })
+    comments: Comment_[];
 
     @Prop({ type: MongooseSchema.Types.ObjectId, ref: 'User', required: true })
     author: string;

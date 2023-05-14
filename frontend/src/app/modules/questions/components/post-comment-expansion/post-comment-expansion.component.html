@@ -1,0 +1,19 @@
+<mat-expansion-panel hideToggle>
+
+    <mat-expansion-panel-header>
+        <mat-panel-title>Leave A Comment</mat-panel-title>
+    </mat-expansion-panel-header>
+
+    <form class="container" [formGroup]="postCommentForm" (ngSubmit)="onSubmit()">
+        <mat-form-field class="w-100">
+            <textarea matInput placeholder="Enter your comment" formControlName="body" class="h-8rem"></textarea>
+            <div class="text-danger text-center mb-3"> {{ getErrorMessage('body') || postError }} </div>
+        </mat-form-field>
+
+        <div class="text-end">
+            <button mat-button type="submit" color="primary" class="btn btn-primary">Comment</button>
+        </div>
+        
+    </form>
+
+</mat-expansion-panel>
