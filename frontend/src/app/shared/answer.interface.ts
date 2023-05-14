@@ -2,7 +2,7 @@ export interface Answer {
     _id: string;
 
     title: string;
-    author: string;
+    author: {_id: string, username: string};
     body: string;
     tags: string;
     createdAt: string;

@@ -115,7 +115,7 @@ export class QuestionsService {
 
         if(!question) return []
         
-        return this.answerModel.find({ _id: { $in: question.answers } }).exec();        
+        return this.answerModel.find({ _id: { $in: question.answers } }).populate('author', 'username').exec();        
     }
 
     async voteAnswer(voteDto: VoteDto, userId: string, answerId: string) {
