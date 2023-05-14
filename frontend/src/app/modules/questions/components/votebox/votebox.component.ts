@@ -1,5 +1,6 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { AuthenticationService } from 'src/app/core/services/authentication.service';
+import { DialogService } from 'src/app/shared/services/dialog.service';
 
 @Component({
   selector: 'app-votebox',
@@ -13,12 +14,15 @@ export class VoteboxComponent {
 
   @Output() voted = new EventEmitter<number>();
 
-  constructor(private authService: AuthenticationService) { }
+  constructor(private authService: AuthenticationService, private dialogService: DialogService) { }
 
   vote(value: number) {
 
     // Return early if the user is not logged in
-    if (!this.authService.isLoggedIn) return // change this later to display login form
+    if (!this.authService.isLoggedIn) {
+      this.dialogService.openLoginDialog()
+      return
+    }
 
     // Set the value to either 1 or -1 to represent an upvote or downvote respectively, this is done for security
     value = value > 0 ? 1 : -1

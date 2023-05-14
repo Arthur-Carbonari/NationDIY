@@ -10,12 +10,6 @@ import { AuthenticationService } from './services/authentication.service';
   imports: [
     CommonModule,
     HttpClientModule,
-  ],
-  providers: [
-    AuthenticationService,
-    JwtHelperService,
-    {provide: JWT_OPTIONS, useValue: JWT_OPTIONS},
-    AuthInterceptorProvider 
   ]
 })
 export class CoreModule { }

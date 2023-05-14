@@ -21,6 +21,7 @@ import { QuestionPreviewComponent } from './components/question-preview/question
 import { SingleQuestionComponent } from './pages/single-question/single-question.component';
 import { VoteboxComponent } from './components/votebox/votebox.component';
 import { UserCardComponent } from './components/user-card/user-card.component';
+import { CoreModule } from 'src/app/core/core.module';
 
 
 @NgModule({
@@ -38,6 +39,7 @@ import { UserCardComponent } from './components/user-card/user-card.component';
     CommonModule,
     QuestionsRoutingModule,
     SharedModule,
+    CoreModule,
 
     //tags input imports
     FormsModule,

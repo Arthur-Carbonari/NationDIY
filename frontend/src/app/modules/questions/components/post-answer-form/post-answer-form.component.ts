@@ -4,6 +4,7 @@ import { ActivatedRoute } from '@angular/router';
 import { AuthenticationService } from 'src/app/core/services/authentication.service';
 import { Answer } from 'src/app/shared/answer.interface';
 import { SmartForm } from 'src/app/shared/classes/smart-form.abstract';
+import { DialogService } from 'src/app/shared/services/dialog.service';
 import { QuestionsService } from '../../services/questions.service';
 
 @Component({
@@ -19,7 +20,13 @@ export class PostAnswerFormComponent extends SmartForm{
 
   postError = ""
 
-  constructor(formBuilder: FormBuilder, private authService: AuthenticationService, private route: ActivatedRoute, private questionsService: QuestionsService){
+  constructor(
+    formBuilder: FormBuilder, 
+    private authService: AuthenticationService, 
+    private route: ActivatedRoute, 
+    private questionsService: QuestionsService,
+    private dialogService: DialogService
+    ){
 
     const postAnswerForm = formBuilder.group({
       body: ["", [Validators.required, Validators.minLength(50)]]
@@ -39,6 +46,11 @@ export class PostAnswerFormComponent extends SmartForm{
     if (this.postAnswerForm.invalid) { return };
 
     if(this.postError) this.postError = ""
+
+    if(!this.authService.isLoggedIn){      
+      this.dialogService.openLoginDialog()
+      return
+    }
 
     const {body} = this.postAnswerForm.value
 

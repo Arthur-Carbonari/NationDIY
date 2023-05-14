@@ -17,6 +17,9 @@ import { QuestionsModule } from './modules/questions/questions.module';
 import { FoundErrorComponent } from './layout/found-error/found-error.component';
 import { ServerErrorComponent } from './layout/server-error/server-error.component';
 import { ProfileComponent } from './modules/profile/profile.component';
+import { JwtHelperService, JWT_OPTIONS } from '@auth0/angular-jwt';
+import { AuthInterceptorProvider } from './core/interceptors/auth.interceptor';
+import { AuthenticationService } from './core/services/authentication.service';
 
 @NgModule({
   declarations: [
@@ -42,7 +45,12 @@ import { ProfileComponent } from './modules/profile/profile.component';
     QuestionsModule
 
   ],
-  providers: [],
+  providers: [
+    AuthenticationService,
+    JwtHelperService,
+    { provide: JWT_OPTIONS, useValue: JWT_OPTIONS },
+    AuthInterceptorProvider
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

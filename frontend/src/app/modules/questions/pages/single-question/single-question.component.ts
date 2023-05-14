@@ -2,10 +2,10 @@ import { Component, ViewChild } from '@angular/core';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { ActivatedRoute } from '@angular/router';
-import { Observable } from 'rxjs';
 import { AuthenticationService } from 'src/app/core/services/authentication.service';
 import { Answer } from 'src/app/shared/answer.interface';
 import { Question } from 'src/app/shared/question.interface';
+import { DialogService } from 'src/app/shared/services/dialog.service';
 import { QuestionsService } from '../../services/questions.service';
 
 @Component({
@@ -22,7 +22,12 @@ export class SingleQuestionComponent {
   paginator!: MatPaginator;
   pageAnswers: Answer[] = []
 
-  constructor(private route: ActivatedRoute, private questionsService: QuestionsService, private authService: AuthenticationService, private snackBar: MatSnackBar) { }
+  constructor(
+    private route: ActivatedRoute,
+    private questionsService: QuestionsService,
+    private authService: AuthenticationService,
+    private snackBar: MatSnackBar,
+  ) { }
 
   ngOnInit(): void {
     const id = this.route.snapshot.paramMap.get('id')!;
@@ -33,7 +38,7 @@ export class SingleQuestionComponent {
 
       this.question = question
 
-      this.questionsService.getQuestionAnswers(id).subscribe( answers => {
+      this.questionsService.getQuestionAnswers(id).subscribe(answers => {
         this.allAnswers = answers
 
         this.paginator.length = answers.length
@@ -46,14 +51,14 @@ export class SingleQuestionComponent {
     return new Date(dateString).toLocaleString()
   }
 
-  addAnswer(answer: Answer){
+  addAnswer(answer: Answer) {
     this.allAnswers.push(answer)
     this.paginator.length = this.paginator.length + 1
     this.updatePaging()
     this.snackBar.open("Answer Posted Sucessfully", "Dismiss")
   }
 
-  updatePaging(){
+  updatePaging() {
     const pageNumber = this.paginator.pageIndex
     const pageSize = this.paginator.pageSize
 
