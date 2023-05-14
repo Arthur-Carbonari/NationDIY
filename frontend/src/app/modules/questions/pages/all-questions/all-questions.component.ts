@@ -7,6 +7,7 @@ import { Question } from "../../../../shared/question.interface"
 import { QuestionsService } from '../../services/questions.service';
 import { Observable } from 'rxjs';
 import { ActivatedRoute } from '@angular/router';
+import { DialogService } from 'src/app/shared/services/dialog.service';
 
 
 @Component({
@@ -21,7 +22,7 @@ export class AllQuestionsComponent implements AfterViewInit {
   @ViewChild(MatPaginator)
   paginator!: MatPaginator;
 
-  constructor(private questionsService: QuestionsService, private route: ActivatedRoute) { }
+  constructor(private questionsService: QuestionsService, private route: ActivatedRoute, public dialogService: DialogService) { }
   
   ngAfterViewInit(): void {
     this.changePage()

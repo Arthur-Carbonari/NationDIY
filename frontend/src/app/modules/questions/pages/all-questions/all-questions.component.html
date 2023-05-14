@@ -1,24 +1,23 @@
-<div style="height: 50px;"></div>
-<div class=" container pt-5 p-3">
+<div class=" container p-3 mt-5">
     <div class="row">
         
-        <div id="mainbar" class="col-10">
+        <div id="mainbar">
             <!-- title -->
-            <div class="d-flex justify-content-around">
-                <h1 class=""><b> All Questions </b></h1>
-                <div class="mb16"></div>
-                <div class="justify-content-end ps-5 ">
-                    <a routerLink="/ask-question" class="flex-item btn btn-primary"> Ask a Question</a>
+            
+            <mat-card class="p-2">
+                <h1 class="text-start pt-2 ps-2 m-0">All Questions</h1>
+                <hr>
+                <div class="d-flex justify-content-between">
+    
+                    <div>
+                        <p>filter here [                    ] </p>
+                    </div>
 
+                    <div class="justify-content-end ps-5">
+                        <a class="flex-item btn btn-lg btn-primary" (click)="dialogService.openPostQuestionDialog()"> Ask a Question</a>
+                    </div>
                 </div>
-
-            </div>
-            <!-- tags -->
-            <div class="d-flex justify-content-end mb-4">
-
-                <button> Tags </button>
-
-            </div>
+            </mat-card>
 
             <!-- Questions -->
             <ng-container *ngFor="let question of (dataSource | async)?.questions">
@@ -31,11 +30,12 @@
 
         </div>
 
-        <div id="sidebar" class="col-2">
+        <!-- <div id="sidebar" class="col-2 bg-black">
 
             <h2 class="bg-warning"> *Sidebar component slot*</h2>
 
-        </div>
+        </div> -->
+
     </div>
 
 </div>
