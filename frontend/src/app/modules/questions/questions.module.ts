@@ -26,6 +26,8 @@ import { MatIconModule } from '@angular/material/icon';
 import {MatMenuModule} from '@angular/material/menu';
 import {MatExpansionModule} from '@angular/material/expansion';
 import { PostCommentExpansionComponent } from './components/post-comment-expansion/post-comment-expansion.component';
+import { QuestionsTableComponent } from './components/questions-table/questions-table.component';
+import {MatTableModule} from '@angular/material/table';
 
 
 @NgModule({
@@ -38,7 +40,8 @@ import { PostCommentExpansionComponent } from './components/post-comment-expansi
     SingleQuestionComponent,
     VoteboxComponent,
     UserCardComponent,
-    PostCommentExpansionComponent
+    PostCommentExpansionComponent,
+    QuestionsTableComponent
   ],
   imports: [
     CommonModule,
@@ -54,6 +57,7 @@ import { PostCommentExpansionComponent } from './components/post-comment-expansi
     MatIconModule,
     MatMenuModule,
     MatExpansionModule,
+    MatTableModule,
 
     // Rich Text-Editor
     NgxEditorModule,

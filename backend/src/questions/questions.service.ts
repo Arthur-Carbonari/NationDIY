@@ -21,26 +21,23 @@ export class QuestionsService {
         @InjectModel(Tag.name) private readonly tagModel: Model<Tag>,
     ) { }
 
-    async getQuestions(pageNumber: number, pageSize: number, tag: string) {
+    async getQuestions(tag: string) {
 
         const query = this.questionModel.find()
 
         if (tag) {
             const tagDocument = (await this.tagModel.findById(tag))
 
-            if (!tagDocument) return { questions: [], totalMatches: 0 }
+            if (!tagDocument) return { questions: []}
 
             const questionIds = Array.from(tagDocument.questionIds.keys())
 
             query.find({ _id: { $in: questionIds } });
         }
 
-        const skip = pageNumber * pageSize;
+        const questions = await query.populate('author', 'username').exec();
 
-        const totalMatches = await query.clone().countDocuments()
-        const questions = await query.sort({ createAt: -1 }).skip(skip).limit(pageSize).populate('author', 'username').exec();
-
-        return { questions, totalMatches }
+        return questions
     }
 
     findOne(questionId: string): Promise<Question | null> {

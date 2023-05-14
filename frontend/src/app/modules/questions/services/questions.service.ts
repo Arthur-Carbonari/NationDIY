@@ -11,8 +11,8 @@ export class QuestionsService {
 
   constructor(private httpClient: HttpClient) { }
 
-  getQuestions(): Observable<Question[]> {
-    return this.httpClient.get<Question[]>('api/questions')
+  getQuestions(tag: string = "") {
+    return this.httpClient.get<Question[]>('api/questions', {params: {tag}})
   }
 
   queryQuestions(pageNumber: number, pageSize: number, tag: string) {

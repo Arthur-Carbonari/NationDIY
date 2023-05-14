@@ -27,6 +27,7 @@ export class SingleQuestionComponent {
     private questionsService: QuestionsService,
     private authService: AuthenticationService,
     private snackBar: MatSnackBar,
+    public dialogService: DialogService
   ) { }
 
   ngOnInit(): void {
@@ -82,7 +83,6 @@ export class SingleQuestionComponent {
     this.questionsService.acceptAnswer(answerId, this.question._id).subscribe(res => {
       if (res) {
         this.question.acceptedAnswer = answerId
-        console.log('here');
         
         this.sortAnswers()
         this.updatePaging()
