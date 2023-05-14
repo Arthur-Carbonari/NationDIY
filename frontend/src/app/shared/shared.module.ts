@@ -21,6 +21,7 @@ import { MatNativeDateModule } from '@angular/material/core';
 import { MatIconModule } from '@angular/material/icon';
 import { MatSelectModule } from '@angular/material/select';
 import { CoreModule } from '../core/core.module';
+import { ToDatePipe } from './pipes/to-date.pipe';
 
 @NgModule({
   declarations: [
@@ -28,7 +29,8 @@ import { CoreModule } from '../core/core.module';
     SignupDialogComponent,
     LoginDialogComponent,
     PostQuestionDialogComponent,
-    TagsInputComponent
+    TagsInputComponent,
+    ToDatePipe
   ],
   imports: [
     CommonModule,
@@ -57,7 +59,8 @@ import { CoreModule } from '../core/core.module';
     NgxEditorModule,
   ],
   exports: [
-    TextEditorComponent
+    TextEditorComponent,
+    ToDatePipe
   ],
   providers: [
     {provide: MAT_SNACK_BAR_DEFAULT_OPTIONS, useValue: {duration: 2500}}

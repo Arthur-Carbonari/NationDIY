@@ -47,10 +47,6 @@ export class SingleQuestionComponent {
     })
   }
 
-  dateStringToLocale(dateString: string) {
-    return new Date(dateString).toLocaleString()
-  }
-
   addAnswer(answer: Answer) {
     this.allAnswers.push(answer)
     this.paginator.length = this.paginator.length + 1
