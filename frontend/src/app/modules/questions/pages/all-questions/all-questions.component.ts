@@ -25,11 +25,11 @@ export class AllQuestionsComponent implements AfterViewInit {
   constructor(private questionsService: QuestionsService, private route: ActivatedRoute, public dialogService: DialogService) { }
   
   ngAfterViewInit(): void {
-    this.changePage()
+    // this.changePage()
 
-    this.route.queryParams.subscribe(() => {
-      this.changePage();
-    });
+    // this.route.queryParams.subscribe(() => {
+    //   this.changePage();
+    // });
   }
 
   changePage(){

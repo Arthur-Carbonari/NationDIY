@@ -4,37 +4,21 @@
         <div id="mainbar">
             <!-- title -->
             
-            <mat-card class="p-2">
+            <mat-card class="p-2 mb-3">
                 <h1 class="text-start pt-2 ps-2 m-0">All Questions</h1>
                 <hr>
-                <div class="d-flex justify-content-between">
-    
-                    <div>
-                        <p>filter here [                    ] </p>
-                    </div>
+                <div class="d-flex justify-content-end">
 
                     <div class="justify-content-end ps-5">
                         <a class="flex-item btn btn-lg btn-primary" (click)="dialogService.openPostQuestionDialog()"> Ask a Question</a>
                     </div>
+
                 </div>
             </mat-card>
 
-            <!-- Questions -->
-            <ng-container *ngFor="let question of (dataSource | async)?.questions">
-                <app-question-preview [question]="question"></app-question-preview>
-            </ng-container>
-
-            <!-- paginator -->
-            <mat-paginator class="mat-elevation-z3" [length]="10" [pageSize]="5" [pageSizeOptions]="[3, 5, 10]" showFirstLastButtons (page)="changePage()">
-            </mat-paginator>
+            <app-questions-table></app-questions-table>
 
         </div>
-
-        <!-- <div id="sidebar" class="col-2 bg-black">
-
-            <h2 class="bg-warning"> *Sidebar component slot*</h2>
-
-        </div> -->
 
     </div>
 

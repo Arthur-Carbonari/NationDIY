@@ -16,8 +16,8 @@ export class QuestionsController {
     constructor(private questionsService: QuestionsService) { }
 
     @Get()
-    getQuestions(@Query('pageNumber') pageNumber=0, @Query('pageSize') pageSize=50, @Query('tag') tag="",){
-        return from(this.questionsService.getQuestions(pageNumber, pageSize, tag))
+    getQuestions(@Query('tag') tag="",){
+        return this.questionsService.getQuestions(tag)
     }
 
     @Post()

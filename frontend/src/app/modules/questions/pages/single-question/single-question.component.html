@@ -3,24 +3,21 @@
     <ng-container *ngIf="(question); else notFound">
 
         <!-- title example  -->
-        <div id="question-header" class="d-flex align-items-start flex-column">
+        <mat-card id="question-header" class="p-3">
 
-            <div class="d-flex justify-content-between">
+            <mat-card-title>
                 <h1 class=""> {{question.title}}</h1>
-                <div class="flex-item ps-5 ">
-                    <a routerLink="/ask-question" class="flex-item btn btn-primary"> Ask a Question</a>
-                </div>
-            </div>
+            </mat-card-title>
 
-            <div id="post-infs" class="d-flex justify-content-around    ">
-                <div class="p-2">
-                    <span class="text-muted" id="post-date"> {{ question.createdAt | toDate }}</span>
-                </div>
-            </div>
+            <mat-card-subtitle>
+                <span class="text-muted" id="post-date"> {{ question.createdAt | toDate }}</span>
+            </mat-card-subtitle>
 
-        </div>
-
-        <hr>
+            <mat-card-footer class="d-flex justify-content-end">
+                <a role="button" (click)="dialogService.openPostQuestionDialog()" class="flex-item btn btn-primary"> Ask a Question</a>
+            </mat-card-footer>
+            
+        </mat-card>
 
         <!-- Question -->
         <app-question-card [question]="question" ></app-question-card>
