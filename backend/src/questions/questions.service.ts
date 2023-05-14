@@ -117,7 +117,7 @@ export class QuestionsService {
 
         if (!question) return { success: false }
 
-        const newAnswer = await this.answerModel.create({ body: postAnswerDto.body, author: userId, question: questionId })
+        const newAnswer = await (await this.answerModel.create({ body: postAnswerDto.body, author: userId, question: questionId })).populate('author', 'username')
 
         question.answers.push(newAnswer._id)
         await question.save()
