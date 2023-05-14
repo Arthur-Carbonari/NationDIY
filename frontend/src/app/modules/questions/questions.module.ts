@@ -30,6 +30,7 @@ import { QuestionsTableComponent } from './components/questions-table/questions-
 import {MatTableModule} from '@angular/material/table';
 import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
 import {MatSlideToggleModule} from '@angular/material/slide-toggle';
+import { MatSortModule } from '@angular/material/sort';
 
 
 @NgModule({
@@ -62,6 +63,7 @@ import {MatSlideToggleModule} from '@angular/material/slide-toggle';
     MatTableModule,
     MatProgressSpinnerModule,
     MatSlideToggleModule,
+    MatSortModule,
 
     // Rich Text-Editor
     NgxEditorModule,

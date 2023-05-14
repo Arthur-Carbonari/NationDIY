@@ -23,13 +23,13 @@
 
         <!-- tags hidden Column -->
         <ng-container matColumnDef="tags">
-            <th mat-header-cell *matHeaderCellDef mat-sort-header> Tags </th>
+            <th class="d-none" mat-header-cell *matHeaderCellDef mat-sort-header> Tags </th>
             <td class="d-none" mat-cell *matCellDef="let row"> {{row.tags}} </td>
         </ng-container>
        
         <!-- tags hidden Column -->
         <ng-container matColumnDef="createdAt">
-            <th class="d-none" mat-header-cell *matHeaderCellDef mat-sort-header> createdAt </th>
+            <th  mat-header-cell *matHeaderCellDef mat-sort-header> Date </th>
             <td class="d-none" mat-cell *matCellDef="let row"> {{row.createdAt}} </td>
         </ng-container>
 
