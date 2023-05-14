@@ -8,6 +8,7 @@ import { Component, Input } from '@angular/core';
 export class UserCardComponent {
 
   @Input() user!: {_id: string, username: string}
+  @Input() date!: string
 
   constructor() { }
 

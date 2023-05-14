@@ -1,20 +1,18 @@
 <mat-card class="bg-grey mb-2 p-2" id="card" >
-    <mat-card-subtitle>
-        $date 13/05/2023 - 18:29
-    </mat-card-subtitle>
-    <div class="d-flex">
-        <div class="col-2 m-0">
 
+    <div class="d-flex">
+        <div class="col text-end pe-2">
+            <!-- link to the user profile -->
+            <a routerLink="/" class="text-decoration-none"> {{user.username}} </a>
+        </div>
+        <div class="col-2 m-0">
             <img src="https://www.kindpng.com/picc/m/146-1468390_transparent-shadow-person-png-missing-profile-picture-icon.png"
                 alt="" width="32" height="32" class="img-fluid avatar-lg rounded-circle">
         </div>
-        <div class="col">
-            
-                <!-- link to the user profile -->
-                <a routerLink="/" class="text-decoration-none"> {{user.username}} </a>
-
-        </div>
     </div>
 
+    <mat-card-subtitle>
+        {{date | toDate}}
+    </mat-card-subtitle>
 
 </mat-card>
