@@ -8,7 +8,7 @@
                 <button mat-icon-button [matMenuTriggerFor]="menu">
                     <mat-icon>more_vert</mat-icon>
                 </button>
-    
+                <!-- Accept answerd and delete only displayed for onwer of the question that was answered  -->
                 <mat-menu #menu="matMenu">
                     <button mat-menu-item (click)="acceptAsAnswer()" *appIsOwner="questionAuthor">Accept as Answer</button>
                     <button mat-menu-item (click)="delete()" *appIsOwner="answer.author._id">Delete</button>

@@ -11,10 +11,37 @@ import { catchError, Observable, throwError } from 'rxjs';
 import { AuthenticationService } from '../services/authentication.service';
 import { Router } from '@angular/router';
 
+
+/**
+
+AuthInterceptor is an HTTP interceptor that intercepts HTTP requests and adds a bearer token
+to the headers of the request if the user is logged in. It also handles errors and logs the user out if there is an unauthorized error
+@class AuthInterceptor
+@implements {HttpInterceptor}
+*/
+
 @Injectable()
 class AuthInterceptor implements HttpInterceptor {
 
+  /**
+
+Creates an instance of AuthInterceptor
+@param {AuthenticationService} authService - An instance of the AuthenticationService
+@param {Router} router - An instance of the Angular Router
+@memberof AuthInterceptor
+*/
+
   constructor(private authService: AuthenticationService, private router: Router) {}
+
+  /**
+
+Intercepts HTTP requests and adds a bearer token to the headers if the user is logged in.
+It also handles errors and logs the user out if there is an unauthorized error.
+@param {HttpRequest<unknown>} request - The HTTP request
+@param {HttpHandler} next - The HTTP handler
+@returns {Observable<HttpEvent<unknown>>} An observable of the HTTP event
+@memberof AuthInterceptor
+*/
 
   intercept(request: HttpRequest<unknown>, next: HttpHandler): Observable<HttpEvent<unknown>> {
 
@@ -39,6 +66,14 @@ class AuthInterceptor implements HttpInterceptor {
     );
   }
 }
+
+/**
+
+AuthInterceptorProvider is a provider that provides an instance of AuthInterceptor as an HTTP_INTERCEPTOR
+@export
+@const AuthInterceptorProvider
+@type {Provider}
+*/
 
 export const AuthInterceptorProvider = {
   provide: HTTP_INTERCEPTORS,

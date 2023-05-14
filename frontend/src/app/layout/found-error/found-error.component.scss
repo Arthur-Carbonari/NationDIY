@@ -1,3 +1,4 @@
+// specific fonts for the cog design 
 @import url("https://fonts.googleapis.com/css2?family=Poppins:wght@700&display=swap" );
 
 @import url("https://fonts.googleapis.com/css?family=Montserrat:400,500,600,700");
@@ -42,6 +43,7 @@ body{
   border:6vmin solid #4f8a8b;
 }
 
+// nodes of cog whell 
 .top, .down, .left, .right, .left-top, .left-down, .right-top, .right-down{
   width:10vmin;
   height:10vmin;

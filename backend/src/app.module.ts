@@ -8,7 +8,7 @@ import { QuestionsModule } from './questions/questions.module';
 @Module({
   imports: [
     AuthModule,
-    ConfigModule.forRoot({ isGlobal: true }),
+    ConfigModule.forRoot({ isGlobal: true }),     // configure global root 
     MongooseModule.forRoot(process.env.MONGO_URI || ""),
     UsersModule,
     QuestionsModule

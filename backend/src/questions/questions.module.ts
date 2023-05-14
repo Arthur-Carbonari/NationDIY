@@ -7,6 +7,10 @@ import { MongooseModule } from '@nestjs/mongoose';
 import { AuthModule } from 'src/auth/auth.module';
 import { Tag, TagSchema } from './schema/tag.schema';
 
+/**
+ * @method forFeature() used to register Mongoose schemas for Question, Answer, and Tag. These schemas define the structure of documents that will be stored in a MongoDB database.
+ */
+
 @Module({
   imports: [
     AuthModule,
@@ -14,7 +18,7 @@ import { Tag, TagSchema } from './schema/tag.schema';
     MongooseModule.forFeature([{ name: Answer.name, schema: AnswerSchema }]),
     MongooseModule.forFeature([{ name: Tag.name, schema: TagSchema }]),
   ],
-  providers: [QuestionsService],
-  controllers: [QuestionsController]
+  providers: [QuestionsService], //responsible for handling business logic related to questions and answers.
+  controllers: [QuestionsController]  // responsible for handling incoming HTTP requests related to questions and answers.
 })
 export class QuestionsModule { }

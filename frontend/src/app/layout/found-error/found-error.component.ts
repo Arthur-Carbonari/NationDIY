@@ -7,7 +7,7 @@ import { gsap, Linear } from 'gsap';
   styleUrls: ['./found-error.component.scss']
 })
 export class FoundErrorComponent implements OnInit {
-
+// gsap used to allow vanilla JS to run animations in Angular throught the module
   ngOnInit(): void {
     let t1 = gsap.timeline();
     let t2 = gsap.timeline();

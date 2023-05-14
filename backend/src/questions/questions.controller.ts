@@ -10,6 +10,14 @@ import { QuestionsService } from './questions.service';
 import { Answer } from './schema/answer.schema';
 import { Question } from './schema/question.schema';
 
+/**
+ * This is a NestJS controller for a Questions feature in a web application. It handles various HTTP requests related to questions, including getting questions, creating a question, getting a single question, deleting a question, voting on a question, accepting an answer, posting an answer, getting answers, deleting an answer, voting on an answer, posting a comment on a question, and posting a comment on an answer.
+
+It uses various NestJS decorators to define the route paths and request methods, as well as guards to ensure that only authenticated users can perform certain actions. It also uses DTOs (data transfer objects) to validate and sanitize the incoming request data before passing it on to the service layer.
+
+The controller methods mostly delegate to corresponding methods in the QuestionsService class, which is responsible for interacting with the database and implementing the business logic for the Questions feature.
+ **/
+
 @Controller('questions')
 export class QuestionsController {
 

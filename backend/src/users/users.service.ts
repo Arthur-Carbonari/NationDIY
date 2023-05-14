@@ -4,6 +4,8 @@ import { Model } from 'mongoose';
 import { from } from 'rxjs';
 import { User } from './schema/user.schema';
 
+// This is a service class that provides methods to interact with the user data in the database.
+
 @Injectable()
 export class UsersService {
     constructor(

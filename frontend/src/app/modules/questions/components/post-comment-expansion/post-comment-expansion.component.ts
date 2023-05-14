@@ -27,6 +27,7 @@ export class PostCommentExpansionComponent extends SmartForm{
 
   opened: boolean = false
 
+  //  modules necessaries for post comment 
   constructor(
     formBuilder: FormBuilder, 
     private authService: AuthenticationService, 
@@ -44,6 +45,7 @@ export class PostCommentExpansionComponent extends SmartForm{
     this.postCommentForm = postCommentForm
   }
 
+  // on submit check and return error or sucess 
   onSubmit(): void {    
 
     this.postCommentForm.markAllAsTouched()
@@ -73,7 +75,7 @@ export class PostCommentExpansionComponent extends SmartForm{
       this.postCommentForm.controls['body'].markAsUntouched()
 
       this.panel.close()
-
+      // post comment if validation is pass 
       this.commentPosted.emit(res.newComment)
     })
   }

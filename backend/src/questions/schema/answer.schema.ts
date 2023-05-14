@@ -4,6 +4,8 @@ import { Comment } from '../comment.interface'
 
 
 // Mongoose schema for an Answer to be store in the database
+// Each property of the Answer document is defined using the @Prop() decorator.
+// The SchemaFactory.createForClass method is used to create a Mongoose schema based on the TypeScript class definition.
 
 @Schema()
 export class Answer extends Document{

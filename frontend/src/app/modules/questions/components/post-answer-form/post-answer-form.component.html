@@ -2,7 +2,7 @@
     <form class="form-group card-body align-center" [formGroup]="postAnswerForm" (ngSubmit)="onSubmit()">
 
         <h3 class="card-header">Your Answer</h3>
-
+        <!-- feed text-editor with body infs -->
         <app-text-editor class="card-body" formControlName="body"></app-text-editor>
         <div class="text-danger text-center mb-3"> {{ getErrorMessage('body') || postError }} </div>
 

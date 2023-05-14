@@ -5,6 +5,14 @@ import * as bcrypt from "bcrypt";
 
 import ErrorMessage from '../../common/constants/error-messages';
 
+
+/**
+ *  Mongoose schema for an User to be store in the database
+ *  Each property of the User document is defined using the @Prop() decorator.
+ *  The SchemaFactory.createForClass method is used to create a Mongoose schema based on the TypeScript class definition.
+ *
+  */
+
 @Schema()
 export class User extends Document {
 

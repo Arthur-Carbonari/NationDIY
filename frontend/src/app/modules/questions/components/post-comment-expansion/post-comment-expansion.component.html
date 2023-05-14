@@ -3,7 +3,7 @@
     <mat-expansion-panel-header>
         <mat-panel-title>Leave A Comment</mat-panel-title>
     </mat-expansion-panel-header>
-
+<!-- post comment form on submit  -->
     <form class="container" [formGroup]="postCommentForm" (ngSubmit)="onSubmit()">
         <mat-form-field class="w-100">
             <textarea matInput placeholder="Enter your comment" formControlName="body" class="h-8rem"></textarea>

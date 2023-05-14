@@ -2,6 +2,10 @@ import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
 import { Document, Schema as MongooseSchema } from 'mongoose';
 import { Comment as Comment_ } from '../comment.interface';
 
+/**  Mongoose schema for an Question to be store in the database
+ *  Each property of the Question document is defined using the @Prop() decorator.
+ *  The SchemaFactory.createForClass method is used to create a Mongoose schema based on the TypeScript class definition.
+*/
 
 @Schema()
 export class Question extends Document {

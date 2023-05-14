@@ -3,6 +3,13 @@ import { HttpClient } from '@angular/common/http'
 import { BehaviorSubject, Observable, tap } from 'rxjs';
 import { JwtHelperService } from '@auth0/angular-jwt';
 
+
+/**
+
+A service that provides authentication functionality.
+It uses JWT (JSON Web Token) for authentication and authorization.
+*/
+
 @Injectable({
   providedIn: 'root'
 })
