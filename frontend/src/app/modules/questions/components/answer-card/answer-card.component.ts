@@ -10,7 +10,9 @@ import { QuestionsService } from '../../services/questions.service';
 })
 export class AnswerCardComponent implements OnInit {
   @Input() answer!: Answer;
+  @Input() questionAuthor: string = ""
   @Output() deleted = new EventEmitter<string>();
+  @Output() acceptedAsAnswer = new EventEmitter<string>();
 
   votes: number = 0
   currentVote: number = 0
@@ -45,9 +47,11 @@ export class AnswerCardComponent implements OnInit {
     this.questionsService.voteAnswer(this.answer._id, this.answer.question, value).subscribe()
   }
 
+  acceptAsAnswer(){
+    this.acceptedAsAnswer.emit(this.answer._id)
+  }
+
   delete(){
-    this.questionsService.deleteAnswer(this.answer._id, this.answer.question).subscribe( res => {
-      if(res.sucess) this.deleted.emit(this.answer._id)
-    })
+    this.deleted.emit(this.answer._id)
   }
 }

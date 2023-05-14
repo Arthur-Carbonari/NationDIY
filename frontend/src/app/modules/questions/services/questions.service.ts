@@ -1,6 +1,6 @@
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
+import { map, Observable } from 'rxjs';
 import { Answer } from 'src/app/shared/answer.interface';
 import { Question } from 'src/app/shared/question.interface';
 
@@ -42,6 +42,10 @@ export class QuestionsService {
 
   getQuestionAnswers(questionId: string): Observable<Answer[]> {
     return this.httpClient.get<Answer[]>(`api/questions/${questionId}/answers`)
+  }
+
+  acceptAnswer(answerId: string, questionId: string){
+    return this.httpClient.patch<any>(`api/questions/${questionId}/accept-answer`, { answerId });
   }
 
   voteAnswer(answerId: string, questionId: string, value: number) {

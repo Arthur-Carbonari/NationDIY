@@ -1,6 +1,6 @@
 import { Injectable } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
-import { Model, Query } from 'mongoose';
+import { Model, ObjectId, Query } from 'mongoose';
 import { CreateQuestionDto } from './dto/createQuestionDto';
 import { Question } from './schema/question.schema';
 import { VoteDto } from './dto/vote.dto';
@@ -8,6 +8,7 @@ import { Answer } from './schema/answer.schema';
 import { PostAnswerDto } from 'src/auth/dto/post-answer.dto';
 import { Tag } from './schema/tag.schema';
 import { from } from 'rxjs';
+import { AcceptAnswerDto } from 'src/auth/dto/accept-answer-dto';
 
 
 @Injectable()
@@ -132,6 +133,24 @@ export class QuestionsService {
         if (!question) return []
 
         return this.answerModel.find({ _id: { $in: question.answers } }).populate('author', 'username').exec();
+    }
+
+    async acceptAnswer(acceptAnswerDto: AcceptAnswerDto, userId: ObjectId, questionId: string){
+        const question = await this.questionModel.findById(questionId).exec()
+
+        if(!question) return false
+
+        if(String(question.author) !== String(userId)) return false
+        
+        const {answerId} = acceptAnswerDto
+        
+        if(!question.answers.map(answer => String(answer)).includes(answerId)) return false
+
+        question.acceptedAnswer = answerId
+
+        await question.save()
+
+        return true
     }
 
     async deleteAnswerIfOwner(answerId: string, userId: string) {

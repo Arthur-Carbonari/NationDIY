@@ -32,9 +32,12 @@ export class SingleQuestionComponent {
   ngOnInit(): void {
     const id = this.route.snapshot.paramMap.get('id')!;
 
+    
+    
     this.questionsService.getQuestionById(id).subscribe(question => {
-
+      
       if (!question) return
+      console.log(question);
 
       this.question = question
 
@@ -42,6 +45,8 @@ export class SingleQuestionComponent {
         this.allAnswers = answers
 
         this.paginator.length = answers.length
+
+        this.sortAnswers()
         this.updatePaging()
       })
     })
@@ -50,7 +55,10 @@ export class SingleQuestionComponent {
   addAnswer(answer: Answer) {
     this.allAnswers.push(answer)
     this.paginator.length = this.paginator.length + 1
+
+    this.sortAnswers()
     this.updatePaging()
+    
     this.snackBar.open("Answer Posted Sucessfully", "Dismiss")
   }
 
@@ -63,9 +71,32 @@ export class SingleQuestionComponent {
     this.pageAnswers = this.allAnswers.slice(skip, skip + pageSize)
   }
 
-  removeAnswer(answerId: string){
-    this.allAnswers = this.allAnswers.filter(answer => answer._id !== answerId)
-    this.updatePaging()
+  sortAnswers() {
+    this.allAnswers = this.allAnswers
+      .sort((a1, a2) => ((Object.keys(a2.upvotes).length) - Object.keys(a2.downvotes).length - (Object.keys(a1.upvotes).length - Object.keys(a1.downvotes).length)) )
+      .sort((a1, a2) => a1._id === this.authService.userId ? -1 : 0)
+      .sort((a1, a2) => a1._id === this.question.acceptedAnswer ? -1 : 0)
+  }
+
+  acceptAnswer(answerId: string) {
+    this.questionsService.acceptAnswer(answerId, this.question._id).subscribe(res => {
+      if (res) {
+        this.question.acceptedAnswer = answerId
+        console.log('here');
+        
+        this.sortAnswers()
+        this.updatePaging()
+      }
+    })
+  }
+
+  removeAnswer(answerId: string) {
+    this.questionsService.deleteAnswer(answerId, this.question._id).subscribe(res => {
+      if (res.sucess) {
+        this.allAnswers = this.allAnswers.filter(answer => answer._id !== answerId)
+        this.updatePaging()
+      }
+    })
   }
 
 }

@@ -10,5 +10,6 @@ export interface Question {
     comments: Comment[];
     answers: string[];
     createdAt: string;
-
+    acceptedAnswer: string;
+    
 }

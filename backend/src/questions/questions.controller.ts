@@ -1,5 +1,6 @@
 import { Body, Controller, Delete, Get, Param, Patch, Post, Query, Req, UseGuards } from '@nestjs/common';
 import { catchError, from, map, Observable, of } from 'rxjs';
+import { AcceptAnswerDto } from 'src/auth/dto/accept-answer-dto';
 import { PostAnswerDto } from 'src/auth/dto/post-answer.dto';
 import { JwtAuthGuard } from 'src/auth/guards/jwt-auth.guard';
 import { CreateQuestionDto } from './dto/createQuestionDto';
@@ -22,7 +23,7 @@ export class QuestionsController {
     @UseGuards(JwtAuthGuard)
     create(@Body() createQuestionDto: CreateQuestionDto, @Req() req: any): Observable<{ success: boolean }> {
 
-        const userId: string = req.user._id
+        const userId = req.user._id
 
         return from(this.questionsService.create(createQuestionDto, userId)).pipe(
             map(() => ({ success: true })),
@@ -42,7 +43,7 @@ export class QuestionsController {
     @Delete(":id")
     @UseGuards(JwtAuthGuard)
     async delete(@Param('id') questionId: string, @Req() req: any) {
-        const userId: string = req.user._id
+        const userId = req.user._id
 
         const sucess = await this.questionsService.deleteIfOwner(questionId, userId)
 
@@ -52,9 +53,20 @@ export class QuestionsController {
     @Patch(":id/vote")
     @UseGuards(JwtAuthGuard)
     vote(@Body() voteDto: VoteDto, @Req() req: any, @Param('id') questionId: string): Observable<{ success: boolean }> {
-        const userId: string = req.user._id
+        const userId = req.user._id
 
         return from(this.questionsService.vote(voteDto, userId, questionId)).pipe(
+            map((success) => ({ success })),
+            catchError(() => of({ success: false })),
+        );
+    }
+
+    @Patch(":id/accept-answer")
+    @UseGuards(JwtAuthGuard)
+    acceptAnswer(@Body() acceptAnswerDto: AcceptAnswerDto, @Req() req: any, @Param('id') questionId: string): Observable<{ success: boolean }> {
+        const userId = req.user._id        
+
+        return from(this.questionsService.acceptAnswer(acceptAnswerDto, userId, questionId)).pipe(
             map((success) => ({ success })),
             catchError(() => of({ success: false })),
         );
@@ -75,7 +87,7 @@ export class QuestionsController {
     @Delete(":questionId/answers/:answerId")
     @UseGuards(JwtAuthGuard)
     async deleteAnswer(@Param('answerId') answerId: string, @Req() req: any) {
-        const userId: string = req.user._id
+        const userId = req.user._id
 
         const sucess = await this.questionsService.deleteAnswerIfOwner(answerId, userId)
 
@@ -85,7 +97,7 @@ export class QuestionsController {
     @Patch(":id/answers/:answerId/vote")
     @UseGuards(JwtAuthGuard)
     voteAnswer(@Body() voteDto: VoteDto, @Req() req: any, @Param("answerId") answerId: string): Observable<{ success: boolean }> {
-        const userId: string = req.user._id
+        const userId = req.user._id
 
         return from(this.questionsService.voteAnswer(voteDto, userId, answerId)).pipe(
             map((success) => ({ success })),
