@@ -6,6 +6,12 @@ import { UsersService } from "src/users/users.service";
 @Injectable()
 export class JwtStrategy extends PassportStrategy(Strategy){
 
+    /**
+     * 
+     * @param usersService Constructs a new instance of the JwtStrategy class.
+     * @param usersService - An instance of the UsersService class used to validate the user ID extracted from the JWT payload.
+     */
+
     constructor(private usersService: UsersService){
         super({
             jwtFromRequest: ExtractJwt.fromAuthHeaderAsBearerToken(),
@@ -14,6 +20,12 @@ export class JwtStrategy extends PassportStrategy(Strategy){
           });
     }
 
+    /**
+     *   Validates the JWT payload extracted from the Authorization header.
+     *   @param payload - The decoded JWT payload object.
+     *   @returns - A Promise that resolves to the user object associated with the user ID extracted from the payload.
+     *   @throws - An UnauthorizedException if the user object cannot be found in the database.
+     */
     async validate(payload: any){
         const {userId} = payload
 

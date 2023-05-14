@@ -9,12 +9,18 @@ import { AdminGuard } from './guards/admin.guard';
 import { JwtAuthGuard } from './guards/jwt-auth.guard';
 import { JwtStrategy } from './jwt.strategy';
 
+/**
+The Auth module is responsible for authentication and authorization of users. It provides functionality to sign up new users, log in existing users, and check availability of email or username. It also defines guards to protect routes that require authentication and authorization.
+*/
+
 @Module({
+  // Import necessary modules
   imports: [
     PassportModule.register({defaultStrategy: "jwt"}),
     JwtModule.registerAsync({
       imports: [ConfigModule],
       inject: [ConfigService],
+       // Factory function for creating JwtModule options 
       useFactory: async (configService :ConfigService) => ({
         secret: configService.get("JWT_SECRET"),
         signOptions: { expiresIn: configService.get("JWT_EXPIRES")}

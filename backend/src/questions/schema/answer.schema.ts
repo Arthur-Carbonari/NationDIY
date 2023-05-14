@@ -3,6 +3,8 @@ import { Document, Schema as MongooseSchema } from 'mongoose';
 import { Comment } from '../comment.interface'
 
 
+// Mongoose schema for an Answer to be store in the database
+
 @Schema()
 export class Answer extends Document{
     @Prop({ required: true })

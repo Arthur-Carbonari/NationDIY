@@ -1,3 +1,5 @@
+
+// Represents a collection of error messages used throughout the application.
 export default class ErrorMessage {
   static readonly REQUIRED_FIELD_EMPTY = 'This field is required.';
   static readonly EMAIL_ALREADY_REGISTERED = 'The email address you entered is already registered.';
