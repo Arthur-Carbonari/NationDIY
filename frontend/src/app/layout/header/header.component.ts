@@ -20,15 +20,15 @@ export class HeaderComponent {
     this.authService.logout()
   }
   
-  // used to change the navbar class if it is scrolled 
-  isScrolled = false;
+  // // used to change the navbar class if it is scrolled 
+  // isScrolled = false;
 
-  @HostListener('window:scroll', [])
-  onWindowScroll() {
-    if (window.scrollY >= 56) {
-      this.isScrolled = true;
-    } else {
-      this.isScrolled = false;
-    }
-  }
+  // @HostListener('window:scroll', [])
+  // onWindowScroll() {
+  //   if (window.scrollY >= 56) {
+  //     this.isScrolled = true;
+  //   } else {
+  //     this.isScrolled = false;
+  //   }
+  // }
 }
