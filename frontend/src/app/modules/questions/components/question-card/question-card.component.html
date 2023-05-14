@@ -17,7 +17,7 @@
         <!-- tags -->
         <!-- user card component -->
         <mat-card-actions align="end">
-            <app-user-card></app-user-card>
+            <app-user-card [user]="question.author"></app-user-card>
         </mat-card-actions>
         <div class="text-end">
             <ng-container *ngFor="let tag of question.tags">

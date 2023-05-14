@@ -4,7 +4,7 @@ export interface Question {
     title: string;
     tags: string[];
     body: string;
-    author: string;
+    author: {_id: string, username: string};
     upvotes: { [key: string]: boolean };
     downvotes: { [key: string]: boolean };
     comments: Comment[];

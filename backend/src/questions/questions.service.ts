@@ -36,13 +36,16 @@ export class QuestionsService {
         const skip = pageNumber * pageSize;
 
         const totalMatches = await query.clone().countDocuments()
-        const questions = await query.sort({createAt: -1}).skip(skip).limit(pageSize).exec();
+        const questions = await query.sort({createAt: -1}).skip(skip).limit(pageSize).populate('author', 'username').exec();
+
+        console.log(questions);
+        
 
         return {questions, totalMatches}
     }
     
     findOne(questionId: string): Promise<Question | null> {
-        return this.questionModel.findById(questionId).exec()
+        return this.questionModel.findById(questionId).populate('author', 'username').exec()
     }
 
     async create(createQuestionDto: CreateQuestionDto, userId: string){
