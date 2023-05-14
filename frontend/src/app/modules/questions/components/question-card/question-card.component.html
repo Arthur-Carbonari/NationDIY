@@ -7,7 +7,7 @@
                 <button mat-icon-button [matMenuTriggerFor]="menu">
                     <mat-icon>more_vert</mat-icon>
                 </button>
-                
+                <!--  loop throught quesion and get necessarry info, only display to owner -->
                 <mat-menu #menu="matMenu">
                     <button mat-menu-item *appIsOwner="question.author._id" (click)="deleteQuestion()">Delete</button>
                     <button mat-menu-item >Report</button>
@@ -20,6 +20,7 @@
             
             <!-- vote area -->
             <div class="col-1">
+                <!--  vote event check curren vote  -->
                 <app-votebox [currentValue]="votes" [currentVote]="currentVote" (voted)="vote($event)"></app-votebox>
             </div>
     
@@ -31,7 +32,7 @@
         <!--question-footer -->
         
         <div class="d-flex">
-
+            <!--  loop through quesiton parameters -->
             <div class="flex-grow-1 mx-2 d-flex flex-column justify-content-end">
                 <div class="overflow-auto " style="max-height: 150px;">
                     <ng-container *ngFor="let comment of question.comments">
@@ -68,6 +69,6 @@
         </div>
     
     </mat-card>
-    
+    <!--  comment event  -->
     <app-post-comment-expansion (commentPosted)="addComment($event)"></app-post-comment-expansion>
 </div>
