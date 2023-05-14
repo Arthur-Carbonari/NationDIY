@@ -31,6 +31,11 @@ export class QuestionsController {
         );
     }
 
+    @Get("tags")
+    async getTags() {
+        return this.questionsService.getTags()
+    }
+
     @Get(":id")
     async findOne(@Param('id') questionId: string) {
         const question = await this.questionsService.findOne((questionId))

@@ -55,4 +55,8 @@ export class QuestionsService {
   deleteAnswer(answerId: string, questionId: string){
     return this.httpClient.delete<{sucess: boolean}>(`api/questions/${questionId}/answers/${answerId}`)
   }
+
+  getTags(){
+    return this.httpClient.get<any>(`api/questions/tags`) 
+  }
 }

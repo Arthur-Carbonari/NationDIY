@@ -39,9 +39,6 @@ export class QuestionsService {
         const totalMatches = await query.clone().countDocuments()
         const questions = await query.sort({ createAt: -1 }).skip(skip).limit(pageSize).populate('author', 'username').exec();
 
-        console.log(questions);
-
-
         return { questions, totalMatches }
     }
 
@@ -135,16 +132,16 @@ export class QuestionsService {
         return this.answerModel.find({ _id: { $in: question.answers } }).populate('author', 'username').exec();
     }
 
-    async acceptAnswer(acceptAnswerDto: AcceptAnswerDto, userId: ObjectId, questionId: string){
+    async acceptAnswer(acceptAnswerDto: AcceptAnswerDto, userId: ObjectId, questionId: string) {
         const question = await this.questionModel.findById(questionId).exec()
 
-        if(!question) return false
+        if (!question) return false
 
-        if(String(question.author) !== String(userId)) return false
-        
-        const {answerId} = acceptAnswerDto
-        
-        if(!question.answers.map(answer => String(answer)).includes(answerId)) return false
+        if (String(question.author) !== String(userId)) return false
+
+        const { answerId } = acceptAnswerDto
+
+        if (!question.answers.map(answer => String(answer)).includes(answerId)) return false
 
         question.acceptedAnswer = answerId
 
@@ -166,7 +163,7 @@ export class QuestionsService {
 
         const question = await this.questionModel.findById(questionId)
 
-        if(question){
+        if (question) {
             question.answers = question.answers.filter(a => String(a) !== String(answerId))
             await question.save()
         }
@@ -196,5 +193,11 @@ export class QuestionsService {
         return true
     }
 
+    async getTags() {
+        return (await this.tagModel.find().select('_id').exec()).map(tag => {
+            console.log('here');
+            return tag._id
+        });
+    }
 
 }
