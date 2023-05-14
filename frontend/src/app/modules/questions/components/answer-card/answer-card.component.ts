@@ -11,6 +11,8 @@ import { QuestionsService } from '../../services/questions.service';
 export class AnswerCardComponent implements OnInit {
   @Input() answer!: Answer;
   @Input() questionAuthor: string = ""
+  @Input() isAcceptedAnswer: boolean = false
+
   @Output() deleted = new EventEmitter<string>();
   @Output() acceptedAsAnswer = new EventEmitter<string>();
 

@@ -11,6 +11,7 @@
             <mat-menu #menu="matMenu">
                 <button mat-menu-item (click)="acceptAsAnswer()" *appIsOwner="questionAuthor">Accept as Answer</button>
                 <button mat-menu-item (click)="delete()" *appIsOwner="answer.author._id">Delete</button>
+                <button mat-menu-item >Report</button>
             </mat-menu>
         </div>
 
@@ -19,6 +20,9 @@
     <!-- vote area -->
     <div class="row">
         <div class="col-1">
+            <div *ngIf="isAcceptedAnswer" class="d-flex justify-content-center">
+                <mat-icon class="text-success fs-3">check</mat-icon>
+            </div>
             <app-votebox [currentValue]="votes" [currentVote]="currentVote" (voted)="vote($event)"></app-votebox>
         </div>
 

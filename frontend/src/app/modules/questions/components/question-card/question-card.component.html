@@ -2,13 +2,14 @@
 
     <mat-card-header class="justify-content-end">
 
-        <div *appIsOwner="question.author._id">
+        <div>
             <button mat-icon-button [matMenuTriggerFor]="menu">
                 <mat-icon>more_vert</mat-icon>
             </button>
             
             <mat-menu #menu="matMenu">
-                <button mat-menu-item (click)="deleteQuestion()">Delete</button>
+                <button mat-menu-item *appIsOwner="question.author._id" (click)="deleteQuestion()">Delete</button>
+                <button mat-menu-item >Report</button>
             </mat-menu>
         </div>
 
