@@ -23,6 +23,7 @@ import { MatSelectModule } from '@angular/material/select';
 import { CoreModule } from '../core/core.module';
 import { ToDatePipe } from './pipes/to-date.pipe';
 import { IsOwnerPipe } from './pipes/is-owner.pipe';
+import { IsOwnerDirective } from './directives/is-owner.directive';
 
 @NgModule({
   declarations: [
@@ -32,7 +33,8 @@ import { IsOwnerPipe } from './pipes/is-owner.pipe';
     PostQuestionDialogComponent,
     TagsInputComponent,
     ToDatePipe,
-    IsOwnerPipe
+    IsOwnerPipe,
+    IsOwnerDirective
   ],
   imports: [
     CommonModule,
@@ -64,6 +66,7 @@ import { IsOwnerPipe } from './pipes/is-owner.pipe';
     TextEditorComponent,
     ToDatePipe,
     IsOwnerPipe,
+    IsOwnerDirective
   ],
   providers: [
     {provide: MAT_SNACK_BAR_DEFAULT_OPTIONS, useValue: {duration: 2500}}
