@@ -61,6 +61,19 @@ export class QuestionsService {
         return createdQuestion
     }
 
+    async deleteIfOwner(questionId: string, userId: string){
+        
+        const question = await this.questionModel.findById(questionId)
+        
+        if (question && String(question.author) == String(userId)) {
+          const result = await question.deleteOne();          
+          return true
+        }
+        else {
+            return false
+        }
+    }
+
     async addQuestionToTags(questionId: string, tags: string[]) {        
         tags.forEach(async (tagName) => {
             let tag = await this.tagModel.findById(tagName.toLowerCase()).exec()

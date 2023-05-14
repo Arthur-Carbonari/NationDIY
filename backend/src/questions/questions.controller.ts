@@ -1,4 +1,4 @@
-import { Body, Controller, Get, Param, Patch, Post, Query, Req, UseGuards } from '@nestjs/common';
+import { Body, Controller, Delete, Get, Param, Patch, Post, Query, Req, UseGuards } from '@nestjs/common';
 import { catchError, from, map, Observable, of } from 'rxjs';
 import { PostAnswerDto } from 'src/auth/dto/post-answer.dto';
 import { JwtAuthGuard } from 'src/auth/guards/jwt-auth.guard';
@@ -37,6 +37,16 @@ export class QuestionsController {
         if (!question) return
 
         return question
+    }
+
+    @Delete(":id")
+    @UseGuards(JwtAuthGuard)
+    async delete(@Param('id') questionId: string, @Req() req: any) {
+        const userId: string = req.user._id
+
+        const sucess = await this.questionsService.deleteIfOwner(questionId, userId)
+
+        return {sucess}
     }
 
     @Patch(":id/vote")
