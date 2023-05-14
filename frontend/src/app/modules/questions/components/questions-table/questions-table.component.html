@@ -3,9 +3,16 @@
         <mat-label>Search</mat-label>
         <input matInput (keyup)="applyFilter($event)" placeholder="Search For A Question" #input>
     </mat-form-field>
+
+    <mat-slide-toggle (change)="filterAnswered($event)">Unanswered Only</mat-slide-toggle>
 </div>
 
 <div class="mat-elevation-z8">
+
+    <div *ngIf="allQuestions === undefined" class="d-flex flex-column justify-content-center" style="height: 50vh;" >    
+        <mat-spinner class="m-auto spinner-border"></mat-spinner>
+    </div>
+
     <table mat-table [dataSource]="dataSource" matSort>
 
         <!-- title hidden Column -->
@@ -16,7 +23,7 @@
 
         <!-- tags hidden Column -->
         <ng-container matColumnDef="tags">
-            <th class="d-none" mat-header-cell *matHeaderCellDef mat-sort-header> Tags </th>
+            <th mat-header-cell *matHeaderCellDef mat-sort-header> Tags </th>
             <td class="d-none" mat-cell *matCellDef="let row"> {{row.tags}} </td>
         </ng-container>
        
@@ -40,6 +47,7 @@
         <tr class="mat-row" *matNoDataRow>
             <td class="mat-cell" colspan="4" class="text-center">No data matching the filter "{{input.value}}"</td>
         </tr>
+
     </table>
 
     <mat-paginator [pageSizeOptions]="[5, 10, 25, 100]" aria-label="Select page of users"></mat-paginator>

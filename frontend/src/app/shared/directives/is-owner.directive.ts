@@ -13,9 +13,7 @@ export class IsOwnerDirective implements OnInit {
     private authService: AuthenticationService
   ) {}
 
-  ngOnInit() {
-    console.log('here', this.id);
-    
+  ngOnInit() {    
     const currentUserId = this.authService.userId;
     if (currentUserId && currentUserId === this.id) {
       this.viewContainerRef.createEmbeddedView(this.templateRef);

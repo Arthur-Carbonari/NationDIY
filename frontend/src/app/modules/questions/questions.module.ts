@@ -28,6 +28,8 @@ import {MatExpansionModule} from '@angular/material/expansion';
 import { PostCommentExpansionComponent } from './components/post-comment-expansion/post-comment-expansion.component';
 import { QuestionsTableComponent } from './components/questions-table/questions-table.component';
 import {MatTableModule} from '@angular/material/table';
+import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
+import {MatSlideToggleModule} from '@angular/material/slide-toggle';
 
 
 @NgModule({
@@ -58,6 +60,8 @@ import {MatTableModule} from '@angular/material/table';
     MatMenuModule,
     MatExpansionModule,
     MatTableModule,
+    MatProgressSpinnerModule,
+    MatSlideToggleModule,
 
     // Rich Text-Editor
     NgxEditorModule,

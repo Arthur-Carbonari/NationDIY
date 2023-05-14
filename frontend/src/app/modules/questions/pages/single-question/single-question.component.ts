@@ -1,7 +1,7 @@
 import { Component, ViewChild } from '@angular/core';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSnackBar } from '@angular/material/snack-bar';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { AuthenticationService } from 'src/app/core/services/authentication.service';
 import { Answer } from 'src/app/shared/answer.interface';
 import { Question } from 'src/app/shared/question.interface';
@@ -27,7 +27,8 @@ export class SingleQuestionComponent {
     private questionsService: QuestionsService,
     private authService: AuthenticationService,
     private snackBar: MatSnackBar,
-    public dialogService: DialogService
+    public dialogService: DialogService,
+    private router: Router
   ) { }
 
   ngOnInit(): void {
@@ -37,8 +38,10 @@ export class SingleQuestionComponent {
     
     this.questionsService.getQuestionById(id).subscribe(question => {
       
-      if (!question) return
-      console.log(question);
+      if (!question){
+        this.router.navigateByUrl('/404')
+        return
+      }
 
       this.question = question
 

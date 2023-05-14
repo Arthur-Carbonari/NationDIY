@@ -1,43 +1,10 @@
-import {AfterViewInit, Component, ViewChild} from '@angular/core';
-import {MatPaginator} from '@angular/material/paginator';
-import {MatSort} from '@angular/material/sort';
-import {MatTableDataSource} from '@angular/material/table';
+import { AfterViewInit, Component, ViewChild } from '@angular/core';
+import { MatPaginator } from '@angular/material/paginator';
+import { MatSort } from '@angular/material/sort';
+import { MatTableDataSource } from '@angular/material/table';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Question } from 'src/app/shared/question.interface';
 import { QuestionsService } from '../../services/questions.service';
-
-/** Constants used to fill up our data base. */
-const FRUITS: string[] = [
-  'blueberry',
-  'lychee',
-  'kiwi',
-  'mango',
-  'peach',
-  'lime',
-  'pomegranate',
-  'pineapple',
-];
-const NAMES: string[] = [
-  'Maia',
-  'Asher',
-  'Olivia',
-  'Atticus',
-  'Amelia',
-  'Jack',
-  'Charlotte',
-  'Theodore',
-  'Isla',
-  'Oliver',
-  'Isabella',
-  'Jasper',
-  'Cora',
-  'Levi',
-  'Violet',
-  'Arthur',
-  'Mia',
-  'Thomas',
-  'Elizabeth',
-];
 
 @Component({
   selector: 'app-questions-table',
@@ -47,39 +14,45 @@ const NAMES: string[] = [
 export class QuestionsTableComponent implements AfterViewInit {
   displayedColumns: string[] = ['title', 'tags', "createdAt", 'card'];
   dataSource!: MatTableDataSource<Question>;
+  allQuestions!: Question[];
 
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   @ViewChild(MatSort) sort!: MatSort;
 
   constructor(private questionService: QuestionsService, private router: Router, private route: ActivatedRoute) {
-    
+
   }
 
   ngAfterViewInit() {
     const tag = this.route.snapshot.queryParamMap.get('tag') || "";
-
+    
     this.loadDataSource(tag)
-
-    // this.route.paramMap.subscribe( params => {
-    //   this.loadDataSource(params.get('tag') || '')
+    // this.route.params.subscribe( params => {      
+    //   this.loadDataSource(params['tag'] || "")
     // })
   }
 
-  loadDataSource(tag: string){
-    this.questionService.getQuestions(tag).subscribe( res => {
+  loadDataSource(tag: string) {
+    this.questionService.getQuestions(tag).subscribe(questions => {
 
-      if(!res) {
+      if (!questions) {
         this.router.navigateByUrl('/500')
         return
       }
 
-      // Assign the data to the data source for the table to render
-      this.dataSource = new MatTableDataSource(res);
+      this.allQuestions = questions.reverse()
+      this.loadTable(this.allQuestions)
+    })
 
-      // updates the paginator and the sort
-      this.dataSource.paginator = this.paginator;
-      this.dataSource.sort = this.sort;
-    }) 
+  }
+
+  loadTable(questions: Question[]) {
+    // Assign the data to the data source for the table to render
+    this.dataSource = new MatTableDataSource(questions);
+
+    // updates the paginator and the sort
+    this.dataSource.paginator = this.paginator;
+    this.dataSource.sort = this.sort;
   }
 
   applyFilter(event: Event) {
@@ -89,5 +62,9 @@ export class QuestionsTableComponent implements AfterViewInit {
     if (this.dataSource.paginator) {
       this.dataSource.paginator.firstPage();
     }
+  }
+
+  filterAnswered(toggle: {checked: boolean}){
+    this.loadTable(toggle.checked ? this.allQuestions.filter(question => !question.acceptedAnswer) : this.allQuestions)
   }
 }
