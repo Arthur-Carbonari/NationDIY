@@ -22,7 +22,6 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatSelectModule } from '@angular/material/select';
 import { CoreModule } from '../core/core.module';
 import { ToDatePipe } from './pipes/to-date.pipe';
-import { IsOwnerPipe } from './pipes/is-owner.pipe';
 import { IsOwnerDirective } from './directives/is-owner.directive';
 
 @NgModule({
@@ -33,7 +32,6 @@ import { IsOwnerDirective } from './directives/is-owner.directive';
     PostQuestionDialogComponent,
     TagsInputComponent,
     ToDatePipe,
-    IsOwnerPipe,
     IsOwnerDirective
   ],
   imports: [
@@ -65,7 +63,6 @@ import { IsOwnerDirective } from './directives/is-owner.directive';
   exports: [
     TextEditorComponent,
     ToDatePipe,
-    IsOwnerPipe,
     IsOwnerDirective
   ],
   providers: [

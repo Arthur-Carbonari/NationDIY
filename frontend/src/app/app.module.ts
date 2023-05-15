@@ -16,7 +16,6 @@ import { HomeModule } from './modules/home/home.module';
 import { QuestionsModule } from './modules/questions/questions.module';
 import { FoundErrorComponent } from './layout/found-error/found-error.component';
 import { ServerErrorComponent } from './layout/server-error/server-error.component';
-import { ProfileComponent } from './modules/profile/profile.component';
 import { JwtHelperService, JWT_OPTIONS } from '@auth0/angular-jwt';
 import { AuthInterceptorProvider } from './core/interceptors/auth.interceptor';
 import { AuthenticationService } from './core/services/authentication.service';
@@ -28,7 +27,6 @@ import { AuthenticationService } from './core/services/authentication.service';
     FooterComponent,
     FoundErrorComponent,
     ServerErrorComponent,
-    ProfileComponent,
   ],
   imports: [
     BrowserModule,
