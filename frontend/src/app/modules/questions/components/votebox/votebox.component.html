@@ -1,4 +1,5 @@
 <div class="d-flex justify-content-center flex-column stretch gs4 fc-black-200">
+    <!--  active class based on the current value of vote  -->
     <i class="fa-solid fa-chevron-up btn up-vote fs-3" [ngClass]="{'up-vote-active': currentVote === 1}" (click)="vote(1)"></i>
 
     <h4 class="text-muted text-center m-0"> {{currentValue}} </h4>

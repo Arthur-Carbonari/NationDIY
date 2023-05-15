@@ -13,6 +13,7 @@ export class QuestionPreviewComponent implements OnInit {
   votes: number = 0
   totalAnswers: number = 0
   
+  //  number based on the lenght of the array 
   ngOnInit(): void {    
     this.votes = Object.keys(this.question.upvotes).length - Object.keys(this.question.downvotes).length
     this.totalAnswers = this.question.answers.length

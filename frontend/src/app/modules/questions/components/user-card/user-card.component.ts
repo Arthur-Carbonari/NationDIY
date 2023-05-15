@@ -6,7 +6,7 @@ import { Component, Input } from '@angular/core';
   styleUrls: ['./user-card.component.scss']
 })
 export class UserCardComponent {
-
+  // user infs for interface 
   @Input() user!: {_id: string, username: string}
   @Input() date!: string
 

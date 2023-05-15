@@ -7,7 +7,6 @@ import { Question } from "../../../../shared/question.interface"
 import { QuestionsService } from '../../services/questions.service';
 import { Observable } from 'rxjs';
 import { ActivatedRoute } from '@angular/router';
-import { DialogService } from 'src/app/shared/services/dialog.service';
 
 
 @Component({
@@ -15,21 +14,22 @@ import { DialogService } from 'src/app/shared/services/dialog.service';
   templateUrl: './all-questions.component.html',
   styleUrls: ['./all-questions.component.scss']
 })
-export class AllQuestionsComponent implements AfterViewInit {
+export class AllQuestionsComponent implements AfterViewInit { 
 
   dataSource!: Observable<{questions: Question[], totalMatches: number}>
 
+  //  used to paginator material for sorting page size
   @ViewChild(MatPaginator)
   paginator!: MatPaginator;
 
-  constructor(private questionsService: QuestionsService, private route: ActivatedRoute, public dialogService: DialogService) { }
+  constructor(private questionsService: QuestionsService, private route: ActivatedRoute) { }
   
   ngAfterViewInit(): void {
-    // this.changePage()
+    this.changePage()
 
-    // this.route.queryParams.subscribe(() => {
-    //   this.changePage();
-    // });
+    this.route.queryParams.subscribe(() => {
+      this.changePage();
+    });
   }
 
   changePage(){

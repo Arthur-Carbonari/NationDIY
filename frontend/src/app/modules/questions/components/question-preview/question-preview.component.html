@@ -4,7 +4,7 @@
     <!-- summary -->
     <div class="row">
         <div class="d-flex align-items-center justify-content-center flex-column col-2 ">
-
+            <!--  display total answer and votes from quesiton  -->
             <div>
                 <span class="text-muted"> {{votes}} Votes </span>
             </div>
@@ -16,7 +16,8 @@
         </div>
         <!-- Question title and link -->
         <mat-card class="bg-white col-8 p-4 pb-1">
-            <mat-card-title>
+            <mat-card-title> 
+                <!-- router to single question page of given question based on it id -->
                 <a routerLink="/questions/{{question._id}}" class="text-decoration-none  text-dark"> {{question.title}}
                 </a>
             </mat-card-title>

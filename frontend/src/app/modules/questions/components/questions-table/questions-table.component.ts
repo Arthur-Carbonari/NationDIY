@@ -55,6 +55,7 @@ export class QuestionsTableComponent implements AfterViewInit {
     this.dataSource.sort = this.sort;
   }
 
+  // function is called when the user types in the search input, and updates the filter criteria used by the MatTableDataSource to display only rows that match the search query.
   applyFilter(event: Event) {
     const filterValue = (event.target as HTMLInputElement).value;
     this.dataSource.filter = filterValue.trim().toLowerCase();
@@ -64,6 +65,7 @@ export class QuestionsTableComponent implements AfterViewInit {
     }
   }
 
+  // unction is called when the user toggles the "Show only unanswered questions" switch, and filters the questions displayed in the table based on whether they have an accepted answer or not.
   filterAnswered(toggle: {checked: boolean}){
     this.loadTable(toggle.checked ? this.allQuestions.filter(question => !question.acceptedAnswer) : this.allQuestions)
   }
