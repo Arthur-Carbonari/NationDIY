@@ -21,6 +21,6 @@ import { User, UserSchema } from 'src/users/schema/user.schema';
     MongooseModule.forFeature([{ name: User.name, schema: UserSchema }]),
   ],
   providers: [QuestionsService], //responsible for handling business logic related to questions and answers.
-  controllers: [QuestionsController]  // responsible for handling incoming HTTP requests related to questions and answers.
+  controllers: [QuestionsController],  // responsible for handling incoming HTTP requests related to questions and answers.
 })
 export class QuestionsModule { }

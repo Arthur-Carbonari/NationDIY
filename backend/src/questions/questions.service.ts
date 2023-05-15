@@ -43,14 +43,14 @@ export class QuestionsService {
             query.find({ _id: { $in: questionIds } });
         }
 
-        const questions = await query.populate('author', 'username').exec();
+        const questions = await query.populate('author', 'username _id').exec();
 
         return questions
     }
 
     // returns a single question by ID.
     findOne(questionId: string): Promise<Question | null> {
-        return this.questionModel.findById(questionId).populate('author', 'username').exec()
+        return this.questionModel.findById(questionId).populate('author', 'username _id').exec()
     }
 
     //creates a new question.
@@ -98,7 +98,7 @@ export class QuestionsService {
 
         return true
     }
-    
+
     // save questions into tags 
     async addQuestionToTags(questionId: string, tags: string[]) {
         tags.forEach(async (tagName) => {

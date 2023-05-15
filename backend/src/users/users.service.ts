@@ -31,7 +31,7 @@ export class UsersService {
     }
 
     async getProfile(userId: string){
-        const user = await this.userModel.findById(userId).populate('questions')
+        const user = await this.userModel.findById(userId).populate({path: "questions", populate: { path: "author", select: 'username _id' }})
 
         return user
     }

@@ -3,7 +3,7 @@
 
     <!-- summary -->
     <div class="row">
-        <div class="d-flex align-items-center justify-content-center justify-content-around flex-column col-2 ">
+        <div class="d-flex align-items-center justify-content-center justify-content-around flex-column col-2 py-4">
 
             <div *ngIf="question.acceptedAnswer" class="d-flex justify-content-center">
                 <mat-icon class="text-success fs-3">check</mat-icon>
@@ -22,8 +22,9 @@
         <mat-card class="bg-white col-8 p-4 pb-1">
             <mat-card-title> 
                 <!-- router to single question page of given question based on it id -->
-                <a routerLink="/questions/{{question._id}}" class="text-decoration-none  text-dark"> {{question.title}}
-                </a>
+                <h1 class="text-capitalize">
+                    <a routerLink="/questions/{{question._id}}" class="text-decoration-none  text-dark">{{question.title}}</a> 
+                </h1>
             </mat-card-title>
             <mat-card-subtitle>
                 <ng-container *ngFor="let tag of question.tags">

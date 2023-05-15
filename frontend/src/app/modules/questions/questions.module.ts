@@ -31,6 +31,7 @@ import {MatTableModule} from '@angular/material/table';
 import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
 import {MatSlideToggleModule} from '@angular/material/slide-toggle';
 import { MatSortModule } from '@angular/material/sort';
+import { Q } from '@angular/cdk/keycodes';
 
 
 @NgModule({
@@ -73,6 +74,9 @@ import { MatSortModule } from '@angular/material/sort';
 
     //Paginatior 
     MatPaginatorModule
+  ],
+  exports: [
+    QuestionPreviewComponent,
   ]
 })
 export class QuestionsModule { }
