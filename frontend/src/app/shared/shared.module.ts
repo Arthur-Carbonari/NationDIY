@@ -24,6 +24,8 @@ import { CoreModule } from '../core/core.module';
 import { ToDatePipe } from './pipes/to-date.pipe';
 import { IsOwnerDirective } from './directives/is-owner.directive';
 
+//exports and declares several reusable components, pipes, and directives that are used across multiple feature modules in the application.
+
 @NgModule({
   declarations: [
     TextEditorComponent,

@@ -6,6 +6,10 @@ import { LoginDialogComponent } from '../components/login-dialog/login-dialog.co
 import { PostQuestionDialogComponent } from '../components/post-question-dialog/post-question-dialog.component';
 import { SignupDialogComponent } from '../components/signup-dialog/signup-dialog.component';
 
+
+
+//provides methods for opening and closing dialog windows using the MatDialog component from Angular Material. It also provides methods for opening specific types of dialogs, such as login, signup, and post-question dialogs.
+
 @Injectable({
   providedIn: 'root'
 })
@@ -48,6 +52,7 @@ export class DialogService {
       return
     }
 
+    // set standard size of the dialog based on percentage of the screen size
     return this.openDialog(PostQuestionDialogComponent, {width: "60%", height: "70%"})
   }
 }

@@ -7,8 +7,10 @@ import { Question } from 'src/app/shared/question.interface';
 @Injectable({
   providedIn: 'root'
 })
-export class QuestionsService {
 
+// interacts with backend for generate services 
+export class QuestionsService {
+  //uses http to send requests through API , in this service is used GET, POST, PATCH and DELETE requests to create methods that will be used to implement complexs logics in the application 
   constructor(private httpClient: HttpClient) { }
 
   getQuestions(tag: string = "") {

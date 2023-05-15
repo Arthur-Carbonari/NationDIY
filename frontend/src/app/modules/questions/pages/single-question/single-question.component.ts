@@ -18,6 +18,7 @@ export class SingleQuestionComponent {
   question!: Question
   allAnswers: Answer[] = []
 
+  // paginator logic from Angular Material
   @ViewChild(MatPaginator)
   paginator!: MatPaginator;
   pageAnswers: Answer[] = []
@@ -35,7 +36,7 @@ export class SingleQuestionComponent {
     const id = this.route.snapshot.paramMap.get('id')!;
 
     
-    
+    //  use id to route page, if not found redirect to 404
     this.questionsService.getQuestionById(id).subscribe(question => {
       
       if (!question){
@@ -44,7 +45,7 @@ export class SingleQuestionComponent {
       }
 
       this.question = question
-
+      //  sort logic 
       this.questionsService.getQuestionAnswers(id).subscribe(answers => {
         this.allAnswers = answers
 
@@ -55,17 +56,17 @@ export class SingleQuestionComponent {
       })
     })
   }
-
+  //  add answer logic
   addAnswer(answer: Answer) {
     this.allAnswers.push(answer)
     this.paginator.length = this.paginator.length + 1
 
     this.sortAnswers()
     this.updatePaging()
-    
+    //  notification bar 
     this.snackBar.open("Answer Posted Sucessfully", "Dismiss")
   }
-
+  //  paginator logic for upadate pag
   updatePaging() {
     const pageNumber = this.paginator.pageIndex
     const pageSize = this.paginator.pageSize
@@ -74,30 +75,31 @@ export class SingleQuestionComponent {
 
     this.pageAnswers = this.allAnswers.slice(skip, skip + pageSize)
   }
-
+  //  sort logic based on vote value
   sortAnswers() {
     this.allAnswers = this.allAnswers
       .sort((a1, a2) => ((Object.keys(a2.upvotes).length) - Object.keys(a2.downvotes).length - (Object.keys(a1.upvotes).length - Object.keys(a1.downvotes).length)) )
       .sort((a1, a2) => a1._id === this.authService.userId ? -1 : 0)
       .sort((a1, a2) => a1._id === this.question.acceptedAnswer ? -1 : 0)
   }
-
+  // accept answer using question and answer id 
   acceptAnswer(answerId: string) {
     this.questionsService.acceptAnswer(answerId, this.question._id).subscribe(res => {
       if (res) {
         this.question.acceptedAnswer = answerId
         
         this.sortAnswers()
-        this.updatePaging()
+        this.updatePaging()  // update page after opertaion
       }
     })
   }
 
+  // deletion logic based on ids
   removeAnswer(answerId: string) {
     this.questionsService.deleteAnswer(answerId, this.question._id).subscribe(res => {
       if (res.sucess) {
         this.allAnswers = this.allAnswers.filter(answer => answer._id !== answerId)
-        this.updatePaging()
+        this.updatePaging() // update page after opertaion
       }
     })
   }

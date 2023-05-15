@@ -11,7 +11,12 @@ import { AcceptAnswerDto } from './dto/accept-answer-dto';
 import { PostAnswerDto } from './dto/post-answer.dto';
 import { PostCommentDto } from './dto/post-comment-dto';
 
+/**
+ * 
+This is a NestJS service class for handling questions and answers. It defines methods for creating, retrieving, updating, and deleting questions and answers, as well as adding tags to questions, voting on questions and answers, and accepting answers to questions.
+ */
 
+// decorator for injecting Mongoose models, 
 @Injectable()
 export class QuestionsService {
 
@@ -21,6 +26,7 @@ export class QuestionsService {
         @InjectModel(Tag.name) private readonly tagModel: Model<Tag>,
     ) { }
 
+    //returns an array of questions, optionally filtered by a tag.
     async getQuestions(tag: string) {
 
         const query = this.questionModel.find()
@@ -40,16 +46,19 @@ export class QuestionsService {
         return questions
     }
 
+    // returns a single question by ID.
     findOne(questionId: string): Promise<Question | null> {
         return this.questionModel.findById(questionId).populate('author', 'username').exec()
     }
 
+    //creates a new question.
     async create(createQuestionDto: CreateQuestionDto, userId: string) {
 
         const { title, body } = createQuestionDto
 
         const tags = createQuestionDto.tags?.length ? createQuestionDto.tags : undefined
 
+        // check model to create using parameters
         const createdQuestion = await this.questionModel.create({ title, body, tags, author: userId });
 
         await this.addQuestionToTags(createdQuestion._id, createdQuestion.tags)
@@ -57,10 +66,11 @@ export class QuestionsService {
         return createdQuestion
     }
 
+    // delete if owner, based on id 
     async deleteIfOwner(questionId: string, userId: string) {
-
+        // find of question 
         const question = await this.questionModel.findById(questionId)
-
+        //match user id with question author id 
         if (!(question && String(question.author) == String(userId))) {
             return false
         }
@@ -72,7 +82,7 @@ export class QuestionsService {
 
         return true
     }
-
+    // save questions into tags 
     async addQuestionToTags(questionId: string, tags: string[]) {
         tags.forEach(async (tagName) => {
             let tag = await this.tagModel.findById(tagName.toLowerCase()).exec()
@@ -84,7 +94,7 @@ export class QuestionsService {
             await tag.save()
         })
     }
-
+    // vote data transfer object 
     async vote(voteDto: VoteDto, userId: string, questionId: string) {
 
         const { value } = voteDto
@@ -95,19 +105,20 @@ export class QuestionsService {
 
         question.upvotes.delete(userId)
         question.downvotes.delete(userId)
-
+        // verify if up or down vote based on value 
         if (value > 0) {
             question.upvotes.set(userId, true)
         }
         else if (value < 0) {
             question.downvotes.set(userId, true)
         }
-
+        // save question 
         await question.save()
 
         return true
     }
 
+    //post answer of a question 
     async postAnswer(postAnswerDto: PostAnswerDto, questionId: string, userId: string) {
         const question = await this.questionModel.findById(questionId).exec()
 
@@ -120,7 +131,7 @@ export class QuestionsService {
 
         return newAnswer
     }
-
+    // find answer with id 
     async findAnswers(questionId: string): Promise<Answer[]> {
 
         const question = await this.questionModel.findById(questionId).exec()
@@ -130,6 +141,7 @@ export class QuestionsService {
         return this.answerModel.find({ _id: { $in: question.answers } }).populate('author', 'username').exec();
     }
 
+    // accepts an answer to a question if the requester is the owner.
     async acceptAnswer(acceptAnswerDto: AcceptAnswerDto, userId: ObjectId, questionId: string) {
         const question = await this.questionModel.findById(questionId).exec()
 
@@ -148,6 +160,7 @@ export class QuestionsService {
         return true
     }
 
+    //deletes an answer if the requester is the owner.
     async deleteAnswerIfOwner(answerId: string, userId: string) {
         const answer = await this.answerModel.findById(answerId)
 
@@ -168,7 +181,8 @@ export class QuestionsService {
 
         return true
     }
-
+    
+    // records a vote on an answer
     async voteAnswer(voteDto: VoteDto, userId: string, answerId: string) {
         const { value } = voteDto
 
@@ -190,13 +204,14 @@ export class QuestionsService {
 
         return true
     }
-
+    // return all tags mapped in the select question id
     async getTags() {
         return (await this.tagModel.find().select('_id').exec()).map(tag => {
             return tag._id
         });
     }
 
+    // post comment in the question 
     async postComment(postCommentDto: PostCommentDto, questionId: string, userId: ObjectId, username: string){
         const question = await this.questionModel.findById(questionId).exec()
 
@@ -214,7 +229,7 @@ export class QuestionsService {
 
         return {success: true, newComment}
     }
-
+    // post comment in the specific aswer 
     async postAnswerComment(postCommentDto: PostCommentDto, answerId: string, userId: any, username: any) {
 
         const answer = await this.answerModel.findById(answerId).exec()

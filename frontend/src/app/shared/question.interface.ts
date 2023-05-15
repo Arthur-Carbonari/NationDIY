@@ -1,5 +1,5 @@
 import { Comment } from "./comment.interface";
-
+// question interface, import comment, as it stors the comment in an internal array to cretrieve faster 
 export interface Question {
     _id: string;
     title: string;

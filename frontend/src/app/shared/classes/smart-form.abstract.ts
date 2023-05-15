@@ -1,5 +1,6 @@
 import { FormGroup } from '@angular/forms';
 
+// The class is meant to be extended by other classes that implement forms in Angular. The SmartForm class provides some basic functionality that can be used by all forms.
 export abstract class SmartForm {
     form: FormGroup;
     formErrorMessages: { [key: string]: { [key: string]: string } };

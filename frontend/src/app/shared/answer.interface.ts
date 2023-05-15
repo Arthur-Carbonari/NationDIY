@@ -1,5 +1,6 @@
 import { Comment } from "./comment.interface";
 
+// interfave for answer component
 export interface Answer {
     _id: string;
 
