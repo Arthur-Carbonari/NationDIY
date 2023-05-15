@@ -10,6 +10,7 @@ import { from } from 'rxjs';
 import { AcceptAnswerDto } from './dto/accept-answer-dto';
 import { PostAnswerDto } from './dto/post-answer.dto';
 import { PostCommentDto } from './dto/post-comment-dto';
+import { User } from 'src/users/schema/user.schema';
 
 /**
  * 
@@ -21,6 +22,7 @@ This is a NestJS service class for handling questions and answers. It defines me
 export class QuestionsService {
 
     constructor(
+        @InjectModel(User.name) private readonly userModel: Model<User>,
         @InjectModel(Question.name) private readonly questionModel: Model<Question>,
         @InjectModel(Answer.name) private readonly answerModel: Model<Answer>,
         @InjectModel(Tag.name) private readonly tagModel: Model<Tag>,
@@ -63,6 +65,12 @@ export class QuestionsService {
 
         await this.addQuestionToTags(createdQuestion._id, createdQuestion.tags)
 
+        const user = await this.userModel.findById(userId)
+
+        user?.questions.push(createdQuestion._id)
+
+        await user?.save()
+
         return createdQuestion
     }
 
@@ -80,8 +88,17 @@ export class QuestionsService {
         await question.deleteOne();
         await this.answerModel.deleteMany({ _id: { $in: answerIds } });
 
+        const user = await this.userModel.findById(userId)
+
+        if(!user) return true
+
+        user.questions = user.questions.filter( q => String(q) !== String(questionId))
+
+        await user.save()
+
         return true
     }
+    
     // save questions into tags 
     async addQuestionToTags(questionId: string, tags: string[]) {
         tags.forEach(async (tagName) => {

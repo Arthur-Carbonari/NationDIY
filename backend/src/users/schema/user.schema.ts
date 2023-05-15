@@ -55,6 +55,9 @@ export class User extends Document {
   @Prop({ type: [{ type: String, ref: 'Answer' }], default: [] })
   answers: string[];
 
+  @Prop({ type: Date, default: Date.now })
+  createdAt: Date;
+
   matchPassword = async function (password: string) {
     return await bcrypt.compare(password, this.password)
   };

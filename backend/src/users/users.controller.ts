@@ -8,7 +8,7 @@ export class UsersController {
 
     @Get(":id")
     async getProfile(@Param('id') userId: string) {
-        const user = await this.userService.findById(userId)
+        const user = await this.userService.getProfile(userId)
 
         if (!user) return
 

@@ -24,6 +24,11 @@ export class ProfileCardComponent implements OnInit {
   constructor(private profileService: ProfileService, private router: Router, public authService: AuthenticationService){}
 
   ngOnInit(): void {
+
+    if(!this.userId){
+      this.router.navigateByUrl('')
+      return
+    }
     
     this.profileService.getProfile(this.userId).subscribe( profileData => {
 

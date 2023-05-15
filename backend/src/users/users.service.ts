@@ -30,6 +30,12 @@ export class UsersService {
         return this.userModel.findById(id).exec();
     }
 
+    async getProfile(userId: string){
+        const user = await this.userModel.findById(userId).populate('questions')
+
+        return user
+    }
+
     async findAll(): Promise<User[]> {
         return this.userModel.find().exec();
     }
