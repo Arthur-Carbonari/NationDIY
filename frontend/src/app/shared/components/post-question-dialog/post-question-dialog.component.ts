@@ -3,6 +3,7 @@ import { Component } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { MatDialogRef } from '@angular/material/dialog';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { QuestionsService } from 'src/app/modules/questions/services/questions.service';
 import { SmartForm } from '../../classes/smart-form.abstract';
 import { LoginDialogComponent } from '../login-dialog/login-dialog.component';
 
@@ -11,16 +12,16 @@ import { LoginDialogComponent } from '../login-dialog/login-dialog.component';
   templateUrl: './post-question-dialog.component.html',
   styleUrls: ['./post-question-dialog.component.scss']
 })
-export class PostQuestionDialogComponent extends SmartForm{
+export class PostQuestionDialogComponent extends SmartForm {
 
   postQuestionForm: FormGroup
 
-  constructor(formBuilder: FormBuilder, private httpClient: HttpClient, private dialogRef: MatDialogRef<LoginDialogComponent>, private snackBar: MatSnackBar) {
+  constructor(formBuilder: FormBuilder, private questionService: QuestionsService, private dialogRef: MatDialogRef<LoginDialogComponent>, private snackBar: MatSnackBar) {
 
     const postQuestionForm = formBuilder.group({
       title: [null, [Validators.required, Validators.minLength(8)]],
       tags: [null],
-      body: [null, [Validators.required, Validators.minLength(200)]]
+      body: [null, [Validators.required, Validators.minLength(50)]]
     })
 
     const formErrorMessages = {
@@ -42,8 +43,8 @@ export class PostQuestionDialogComponent extends SmartForm{
     if (this.postQuestionForm.invalid) { return };
 
     const { title, tags, body } = this.postQuestionForm.value
-        
-     this.httpClient.post<any>('api/questions', { title, tags: tags ? Array.from(tags) : null, body }).subscribe({
+
+    this.questionService.postQuestion(title, tags, body).subscribe({
       next: () => {
         this.dialogRef.close()
         this.snackBar.open("Question Posted", "Dismiss")

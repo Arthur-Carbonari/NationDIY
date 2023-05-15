@@ -24,6 +24,10 @@ export class QuestionsService {
     return this.httpClient.get<any>("api/questions", { params })
   }
 
+  postQuestion(title: string, tags: string | null, body: string){
+    return this.httpClient.post<any>('api/questions', { title, tags: tags ? Array.from(tags) : null, body })
+  }
+
   getQuestionById(questionId: string): Observable<Question | null> {
     return this.httpClient.get<any>(`api/questions/${questionId}`)
   }

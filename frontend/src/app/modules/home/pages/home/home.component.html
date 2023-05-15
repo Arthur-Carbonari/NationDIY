@@ -17,7 +17,7 @@
                 </div>
 
                 <div class="d-flex justify-content-evenly mt-2 pt-5">
-                    <a routerLink="ask-question" class="btn btn-primary"> Ask a Question</a>
+                    <a (click)="dialogService.openPostQuestionDialog()" class="btn btn-primary"> Ask a Question</a>
                     <a routerLink="questions" class="btn btn-danger"> Check Questions</a>
 
                 </div>
