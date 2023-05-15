@@ -1,19 +1,21 @@
-import { Component } from '@angular/core';
-import {Observable, Observer} from 'rxjs';
-import {MatTabsModule} from '@angular/material/tabs';
+import { Component, OnInit } from '@angular/core';
+import { AuthenticationService } from 'src/app/core/services/authentication.service';
 
-export interface tabs{
-  label: string;
-  content: any;
-}
 
 @Component({
   selector: 'app-profile',
   templateUrl: './profile.component.html',
   styleUrls: ['./profile.component.scss']
 })
-export class ProfileComponent {
+export class ProfileComponent implements OnInit {
 
-  
+
+  constructor(public authService: AuthenticationService){}
+
+  ngOnInit(): void {
+    
+
+
+  }
 
 }

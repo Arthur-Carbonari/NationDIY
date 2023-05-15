@@ -1,0 +1,78 @@
+<div class="container pt-5">
+    <mat-card class=" container p-3 rounded-5" >
+        <div class="d-flex">
+            <div class="row">
+                <!-- User img area -->
+                <div class="col-2">
+                    <img src="https://www.kindpng.com/picc/m/146-1468390_transparent-shadow-person-png-missing-answers-picture-icon.png"
+                        alt="" class="img-fluid avatar-lg rounded-circle">
+    
+                </div>
+                <!-- User name and creation date -->
+                <div class="col  m-auto ">
+                    <div class="d-block justify-content-start">
+    
+                        <h1 class=" fs-1"> User name </h1>
+    
+                        <i class="fa-solid fa-calendar-days fs-5 text-muted"> User since $date </i>
+    
+                    </div>
+    
+    
+                </div>
+    
+            </div>
+        </div>
+    
+        <div class="row">
+    
+            <!-- pills to show user activity  -->
+            <div class="col">
+                <div class="tab-content" id="v-pills-tabContent">
+                    <div class="tab-pane fade show active" id="v-pills-act" role="tabpanel"
+                        aria-labelledby="v-pills-act-tab">
+                        <nav>
+                            <div class="nav nav-tabs justify-content-around fs-1" id="nav-tab" role="tablist">
+                                <button class="nav-link active" id="nav-questions-tab" data-bs-toggle="tab"
+                                    data-bs-target="#nav-questions" type="button" role="tab" aria-controls="nav-questions"
+                                    aria-selected="true">Questions
+                                </button>
+                                <button class="nav-link" id="nav-answers-tab" data-bs-toggle="tab"
+                                    data-bs-target="#nav-answers" type="button" role="tab" aria-controls="nav-answers"
+                                    aria-selected="false">
+                                    Answers
+                                </button>
+    
+                            </div>
+                        </nav>
+                        <div class="tab-content" id="nav-tabContent">
+                            <div class="tab-pane fade show active" id="nav-questions" role="tabpanel"
+                                aria-labelledby="nav-questions-tab">
+                                <h1> All Questions that User did</h1>
+                                <!-- <ng-container *ngFor="let question of (dataSource | async)?.questions"> -->
+                                <!-- <app-question-preview></app-question-preview> -->
+                                <!-- </ng-container> -->
+                            </div>
+                            <div class="tab-pane fade" id="nav-answers" role="tabpanel" aria-labelledby="nav-answers-tab">
+                                <h1> Answers from user in all posts </h1>
+                                <!-- <ng-container *ngFor="let answer of pageAnswers">
+                                    <app-answer-card [answer]="answer"></app-answer-card>
+                                </ng-container>-->
+                            </div>
+    
+                        </div>
+                    </div>
+    
+    
+    
+                    <div class="tab-pane fade" id="v-pills-profile" role="tabpanel" aria-labelledby="v-pills-profile-tab">
+                        <h1>Nothing for now</h1>
+                    </div>
+    
+                </div>
+    
+    
+            </div>
+        </div>
+    </mat-card>
+</div>
