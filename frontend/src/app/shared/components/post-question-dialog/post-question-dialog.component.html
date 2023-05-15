@@ -23,14 +23,14 @@
                 <!-- question body -->
                 <div class="mb-4 form-outline">
                     <app-text-editor formControlName="body"></app-text-editor>
-                    <mat-hint class="text-danger"> {{ getErrorMessage('body') }} </mat-hint>
+                    <div class="text-danger text-center mb-3"> {{ getErrorMessage('body') }} </div>
                 </div>
 
                 <div class="d-flex justify-content-evenly mb-4">
 
                     <input type="submit" value="Save" class="btn btn-primary btn-block">
                     <br>
-                    <a href="/" class="btn btn-outline-danger">Cancel</a>
+                    <a role="button" class="btn btn-danger" mat-dialog-close>Cancel</a>
                 </div>
 
             </div>

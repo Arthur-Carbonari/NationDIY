@@ -3,8 +3,12 @@
 
     <!-- summary -->
     <div class="row">
-        <div class="d-flex align-items-center justify-content-center flex-column col-2 ">
-            <!--  display total answer and votes from quesiton  -->
+        <div class="d-flex align-items-center justify-content-center justify-content-around flex-column col-2 ">
+
+            <div *ngIf="question.acceptedAnswer" class="d-flex justify-content-center">
+                <mat-icon class="text-success fs-3">check</mat-icon>
+            </div>
+
             <div>
                 <span class="text-muted"> {{votes}} Votes </span>
             </div>
